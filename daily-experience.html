@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>일일체험 일정 - 인천어린이천문대</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          "starry-gold": "#FFC300",
+          "midnight-deep": "#05070A",
+          "ink": "#111827",
+          "paper": "#F7F8FB"
+        },
+        fontFamily: {
+          "headline": ["Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"],
+          "body": ["Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"]
+        },
+        boxShadow: {
+          "soft": "0 18px 45px rgba(17, 24, 39, 0.08)"
+        }
+      }
+    }
+  };
+</script>
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: #f7f8fb;
+    color: #111827;
+    overflow-x: hidden;
+    font-family: "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  .hero-sky {
+    background-color: #070a12;
+    background-image:
+      radial-gradient(circle at 18px 18px, rgba(255, 255, 255, 0.28) 1px, transparent 1.8px),
+      radial-gradient(circle at 72px 58px, rgba(255, 195, 0, 0.24) 1px, transparent 1.8px);
+    background-size: 110px 110px, 150px 150px;
+  }
+
+  .surface-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+    min-width: 0;
+  }
+
+  .calendar-cell {
+    min-height: 148px;
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+
+  .calendar-scroll {
+    display: none;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    touch-action: pan-x;
+  }
+
+  .calendar-board {
+    min-width: 760px;
+  }
+
+  .mobile-calendar-shell {
+    display: block;
+  }
+
+  .mobile-calendar-board {
+    border-radius: 18px;
+    background: #f7f8fb;
+    padding: 16px;
+    color: #111827;
+  }
+
+  .mobile-weekdays,
+  .mobile-week {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .mobile-weekdays {
+    padding: 0 2px 10px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .mobile-weekdays > div {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .mobile-day {
+    min-height: 128px;
+    min-width: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    overflow: hidden;
+    transition: border-color 160ms ease, background-color 160ms ease;
+  }
+
+  .mobile-day.is-other {
+    background: rgba(255, 255, 255, 0.55);
+    opacity: 0.58;
+  }
+
+  .mobile-day.is-selected {
+    border-color: #ffc300;
+    box-shadow: inset 0 0 0 1px rgba(255, 195, 0, 0.8);
+    background: #fffdf2;
+  }
+
+  .mobile-day.is-today .mobile-date-number {
+    background: #ffc300;
+    color: #05070a;
+  }
+
+  .mobile-date-number {
+    display: inline-flex;
+    flex: none;
+    min-width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: #111827;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .mobile-event-stack {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mobile-event-chip {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 5px 6px;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.08;
+    text-align: center;
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .mobile-event-time,
+  .mobile-event-name {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-more {
+    color: #d1d5db;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .calendar-cell:hover {
+    border-color: rgba(255, 195, 0, 0.72);
+    background: #fffdf2;
+  }
+
+  .calendar-cell.is-selected {
+    border-color: #ffc300;
+    box-shadow: inset 0 0 0 2px rgba(255, 195, 0, 0.42);
+  }
+
+  .calendar-cell.is-today .date-number {
+    background: #ffc300;
+    color: #05070a;
+  }
+
+  .event-chip,
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .event-chip {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    border-radius: 12px;
+    line-height: 1.22;
+    white-space: normal;
+    overflow: hidden;
+  }
+
+  .event-time {
+    font-size: 10px;
+    opacity: 0.78;
+    white-space: nowrap;
+  }
+
+  .event-program {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .event-program-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .program-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: currentColor;
+    flex: none;
+  }
+
+  .status-open {
+    background: rgba(255, 195, 0, 0.12);
+    border-color: rgba(255, 195, 0, 0.48);
+    color: #917a00;
+  }
+
+  .status-wait {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #6b7280;
+  }
+
+  .status-closed {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    color: #be123c;
+  }
+
+  .motion-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 650ms ease, transform 650ms ease;
+  }
+
+  .motion-ready [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 767px) {
+    .mobile-calendar-board {
+      padding: 12px;
+    }
+
+    .mobile-weekdays,
+    .mobile-week {
+      gap: 4px;
+    }
+
+    .calendar-cell {
+      min-height: 136px;
+    }
+
+    .mobile-day {
+      min-height: 88px;
+      border-radius: 8px;
+      padding: 6px 3px;
+    }
+
+    .mobile-date-number {
+      font-size: 14px;
+    }
+
+    .mobile-event-chip {
+      padding: 3px 2px;
+      font-size: 10px;
+    }
+
+    .event-program {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .mobile-calendar-board {
+      margin: 0 -6px;
+      padding: 10px 8px;
+      border-radius: 14px;
+    }
+
+    .mobile-weekdays,
+    .mobile-week {
+      gap: 3px;
+    }
+
+    .mobile-day {
+      min-height: 82px;
+      padding: 5px 2px;
+    }
+
+    .mobile-event-stack {
+      gap: 3px;
+    }
+
+    .mobile-event-chip {
+      padding: 3px 1px;
+      font-size: 9px;
+    }
+  }
+</style>
+</head>
+<body class="font-body antialiased">
+<header class="sticky top-0 z-30 border-b border-gray-200 bg-white/90 backdrop-blur">
+<div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 md:px-6">
+<a class="flex min-w-0 items-center gap-2 sm:gap-3" href="index.html">
+<img alt="인천어린이천문대 로고" class="h-8 w-8 shrink-0 object-contain grayscale sm:h-9 sm:w-9" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<span class="min-w-0 truncate font-headline text-base font-bold leading-tight text-black sm:text-lg md:text-xl">인천어린이천문대</span>
+</a>
+<a class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gray-200 px-3 py-2 text-xs font-bold leading-none text-gray-700 transition-colors hover:border-starry-gold hover:text-starry-gold sm:gap-2 sm:px-4 sm:text-sm" href="index.html">
+<span class="material-symbols-outlined shrink-0" style="font-size: 17px;">home</span>
+메인 페이지로
+</a>
+</div>
+</header>
+
+<main>
+<section class="hero-sky text-white">
+<div class="mx-auto grid max-w-6xl gap-8 px-5 py-14 md:grid-cols-[1.1fr_0.9fr] md:px-6 md:py-20">
+<div class="flex flex-col justify-center" data-reveal>
+<span class="inline-flex w-fit max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/40 bg-starry-gold/10 px-4 py-1.5 text-sm font-bold leading-none text-starry-gold">
+<span class="material-symbols-outlined shrink-0" style="font-size: 17px;">calendar_month</span>
+일일체험 일정
+</span>
+<h1 class="mt-6 break-keep font-headline text-4xl font-extrabold leading-tight md:text-6xl">밤하늘을 만나는 날을 확인하세요</h1>
+<p class="mt-5 max-w-2xl text-base leading-8 text-gray-300 md:text-lg">가족과 함께하는 우주여행과 일일별자리체험 일정을 달력에서 바로 확인할 수 있습니다.</p>
+</div>
+<div class="grid content-center gap-3 text-ink" data-reveal>
+<div class="surface-card rounded-xl p-4">
+<div class="flex items-center gap-3">
+<span class="flex h-10 w-10 items-center justify-center rounded-full bg-starry-gold text-midnight-deep">
+<span class="material-symbols-outlined">family_restroom</span>
+</span>
+<div class="min-w-0">
+<h2 class="break-keep font-headline text-lg font-bold leading-snug text-black">가족과 함께하는 우주여행</h2>
+<p class="mt-1 text-sm text-gray-600">학생 동반 가족전용</p>
+</div>
+</div>
+</div>
+<div class="surface-card rounded-xl p-4">
+<div class="flex items-center gap-3">
+<span class="flex h-10 w-10 items-center justify-center rounded-full bg-starry-gold text-midnight-deep">
+<span class="material-symbols-outlined">star</span>
+</span>
+<div class="min-w-0">
+<h2 class="break-keep font-headline text-lg font-bold leading-snug text-black">일일별자리체험</h2>
+<p class="mt-1 text-sm text-gray-600">학생 전용</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="mx-auto max-w-6xl px-5 py-10 md:px-6 md:py-14">
+<div class="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
+<div class="min-w-0">
+<span class="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/30 bg-starry-gold/10 px-4 py-1.5 text-xs font-bold leading-none text-[#917a00]">
+<span class="material-symbols-outlined shrink-0" style="font-size: 16px;">event_available</span>
+일정 확인
+</span>
+<h2 class="mt-4 break-keep font-headline text-3xl font-extrabold leading-tight text-black md:text-4xl">일일체험 달력</h2>
+</div>
+<div class="flex min-w-0 flex-wrap gap-2">
+<span class="status-pill status-open px-3 py-1.5 text-xs">접수중</span>
+<a class="status-pill status-wait px-3 py-1.5 text-xs transition-colors hover:border-starry-gold hover:text-starry-gold" href="admin.html" aria-label="일일체험 일정 관리자 페이지로 이동">대기</a>
+<span class="status-pill status-closed px-3 py-1.5 text-xs">마감</span>
+</div>
+</div>
+
+<div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+<section class="surface-card rounded-xl p-4 md:p-6" data-reveal>
+<div class="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+<div class="min-w-0">
+<p id="month-kicker" class="text-sm font-bold leading-tight text-starry-gold"></p>
+<h3 id="month-title" class="font-headline text-2xl font-bold leading-tight text-black md:text-3xl"></h3>
+</div>
+<div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+<button id="prev-month" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition-colors hover:border-starry-gold hover:text-starry-gold sm:h-10 sm:w-10" type="button" aria-label="이전 달">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button id="today-button" class="inline-flex h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-gray-200 px-3 text-xs font-bold leading-none text-gray-700 transition-colors hover:border-starry-gold hover:text-starry-gold sm:h-10 sm:px-4 sm:text-sm" type="button">오늘</button>
+<button id="next-month" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-700 transition-colors hover:border-starry-gold hover:text-starry-gold sm:h-10 sm:w-10" type="button" aria-label="다음 달">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+
+<div class="calendar-scroll -mx-1 px-1 pb-3">
+<div class="calendar-board">
+<div class="grid grid-cols-7 overflow-hidden rounded-xl border border-gray-200 bg-gray-50 text-center text-sm font-bold text-gray-600">
+<div class="py-3 text-red-500">일</div>
+<div class="py-3">월</div>
+<div class="py-3">화</div>
+<div class="py-3">수</div>
+<div class="py-3">목</div>
+<div class="py-3">금</div>
+<div class="py-3 text-blue-500">토</div>
+</div>
+<div id="calendar-grid" class="mt-3 grid grid-cols-7 gap-2"></div>
+</div>
+</div>
+<div id="mobile-calendar" class="mobile-calendar-shell"></div>
+</section>
+
+<aside class="space-y-6">
+<section class="surface-card rounded-xl p-5 md:p-6" data-reveal>
+<div class="flex min-w-0 items-center justify-between gap-3">
+<div class="min-w-0">
+<p class="text-sm font-bold leading-tight text-starry-gold">선택한 날짜</p>
+<h3 id="selected-title" class="mt-1 break-keep font-headline text-xl font-bold leading-tight text-black sm:text-2xl"></h3>
+</div>
+<span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-starry-gold text-midnight-deep">
+<span class="material-symbols-outlined">event_note</span>
+</span>
+</div>
+<div id="selected-events" class="mt-5 space-y-3"></div>
+</section>
+
+<section class="surface-card rounded-xl p-5 md:p-6" data-reveal>
+<p class="text-sm font-bold leading-tight text-starry-gold">다가오는 일정</p>
+<h3 class="mt-1 break-keep font-headline text-xl font-bold leading-tight text-black sm:text-2xl">예정된 일일체험</h3>
+<div id="upcoming-events" class="mt-5 space-y-3"></div>
+</section>
+</aside>
+</div>
+</section>
+</main>
+
+<script src="experience-data.js"></script>
+<script>
+const storageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
+const dataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
+const statusLabels = window.INCHEON_ASTRO_EXPERIENCE_STATUS || { open: "접수중", wait: "대기", closed: "마감" };
+const programNames = window.INCHEON_ASTRO_EXPERIENCE_PROGRAMS || [];
+const programShortLabels = {
+  "가족과 함께하는 우주여행": "가족 우주여행",
+  "일일별자리체험": "별자리체험"
+};
+const mobileProgramLabels = {
+  "가족과 함께하는 우주여행": "가족",
+  "일일별자리체험": "별자리"
+};
+const calendarGrid = document.getElementById("calendar-grid");
+const mobileCalendar = document.getElementById("mobile-calendar");
+const monthTitle = document.getElementById("month-title");
+const monthKicker = document.getElementById("month-kicker");
+const selectedTitle = document.getElementById("selected-title");
+const selectedEvents = document.getElementById("selected-events");
+const upcomingEvents = document.getElementById("upcoming-events");
+const prevMonth = document.getElementById("prev-month");
+const nextMonth = document.getElementById("next-month");
+const todayButton = document.getElementById("today-button");
+
+let schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
+let viewDate = new Date();
+let selectedDateKey = formatDateKey(new Date());
+
+function cloneData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function normalizeSchedule(data) {
+  const events = Array.isArray(data?.events) ? data.events : [];
+  return {
+    events: events
+      .filter((event) => {
+        const isKnownProgram = programNames.length === 0 || programNames.includes(event.title);
+        return event
+          && typeof event.id === "string"
+          && /^\d{4}-\d{2}-\d{2}$/.test(event.date || "")
+          && /^\d{2}:\d{2}$/.test(event.time || "")
+          && isKnownProgram
+          && Object.prototype.hasOwnProperty.call(statusLabels, event.status);
+      })
+      .map((event) => ({
+        id: event.id,
+        date: event.date,
+        time: event.time,
+        title: event.title,
+        status: event.status,
+        memo: typeof event.memo === "string" ? event.memo : ""
+      }))
+      .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`))
+  };
+}
+
+async function loadSchedule() {
+  let loadedSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
+
+  try {
+    const response = await fetch(`${dataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      loadedSchedule = normalizeSchedule(await response.json());
+    }
+  } catch (error) {
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+    if (saved) {
+      loadedSchedule = normalizeSchedule(saved);
+    }
+  } catch (error) {
+  }
+
+  return loadedSchedule;
+}
+
+function pad(value) {
+  return String(value).padStart(2, "0");
+}
+
+function formatDateKey(date) {
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function parseDateKey(dateKey) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function formatKoreanDate(dateKey) {
+  const date = parseDateKey(dateKey);
+  return new Intl.DateTimeFormat("ko-KR", {
+    month: "long",
+    day: "numeric",
+    weekday: "short"
+  }).format(date);
+}
+
+function getEventsForDate(dateKey) {
+  return schedule.events.filter((event) => event.date === dateKey);
+}
+
+function getStatusClass(status) {
+  return {
+    open: "status-open",
+    wait: "status-wait",
+    closed: "status-closed"
+  }[status] || "status-wait";
+}
+
+function getProgramShortLabel(title) {
+  return programShortLabels[title] || title;
+}
+
+function getMobileProgramLabel(title) {
+  return mobileProgramLabels[title] || getProgramShortLabel(title);
+}
+
+function renderEventCard(event) {
+  return `
+    <article class="min-w-0 rounded-xl border border-gray-200 bg-gray-50 p-4">
+      <div class="flex min-w-0 items-start justify-between gap-3">
+        <div class="min-w-0">
+          <p class="whitespace-nowrap text-xs font-bold text-gray-500 sm:text-sm">${event.date} ${event.time}</p>
+          <h4 class="mt-1 break-keep font-headline text-base font-bold leading-snug text-black sm:text-lg">${event.title}</h4>
+        </div>
+        <span class="status-pill ${getStatusClass(event.status)} shrink-0 px-2.5 py-1 text-[11px] sm:px-3 sm:text-xs">${statusLabels[event.status]}</span>
+      </div>
+      ${event.memo ? `<p class="mt-3 break-keep text-sm leading-6 text-gray-600">${event.memo}</p>` : ""}
+    </article>
+  `;
+}
+
+function renderCalendar() {
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const todayKey = formatDateKey(new Date());
+  const firstDay = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const blankCount = firstDay.getDay();
+  const monthEvents = schedule.events.filter((event) => {
+    const date = parseDateKey(event.date);
+    return date.getFullYear() === year && date.getMonth() === month;
+  });
+
+  monthTitle.textContent = `${year}년 ${month + 1}월`;
+  monthKicker.textContent = `${monthEvents.length}개 일정`;
+
+  const cells = [];
+  for (let index = 0; index < blankCount; index += 1) {
+    cells.push(`<div class="calendar-cell rounded-xl border border-dashed border-gray-200 bg-white/50"></div>`);
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    const date = new Date(year, month, day);
+    const dateKey = formatDateKey(date);
+    const events = getEventsForDate(dateKey);
+    const isToday = dateKey === todayKey;
+    const isSelected = dateKey === selectedDateKey;
+    const visibleEvents = events.slice(0, 2);
+    const hiddenCount = events.length - visibleEvents.length;
+
+    cells.push(`
+      <button class="calendar-cell ${isToday ? "is-today" : ""} ${isSelected ? "is-selected" : ""} flex flex-col rounded-xl border border-gray-200 bg-white p-2 text-left" type="button" data-date="${dateKey}">
+        <span class="date-number inline-flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold text-gray-900">${day}</span>
+        <span class="mt-2 flex flex-1 flex-col gap-1.5 overflow-hidden">
+          ${visibleEvents.map((event) => `
+            <span class="event-chip ${getStatusClass(event.status)} px-2 py-1.5">
+              <span class="event-time">${event.time}</span>
+              <span class="event-program"><span class="program-dot"></span><span class="event-program-label">${getProgramShortLabel(event.title)}</span></span>
+            </span>
+          `).join("")}
+          ${hiddenCount > 0 ? `<span class="text-xs font-bold text-gray-500">+${hiddenCount}개 더</span>` : ""}
+        </span>
+      </button>
+    `);
+  }
+
+  calendarGrid.innerHTML = cells.join("");
+  renderMobileCalendar(year, month, todayKey);
+  renderSelectedEvents();
+  renderUpcomingEvents();
+}
+
+function renderMobileCalendar(year, month, todayKey) {
+  const firstDay = new Date(year, month, 1);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const startDate = new Date(year, month, 1 - firstDay.getDay());
+  const totalCells = Math.ceil((firstDay.getDay() + daysInMonth) / 7) * 7;
+  const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+  const weeks = [];
+
+  for (let index = 0; index < totalCells; index += 7) {
+    const days = [];
+    for (let offset = 0; offset < 7; offset += 1) {
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + index + offset);
+      const dateKey = formatDateKey(date);
+      const events = getEventsForDate(dateKey);
+      const visibleEvents = events.slice(0, 2);
+      const hiddenCount = events.length - visibleEvents.length;
+      const isCurrentMonth = date.getMonth() === month;
+      const isToday = dateKey === todayKey;
+      const isSelected = dateKey === selectedDateKey;
+
+      days.push(`
+        <button class="mobile-day ${isCurrentMonth ? "" : "is-other"} ${isToday ? "is-today" : ""} ${isSelected ? "is-selected" : ""}" type="button" data-date="${dateKey}">
+          <span class="mobile-date-number">${date.getDate()}</span>
+          <span class="mobile-event-stack">
+            ${visibleEvents.map((event) => `
+              <span class="mobile-event-chip ${getStatusClass(event.status)}">
+                <span class="mobile-event-time">${event.time.slice(0, 2)}시</span>
+                <span class="mobile-event-name">${getMobileProgramLabel(event.title)}</span>
+              </span>
+            `).join("")}
+            ${hiddenCount > 0 ? `<span class="mobile-more">+${hiddenCount}</span>` : ""}
+          </span>
+        </button>
+      `);
+    }
+    weeks.push(`<div class="mobile-week mt-1">${days.join("")}</div>`);
+  }
+
+  mobileCalendar.innerHTML = `
+    <div class="mobile-calendar-board">
+      <div class="mobile-weekdays">
+        ${dayNames.map((day, index) => `<div class="${index === 0 ? "text-red-400" : index === 6 ? "text-blue-400" : ""}">${day}</div>`).join("")}
+      </div>
+      ${weeks.join("")}
+    </div>
+  `;
+}
+
+function renderSelectedEvents() {
+  const events = getEventsForDate(selectedDateKey);
+  selectedTitle.textContent = formatKoreanDate(selectedDateKey);
+  selectedEvents.innerHTML = events.length
+    ? events.map(renderEventCard).join("")
+    : `<div class="break-keep rounded-xl border border-dashed border-gray-200 bg-gray-50 p-4 text-sm font-bold leading-6 text-gray-500 sm:p-5">등록된 일일체험 일정이 없습니다.</div>`;
+}
+
+function renderUpcomingEvents() {
+  const todayKey = formatDateKey(new Date());
+  const events = schedule.events.filter((event) => event.date >= todayKey).slice(0, 5);
+  upcomingEvents.innerHTML = events.length
+    ? events.map(renderEventCard).join("")
+    : `<div class="break-keep rounded-xl border border-dashed border-gray-200 bg-gray-50 p-4 text-sm font-bold leading-6 text-gray-500 sm:p-5">다가오는 일정이 없습니다.</div>`;
+}
+
+function selectCalendarDate(event) {
+  const button = event.target.closest("[data-date]");
+  if (!button) return;
+  selectedDateKey = button.dataset.date;
+  renderCalendar();
+}
+
+calendarGrid.addEventListener("click", selectCalendarDate);
+mobileCalendar.addEventListener("click", selectCalendarDate);
+
+prevMonth.addEventListener("click", () => {
+  viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+  renderCalendar();
+});
+
+nextMonth.addEventListener("click", () => {
+  viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+  renderCalendar();
+});
+
+todayButton.addEventListener("click", () => {
+  viewDate = new Date();
+  selectedDateKey = formatDateKey(viewDate);
+  renderCalendar();
+});
+
+function setupReveal() {
+  document.body.classList.add("motion-ready");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+
+  document.querySelectorAll("[data-reveal]").forEach((node) => observer.observe(node));
+}
+
+async function init() {
+  setupReveal();
+  schedule = await loadSchedule();
+  renderCalendar();
+}
+
+init();
+</script>
+</body>
+</html>

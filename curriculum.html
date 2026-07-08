@@ -1,0 +1,1196 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>정규 과정 커리큘럼 - 인천어린이천문대</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>document.documentElement.classList.add("motion-ready");</script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-secondary-fixed-variant": "#4029ba",
+                "surface-container-lowest": "#0c0f10",
+                "primary-container": "#0a0e1a",
+                "outline": "#909096",
+                "background": "#111415",
+                "surface-container-highest": "#323536",
+                "inverse-on-surface": "#2e3132",
+                "error": "#ffb4ab",
+                "tertiary": "#e9c400",
+                "on-primary-fixed": "#171b28",
+                "on-surface": "#111827",
+                "outline-variant": "#46464c",
+                "starry-gold": "#FFC300",
+                "surface-dim": "#111415",
+                "surface": "#111415",
+                "midnight-deep": "#05070A",
+                "on-error": "#690005",
+                "secondary": "#c6bfff",
+                "tertiary-fixed": "#ffe16d",
+                "surface-container": "#1d2021",
+                "on-tertiary-fixed-variant": "#544600",
+                "error-container": "#93000a",
+                "on-error-container": "#ffdad6",
+                "secondary-fixed": "#e4dfff",
+                "inverse-primary": "#5a5e6d",
+                "surface-bright": "#373a3b",
+                "surface-tint": "#c3c6d7",
+                "on-secondary": "#2900a0",
+                "secondary-fixed-dim": "#c6bfff",
+                "glass-surface": "rgba(255, 255, 255, 0.05)",
+                "on-primary-container": "#777b8a",
+                "surface-container-high": "#282a2b",
+                "on-primary-fixed-variant": "#434654",
+                "primary-fixed": "#dfe2f3",
+                "surface-variant": "#323536",
+                "secondary-container": "#4029ba",
+                "primary": "#c3c6d7",
+                "tertiary-container": "#130e00",
+                "nebular-violet": "#8E78FF",
+                "on-tertiary-container": "#917a00",
+                "on-secondary-fixed": "#160066",
+                "on-tertiary": "#3a3000",
+                "on-secondary-container": "#b4abff",
+                "primary-fixed-dim": "#c3c6d7",
+                "inverse-surface": "#e1e3e4",
+                "on-tertiary-fixed": "#221b00",
+                "on-surface-variant": "#111827",
+                "on-background": "#111827",
+                "tertiary-fixed-dim": "#e9c400",
+                "glass-border": "rgba(255, 255, 255, 0.15)",
+                "on-primary": "#2c303d",
+                "surface-container-low": "#191c1d"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "24px",
+                "section-gap": "120px",
+                "container-max": "1200px",
+                "section-gap-mobile": "64px",
+                "unit": "8px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "headline-lg": [
+                        "Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "display-lg-mobile": [
+                        "Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "label-md": [
+                        "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "display-lg": [
+                        "Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "caption": [
+                        "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ],
+                "body-md": [
+                        "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "0",
+                                "fontWeight": "700"
+                        }
+                ],
+                "caption": [
+                        "12px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: #f7f8fb;
+            color: #111827;
+            overflow-x: hidden;
+            font-family: "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        }
+
+        .ko-keep {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        
+        .star-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, rgba(17,24,39,0.25), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, rgba(17,24,39,0.25), rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 50px 160px, rgba(17,24,39,0.2), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, rgba(17,24,39,0.25), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, rgba(17,24,39,0.16), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.35;
+            z-index: -1;
+            animation: twinkle 5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.16; }
+            100% { opacity: 0.28; }
+        }
+
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
+        }
+
+        .bg-glass-surface {
+            background-color: #f3f4f6 !important;
+        }
+
+        .glow-hover:hover {
+            border-color: #d4af37;
+            box-shadow: 0 18px 45px rgba(17, 24, 39, 0.12);
+        }
+
+        .time-slot-badge {
+            display: inline-flex;
+            min-width: 76px;
+            min-height: 28px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            padding: 0.35rem 0.65rem;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 430px) {
+            .time-slot-badge {
+                min-width: 64px;
+                min-height: 26px;
+                padding: 0.3rem 0.5rem;
+                font-size: 11px;
+            }
+        }
+
+        .time-slot-open {
+            color: #917a00;
+            background: rgba(255, 195, 0, 0.12);
+            border: 1px solid rgba(255, 195, 0, 0.42);
+        }
+
+        .time-slot-wait {
+            color: #6b7280;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+        }
+
+        .drag-scroll {
+            cursor: grab;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-inline: contain;
+            touch-action: pan-x pan-y;
+        }
+
+        .drag-scroll.is-dragging {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        .drag-scroll.is-dragging * {
+            user-select: none;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #d4af37, rgba(212, 175, 55, 0.1));
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 24px;
+                transform: none;
+            }
+        }
+
+        .motion-ready [data-reveal] {
+            opacity: 0;
+            transform: translate3d(0, 34px, 0);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+
+        .motion-ready [data-reveal="left"] {
+            transform: translate3d(-34px, 22px, 0);
+        }
+
+        .motion-ready [data-reveal="right"] {
+            transform: translate3d(34px, 22px, 0);
+        }
+
+        @media (max-width: 768px) {
+            .motion-ready [data-reveal="left"],
+            .motion-ready [data-reveal="right"] {
+                transform: translate3d(0, 34px, 0);
+            }
+        }
+
+        .motion-ready [data-reveal="zoom"] {
+            transform: scale(0.94);
+            filter: blur(4px);
+        }
+
+        .motion-ready [data-reveal="line"] {
+            opacity: 0;
+            transform: translateX(-50%) scaleY(0.7);
+            transform-origin: top center;
+        }
+
+        .motion-ready [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+            filter: blur(0);
+        }
+
+        .motion-ready [data-reveal="zoom"].is-visible {
+            transform: scale(1);
+        }
+
+        .motion-ready [data-reveal="line"].is-visible {
+            transform: translateX(-50%) scaleY(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .motion-ready [data-reveal],
+            .motion-ready [data-reveal].is-visible,
+            .motion-ready [data-reveal="left"],
+            .motion-ready [data-reveal="right"],
+            .motion-ready [data-reveal="zoom"],
+            .motion-ready [data-reveal="line"],
+            .motion-ready [data-reveal="line"].is-visible {
+                opacity: 1;
+                transform: none;
+                filter: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased relative selection:bg-starry-gold selection:text-midnight-deep">
+<div class="star-field"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
+<div class="flex justify-between items-center gap-3 h-20 px-gutter max-w-container-max mx-auto">
+<a class="flex min-w-0 items-center space-x-2 sm:space-x-3" href="index.html">
+<img alt="Logo" class="w-8 h-8 object-contain grayscale" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<span class="font-headline-md text-base md:text-xl font-bold text-black tracking-normal leading-tight ko-keep min-w-0">인천어린이천문대</span>
+</a>
+<a class="inline-flex shrink-0 items-center justify-center whitespace-nowrap bg-starry-gold text-midnight-deep px-3 sm:px-4 md:px-6 py-2 rounded-full font-label-md text-xs md:text-label-md leading-none hover:opacity-90 active:scale-95 duration-200" href="index.html">
+                메인 페이지로
+            </a>
+</div>
+</nav>
+<main class="pt-32 pb-section-gap-mobile md:pb-section-gap">
+<!-- Hero Section -->
+<section class="px-gutter max-w-container-max mx-auto text-center mb-section-gap-mobile md:mb-section-gap" data-reveal="zoom">
+<h1 class="font-display-lg text-[28px] sm:text-display-lg-mobile md:text-display-lg leading-tight md:leading-[1.2] text-on-surface mb-6 max-w-3xl mx-auto ko-keep">인천어린이천문대 정규 과정 커리큘럼</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed ko-keep">별을 아는 아이로 성장하는 4단계 교육 로드맵</p>
+</section>
+<!-- Curriculum Features (Bento Grid) -->
+<section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="0">
+<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
+<span class="material-symbols-outlined" style="font-size: 32px;">school</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">전담 선생님</h3>
+<p class="font-body-md text-body-md text-on-surface-variant ko-keep">아이들의 성향을 파악하고 맞춤형 지도를 제공합니다.</p>
+</div>
+<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="110">
+<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
+<span class="material-symbols-outlined" style="font-size: 32px;">groups</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">1년 과정 팀 수업</h3>
+<p class="font-body-md text-body-md text-on-surface-variant ko-keep">친구들과 함께 협동심을 기르며 장기적인 학습을 진행합니다.</p>
+</div>
+<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="220">
+<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
+<span class="material-symbols-outlined" style="font-size: 32px;">travel_explore</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">관측 중심 교육</h3>
+<p class="font-body-md text-body-md text-on-surface-variant ko-keep">이론을 넘어 실제 밤하늘을 관측하며 우주를 체험합니다.</p>
+</div>
+</div>
+</section>
+<!-- Timeline & Course Cards -->
+<section class="px-gutter max-w-container-max mx-auto relative pb-section-gap-mobile md:pb-section-gap">
+<div class="timeline-line hidden md:block" data-reveal="line"></div>
+<div class="space-y-24 relative z-10">
+<!-- Stage 1 -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="w-full md:w-5/12 text-right" data-reveal="left">
+<div class="glass-panel rounded-xl p-2 w-full aspect-video overflow-hidden">
+<iframe class="course-preview-video w-full h-full rounded-lg" title="어린이천문대 첫걸음과정 소개" data-preview-video-id="Iez_OWB-8eA" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-midnight-deep border-2 border-starry-gold hidden md:flex items-center justify-center z-10 shadow-[0_0_15px_rgba(255,193,0,0.4)] shrink-0">
+<span class="font-label-md text-label-md text-starry-gold">1</span>
+</div>
+<div class="w-full md:w-5/12" data-reveal="right" data-reveal-delay="120">
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
+<div class="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 1~2학년</span>
+<h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">첫걸음 과정</h3>
+</div>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">밤하늘과 친해지기</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">달의 변화와 계절 별자리</span>
+                                </li>
+</ul>
+<button class="inline-flex items-center gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="starter" aria-controls="course-modal" aria-expanded="false">
+                                자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Stage 2 -->
+<div class="flex flex-col md:flex-row-reverse items-center justify-between gap-8">
+<div class="w-full md:w-5/12 text-left" data-reveal="right">
+<div class="glass-panel rounded-xl p-2 w-full aspect-video overflow-hidden">
+<iframe class="course-preview-video w-full h-full rounded-lg" title="어린이천문대 체험과정 소개" data-preview-video-id="Gxa1X4TKq70" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-midnight-deep border-2 border-starry-gold hidden md:flex items-center justify-center z-10 shadow-[0_0_15px_rgba(255,193,0,0.4)] shrink-0">
+<span class="font-label-md text-label-md text-starry-gold">2</span>
+</div>
+<div class="w-full md:w-5/12 text-left md:text-right" data-reveal="left" data-reveal-delay="120">
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
+<div class="flex flex-wrap items-center gap-2 md:justify-end md:gap-3 mb-4">
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 2~3학년</span>
+<h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">체험 과정</h3>
+</div>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">태양계의 신비</p>
+<ul class="space-y-2 mb-8 flex flex-col md:items-end">
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">행성 탐험과 망원경 기초 조작</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+</ul>
+<button class="inline-flex w-auto md:w-full items-center md:justify-end gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="experience" aria-controls="course-modal" aria-expanded="false">
+                                자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="w-full md:w-5/12 text-right" data-reveal="left">
+<div class="glass-panel rounded-xl p-2 w-full aspect-video overflow-hidden">
+<iframe class="course-preview-video w-full h-full rounded-lg" title="어린이천문대의 탐구과정에서는 무슨 과정일까?" data-preview-video-id="98FwVjWm2GU" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-midnight-deep border-2 border-starry-gold hidden md:flex items-center justify-center z-10 shadow-[0_0_15px_rgba(255,193,0,0.4)] shrink-0">
+<span class="font-label-md text-label-md text-starry-gold">3</span>
+</div>
+<div class="w-full md:w-5/12" data-reveal="right" data-reveal-delay="120">
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
+<div class="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 4~5학년</span>
+<h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">탐구 과정</h3>
+</div>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">심화 천문학</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">성단/성운 관측 및 우주 과학 원리</span>
+                                </li>
+</ul>
+<button class="inline-flex items-center gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="inquiry" aria-controls="course-modal" aria-expanded="false">
+                                자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="flex flex-col md:flex-row-reverse items-center justify-between gap-8">
+<div class="w-full md:w-5/12 text-left" data-reveal="right">
+<div class="glass-panel rounded-xl p-2 w-full aspect-video overflow-hidden">
+<iframe class="course-preview-video w-full h-full rounded-lg" title="어린이천문대 테마과정에선 무엇을 하나요? - 1" data-preview-video-id="yJR56GsXn8M" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-midnight-deep border-2 border-starry-gold hidden md:flex items-center justify-center z-10 shadow-[0_0_15px_rgba(255,193,0,0.4)] shrink-0">
+<span class="font-label-md text-label-md text-starry-gold">4</span>
+</div>
+<div class="w-full md:w-5/12 text-left md:text-right" data-reveal="left" data-reveal-delay="120">
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
+<div class="flex flex-wrap items-center gap-2 md:justify-end md:gap-3 mb-4">
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 5학년 이상</span>
+<h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">테마 과정</h3>
+</div>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">전문 관측 프로젝트</p>
+<ul class="space-y-2 mb-8 flex flex-col md:items-end">
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">심화 주제 탐구 및 자유 관측</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+</ul>
+<button class="inline-flex w-auto md:w-full items-center md:justify-end gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="theme" aria-controls="course-modal" aria-expanded="false">
+                                자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Course Detail Modal -->
+<div id="course-modal" class="hidden fixed inset-0 z-[100] px-3 sm:px-4 py-5 md:py-10" role="dialog" aria-modal="true" aria-labelledby="course-modal-title">
+<div id="course-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+<div id="course-modal-panel" class="relative mx-auto max-w-5xl max-h-[90vh] overflow-y-auto glass-panel rounded-lg md:rounded-xl">
+<div class="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-gray-200 bg-white/95 px-4 py-3 md:px-8 md:py-4 backdrop-blur">
+<div class="min-w-0">
+<span id="course-modal-kicker" class="block font-caption text-caption text-starry-gold whitespace-nowrap mb-1"></span>
+<h2 id="course-modal-title" class="font-headline-md text-lg sm:text-xl md:text-2xl leading-tight text-black ko-keep"></h2>
+</div>
+<button id="course-modal-close" class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full border border-gray-300 text-black hover:bg-gray-100 transition-colors flex items-center justify-center" type="button" aria-label="팝업 닫기">
+<span class="material-symbols-outlined" style="font-size: 22px;">close</span>
+</button>
+</div>
+<div class="p-4 sm:p-5 md:p-8">
+<div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 md:gap-8 mb-8">
+<div>
+<div class="rounded-xl border border-gray-200 bg-black overflow-hidden shadow-sm">
+<div class="relative aspect-video">
+<iframe id="course-modal-video" class="absolute inset-0 w-full h-full" title="" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+</div>
+<a id="course-modal-youtube-link" class="mt-3 inline-flex items-center gap-2 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" href="#" target="_blank" rel="noopener noreferrer">
+유튜브에서 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+<div>
+<p id="course-modal-summary" class="font-body-md text-sm md:text-body-md leading-relaxed text-black mb-6 ko-keep"></p>
+<div id="course-modal-meta" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4"></div>
+</div>
+</div>
+<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+<table class="w-full min-w-[760px] text-left">
+<thead class="bg-gray-50 border-b border-gray-200">
+<tr>
+<th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">월</th>
+<th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">주제</th>
+<th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">관측</th>
+<th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">실습</th>
+</tr>
+</thead>
+<tbody id="course-modal-rows" class="divide-y divide-gray-100"></tbody>
+</table>
+</div>
+<ul id="course-modal-notes" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm leading-relaxed text-black"></ul>
+</div>
+</div>
+</div>
+<!-- Regular Class Availability -->
+<section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap" data-reveal>
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-10">
+<div class="flex flex-col gap-6 mb-8">
+<div>
+<span class="inline-flex items-center gap-2 rounded-full border border-starry-gold/30 bg-starry-gold/10 px-4 py-1.5 font-caption text-caption text-starry-gold mb-4 whitespace-nowrap">
+<span class="material-symbols-outlined" style="font-size: 16px;">event_available</span>
+현재 접수 중
+</span>
+<h2 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep">정규반 개설 가능 시간 보기</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6">
+<div class="rounded-xl border border-gray-200 bg-gray-50 p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black mb-4 ko-keep">정규반 수업 시간 방식</h3>
+<ul class="space-y-3 text-sm md:text-base leading-relaxed text-on-surface-variant ko-keep">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-starry-gold shrink-0" style="font-size: 20px;">check_circle</span>
+<span class="min-w-0">매달 1회 수업</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-starry-gold shrink-0" style="font-size: 20px;">check_circle</span>
+<span class="min-w-0">같은 주차·요일·시간에 고정 진행</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-starry-gold shrink-0" style="font-size: 20px;">check_circle</span>
+<span class="min-w-0">예: 2주차 화요일 7시 → 매달 두 번째 화요일 7시 수업</span>
+</li>
+</ul>
+<div class="mt-6 rounded-xl bg-white border border-gray-200 p-4">
+<p class="font-headline-md text-lg leading-snug text-black mb-2 ko-keep">상담 및 접수</p>
+<a class="font-headline-md text-xl text-starry-gold hover:text-black transition-colors whitespace-nowrap" href="tel:0325673245">032-567-3245</a>
+<p class="font-body-md text-sm md:text-lg text-on-surface-variant mt-3 leading-relaxed ko-keep">아래 시간표를 기준으로 희망 타임을 상담해 주세요. 실제 개설 가능 여부는 상담 시 최종 안내드립니다.</p>
+<a class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-starry-gold px-4 md:px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep hover:bg-black hover:text-white transition-colors" href="tel:0325673245">
+전화 상담 연결 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">call</span>
+</a>
+</div>
+</div>
+<div class="rounded-xl border border-gray-200 bg-white p-4 md:p-6">
+<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep min-w-0">수업 시간표</h3>
+<div class="flex shrink-0 items-center gap-2 text-xs">
+<span class="time-slot-badge time-slot-open">상담가능</span>
+<a class="time-slot-badge time-slot-wait cursor-pointer hover:border-starry-gold hover:text-starry-gold transition-colors" href="admin.html" aria-label="정규반 대기 관리 페이지로 이동">대기</a>
+</div>
+</div>
+<div class="overflow-x-auto pb-2">
+<div id="availability-table" class="min-w-[660px] space-y-3">
+<div class="rounded-xl border border-gray-200 overflow-hidden">
+<div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">1주차</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">화</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">수</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">목</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">금</div>
+<div class="bg-gray-50 border-b border-gray-200 px-3 py-3 font-bold text-black">토</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">7시</div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="bg-gray-50 border-r border-gray-200 px-3 py-3 font-bold text-black">9시</div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+</div>
+</div>
+<div class="rounded-xl border border-gray-200 overflow-hidden">
+<div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">2주차</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">화</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">수</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">목</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">금</div>
+<div class="bg-gray-50 border-b border-gray-200 px-3 py-3 font-bold text-black">토</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">7시</div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="bg-gray-50 border-r border-gray-200 px-3 py-3 font-bold text-black">9시</div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+</div>
+</div>
+<div class="rounded-xl border border-gray-200 overflow-hidden">
+<div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">3주차</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">화</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">수</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">목</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">금</div>
+<div class="bg-gray-50 border-b border-gray-200 px-3 py-3 font-bold text-black">토</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">7시</div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="bg-gray-50 border-r border-gray-200 px-3 py-3 font-bold text-black">9시</div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+</div>
+</div>
+<div class="rounded-xl border border-gray-200 overflow-hidden">
+<div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">4주차</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">화</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">수</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">목</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">금</div>
+<div class="bg-gray-50 border-b border-gray-200 px-3 py-3 font-bold text-black">토</div>
+<div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">7시</div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-r border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="border-b border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="bg-gray-50 border-r border-gray-200 px-3 py-3 font-bold text-black">9시</div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-open">상담가능</span></div>
+<div class="border-r border-gray-100 p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+<div class="p-2"><span class="time-slot-badge time-slot-wait">대기</span></div>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-4 font-body-md text-sm md:text-lg text-on-surface-variant leading-relaxed ko-keep">표시는 상담 안내용입니다. 실제 시작 가능 여부와 학년 구성은 전화 상담으로 확인해 주세요.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Tuition Calculator -->
+<section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap" data-reveal="zoom">
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-10">
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 items-center">
+<div>
+<span class="inline-flex items-center gap-2 rounded-full border border-starry-gold/30 bg-starry-gold/10 px-4 py-1.5 font-caption text-caption text-starry-gold mb-4 whitespace-nowrap">
+<span class="material-symbols-outlined" style="font-size: 16px;">calculate</span>
+수업료 안내
+</span>
+<h2 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface mb-3 ko-keep">우리 팀 인원 수별 회비 계산기</h2>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed ko-keep">
+정규반 수업료는 팀 단위로 책정됩니다. 팀 인원 수를 선택하면 1인당 예상 월 회비를 바로 확인할 수 있습니다.
+</p>
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+<p class="font-caption text-caption text-gray-500 mb-1">팀 기준 월 수업료</p>
+<p class="font-headline-md text-xl text-black">480,000원</p>
+</div>
+<div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+<p class="font-caption text-caption text-gray-500 mb-1">납부 방식</p>
+<p class="font-headline-md text-xl text-black">3개월 선납</p>
+</div>
+</div>
+</div>
+<div class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<p class="font-headline-md text-lg md:text-xl leading-snug text-black mb-4 ko-keep">팀 인원 선택</p>
+<div class="grid grid-cols-5 gap-1.5 sm:gap-2 mb-6" role="group" aria-label="팀 인원 수 선택">
+<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="6">6명</button>
+<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="7">7명</button>
+<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="8">8명</button>
+<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="9">9명</button>
+<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="10">10명</button>
+</div>
+<div class="rounded-xl bg-gray-50 border border-gray-200 p-4 sm:p-5">
+<div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+<div>
+<p class="font-caption text-caption text-gray-500 mb-1">선택한 팀원 수</p>
+<p id="selected-member-count" class="font-headline-md text-xl text-black">10명</p>
+</div>
+<div class="sm:text-right">
+<p class="font-caption text-caption text-gray-500 mb-1">1인당 예상 월 회비</p>
+<p id="tuition-per-person" class="font-headline-lg text-2xl sm:text-3xl text-starry-gold whitespace-nowrap">48,000원</p>
+</div>
+</div>
+</div>
+<p class="mt-4 font-body-md text-sm md:text-lg text-on-surface-variant leading-relaxed ko-keep">교재비와 기타 비용은 상담 시 별도 안내드립니다.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap-mobile md:py-section-gap border-t border-gray-200 bg-white" data-reveal>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter max-w-container-max mx-auto">
+<div>
+<a class="flex items-center space-x-3 mb-4" href="index.html">
+<img alt="Logo" class="w-10 h-10 object-contain grayscale opacity-80" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<span class="font-headline-md text-xl font-bold text-black tracking-wide">인천어린이천문대</span>
+</a>
+<p class="font-caption text-caption text-on-surface-variant mb-4">© 2024 Incheon Children's Observatory. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap gap-6 md:justify-end">
+<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">032-567-3245</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">인천 서구 원당대로 454-14</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">Naver Cafe</a>
+<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+<script src="availability-data.js"></script>
+<script>
+const courseCurricula = {
+  starter: {
+    kicker: "1단계",
+    title: "첫걸음 과정",
+    summary: "별자리와 달, 태양, 망원경을 놀이형 실습으로 처음 만나는 기초 과정입니다.",
+    videoId: "Iez_OWB-8eA",
+    videoTitle: "어린이천문대 첫걸음과정 소개",
+    meta: [
+      ["권장대상", "초등학교 2학년"],
+      ["수업시간", "화~토 19:00~21:00 / 21:00~23:00"],
+      ["교육비", "팀당 1회 480,000원"]
+    ],
+    rows: [
+      ["1월", "오리온과 친구들", "겨울철 관측 천체", "겨울철 별자리 텀블러"],
+      ["2월", "태양 뒤에 숨은 생일별자리", "-", "야광 생일별자리 열쇠고리"],
+      ["3월", "울퉁불퉁? 얼룩덜룩?", "-", "달모습 체험기"],
+      ["4월", "사자의 울음소리", "봄철 관측 천체", "별자리 무드등"],
+      ["5월", "갈갈이 아저씨의 망원경", "-", "매직스코프"],
+      ["6월", "북극성을 찾아라!", "-", "북극성 바람개비"],
+      ["7월", "은하수로 날아간 백조", "여름철 관측 천체", "별자리를 꾸며라"],
+      ["8월", "별들의 운동회", "-", "겹겹이 액자"],
+      ["9월", "태양이 사라졌어요", "-", "자외선팔찌 만들기"],
+      ["10월", "페가수스의 날개", "가을철 관측 천체", "가을철 포일별자리"],
+      ["11월", "플레이아데스의 비밀", "-", "만화경"],
+      ["12월", "잡아라! 별똥별", "-", "유성우 칼레이도사이클"]
+    ],
+    notes: ["계절별 대표 천체는 출몰 시기에 맞춰 우선 관측합니다.", "관측이 어려운 날에는 관련 실습 또는 영상 수업으로 진행합니다."]
+  },
+  experience: {
+    kicker: "2단계",
+    title: "체험 과정",
+    summary: "별자리, 태양계, 우주탐사 주제를 관측과 만들기 활동으로 연결하는 과정입니다.",
+    videoId: "Gxa1X4TKq70",
+    videoTitle: "어린이천문대 체험과정 소개",
+    meta: [
+      ["권장대상", "초등학교 3학년"],
+      ["수업시간", "화~토 19:00~21:00 / 21:00~23:00"],
+      ["교육비", "팀당 1회 480,000원"]
+    ],
+    rows: [
+      ["1월", "겨울철 별자리와 별의 색깔", "겨울철 관측 천체", "겨울철 별자리 퍼즐"],
+      ["2월", "우주를 향한 도전", "-", "반작용 모형"],
+      ["3월", "우주인의 생활", "-", "우주정거장의 생존필수품 찾기"],
+      ["4월", "봄철 별자리와 별의 밝기", "봄철 관측 천체", "별자리스코프"],
+      ["5월", "태양", "-", "일식 체험기"],
+      ["6월", "태양계", "-", "태양계 주사위"],
+      ["7월", "여름철 별자리와 별의 크기", "여름철 관측 천체", "광섬유 별자리 액자"],
+      ["8월", "은하수", "-", "은하수 사진퍼즐"],
+      ["9월", "달탐사", "-", "달모형"],
+      ["10월", "가을철 별자리와 별의 거리", "가을철 관측 천체", "별의 거리 모형"],
+      ["11월", "사라진 공룡과 소행성", "-", "운석 관찰하기"],
+      ["12월", "우주 속의 지구", "-", "앙부일구"]
+    ],
+    notes: ["만들기 활동을 통해 천문 개념을 손으로 이해하도록 구성합니다.", "관측 대상은 달과 행성의 출몰 시기에 따라 조정될 수 있습니다."]
+  },
+  inquiry: {
+    kicker: "3단계",
+    title: "탐구 과정",
+    summary: "별의 물리, 달과 행성, 성운과 은하까지 우주 과학의 원리를 깊게 다루는 과정입니다.",
+    videoId: "98FwVjWm2GU",
+    videoTitle: "어린이천문대의 탐구과정에서는 무슨 과정일까?",
+    meta: [
+      ["권장대상", "초등학교 4학년"],
+      ["수업시간", "화~토 19:00~21:00 / 21:00~23:00"],
+      ["교육비", "팀당 1회 480,000원"]
+    ],
+    rows: [
+      ["기초1", "별과 별자리", "해당 계절 대상 관측", "야광 생일별자리 열쇠고리"],
+      ["기초2", "태양계 가족", "-", "태양계 주사위"],
+      ["기초3", "우주 속의 지구", "-", "앙부일구"],
+      ["1월", "별의 밝기와 거리", "겨울철 관측 천체", "썬스코프"],
+      ["2월", "우주탐사", "-", "화성탐사 기획하기"],
+      ["3월", "별의 색깔에 담긴 과학", "-", "별 색깔 온도계"],
+      ["4월", "별의 일생", "봄철 관측 천체", "별의 일생카드"],
+      ["5월", "달의 과학", "-", "회전 달모습판"],
+      ["6월", "행성", "-", "줄줄이 태양계"],
+      ["7월", "지구의 운동과 별자리", "여름철 관측 천체", "야광회전 별자리판"],
+      ["8월", "혜성, 유성", "-", "혜성 매직블럭"],
+      ["9월", "소행성과 왜행성", "-", "소행성 간이투영기"],
+      ["10월", "망원경", "가을철 관측 천체", "망원경 조작실습 1"],
+      ["11월", "성운 / 성단 / 은하", "-", "천체 구별하기 / 망원경 조작실습 2"],
+      ["12월", "외부은하", "-", "홀로그램 투영기"]
+    ],
+    notes: ["체험과정을 수료한 대원은 기초3 과정을 생략할 수 있습니다.", "심화 관측과 망원경 조작 실습 비중이 높아집니다."]
+  },
+  theme: {
+    kicker: "4단계",
+    title: "테마 과정",
+    summary: "빛, 중력, 블랙홀, 상대성이론 등 현대 천문학 주제를 프로젝트형으로 탐구하는 심화 과정입니다.",
+    videoId: "yJR56GsXn8M",
+    videoTitle: "어린이천문대 테마과정에선 무엇을 하나요? - 1",
+    meta: [
+      ["권장대상", "탐구과정 수료 초등학교 5학년"],
+      ["수업시간", "화~토 19:00~21:00 / 21:00~23:00"],
+      ["교육비", "팀당 1회 480,000원"]
+    ],
+    rows: [
+      ["기초1", "망원경 사용법", "해당 계절 대상 관측", "망원경 기초 실습"],
+      ["1월", "외계생명체를 찾아서", "겨울철 관측 천체", "응답하라 외계생명 실습지"],
+      ["2월", "천문학의 열쇠 '빛'", "-", "스펙트로 스코프"],
+      ["3월", "인공위성", "-", "인공위성 모형"],
+      ["4월", "중력", "봄철 관측 천체", "신기한 더블콘"],
+      ["5월", "천체들의 거리", "-", "천체의 거리"],
+      ["6월", "밝기가 변하는 별", "-", "변광성 이름찾기"],
+      ["7월", "별의 생성과 진화", "여름철 관측 천체", "하루살이의 일생"],
+      ["8월", "블랙홀", "-", "블랙홀 보드게임"],
+      ["9월", "빛의 속도", "-", "빛의 속도 경주"],
+      ["10월", "어린이 상대성이론", "가을철 관측 천체", "-"],
+      ["11월", "전파천문학과 퀘이사", "-", "퀘이사 적색편이 실습지"],
+      ["12월", "빅뱅과 우주의 성장", "-", "우주팽창의 비밀 실습지"]
+    ],
+    notes: ["테마과정은 탐구과정을 수료한 학생을 대상으로 진행합니다.", "주제별 토론과 프로젝트형 실습이 함께 진행됩니다."]
+  }
+};
+
+const courseModal = document.getElementById("course-modal");
+const courseBackdrop = document.getElementById("course-modal-backdrop");
+const courseKicker = document.getElementById("course-modal-kicker");
+const courseTitle = document.getElementById("course-modal-title");
+const courseSummary = document.getElementById("course-modal-summary");
+const courseMeta = document.getElementById("course-modal-meta");
+const courseRows = document.getElementById("course-modal-rows");
+const courseNotes = document.getElementById("course-modal-notes");
+const courseVideo = document.getElementById("course-modal-video");
+const courseYoutubeLink = document.getElementById("course-modal-youtube-link");
+const courseClose = document.getElementById("course-modal-close");
+const coursePanel = document.getElementById("course-modal-panel");
+const courseButtons = document.querySelectorAll("[data-course-trigger]");
+const coursePreviewVideos = document.querySelectorAll("[data-preview-video-id]");
+const availabilityTable = document.getElementById("availability-table");
+const tuitionMemberButtons = document.querySelectorAll("[data-member-count]");
+const selectedMemberCount = document.getElementById("selected-member-count");
+const tuitionPerPerson = document.getElementById("tuition-per-person");
+const monthlyTeamTuition = 480000;
+
+function getYouTubeEmbedSrc(videoId) {
+  const videoOrigin = window.location.origin && window.location.origin !== "null"
+    ? `&origin=${encodeURIComponent(window.location.origin)}`
+    : "";
+  return `https://www.youtube.com/embed/${videoId}?rel=0&playsinline=1${videoOrigin}`;
+}
+
+coursePreviewVideos.forEach((video) => {
+  video.src = getYouTubeEmbedSrc(video.dataset.previewVideoId);
+});
+
+function cloneAvailabilityData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function mergeAvailabilitySchedules(baseSchedule, overrideSchedule) {
+  if (!overrideSchedule || !Array.isArray(overrideSchedule.weeks)) return baseSchedule;
+
+  baseSchedule.weeks = baseSchedule.weeks.map((week, weekIndex) => {
+    const overrideWeek = overrideSchedule.weeks[weekIndex];
+    if (!overrideWeek || !overrideWeek.slots) return week;
+
+    const slots = {};
+    baseSchedule.times.forEach((time) => {
+      slots[time] = (week.slots[time] || []).map((defaultStatus, dayIndex) => {
+        const overrideStatus = overrideWeek.slots?.[time]?.[dayIndex];
+        return overrideStatus === "open" || overrideStatus === "wait" ? overrideStatus : defaultStatus;
+      });
+    });
+
+    return { ...week, slots };
+  });
+
+  return baseSchedule;
+}
+
+async function getAvailabilitySchedule() {
+  let schedule = cloneAvailabilityData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
+  const dataUrl = window.INCHEON_ASTRO_AVAILABILITY_DATA_URL;
+
+  if (dataUrl) {
+    try {
+      const response = await fetch(`${dataUrl}?v=${Date.now()}`, { cache: "no-store" });
+      if (response.ok) {
+        const fileSchedule = await response.json();
+        schedule = mergeAvailabilitySchedules(schedule, fileSchedule);
+      }
+    } catch (error) {
+    }
+  }
+
+  try {
+    const localSchedule = JSON.parse(localStorage.getItem(window.INCHEON_ASTRO_AVAILABILITY_KEY) || "null");
+    schedule = mergeAvailabilitySchedules(schedule, localSchedule);
+  } catch (error) {
+  }
+
+  return schedule;
+}
+
+function renderAvailabilityTable(schedule) {
+  if (!availabilityTable) return;
+
+  availabilityTable.innerHTML = schedule.weeks.map((week) => `
+    <div class="rounded-xl border border-gray-200 overflow-hidden">
+      <div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
+        <div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">${week.label}</div>
+        ${schedule.days.map((day, index) => `
+          <div class="bg-gray-50 ${index < schedule.days.length - 1 ? "border-r" : ""} border-b border-gray-200 px-3 py-3 font-bold text-black">${day}</div>
+        `).join("")}
+        ${schedule.times.map((time, timeIndex) => `
+          <div class="bg-gray-50 border-r ${timeIndex < schedule.times.length - 1 ? "border-b" : ""} border-gray-200 px-3 py-3 font-bold text-black">${time}</div>
+          ${(week.slots[time] || []).map((status, dayIndex) => {
+            const isOpen = status === "open";
+            const isLastDay = dayIndex === schedule.days.length - 1;
+            const isLastTime = timeIndex === schedule.times.length - 1;
+            return `
+              <div class="${!isLastDay ? "border-r" : ""} ${!isLastTime ? "border-b" : ""} border-gray-100 p-2">
+                <span class="time-slot-badge ${isOpen ? "time-slot-open" : "time-slot-wait"}">${isOpen ? "상담가능" : "대기"}</span>
+              </div>
+            `;
+          }).join("")}
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+getAvailabilitySchedule().then(renderAvailabilityTable);
+
+function formatWon(value) {
+  return `${Math.round(value).toLocaleString("ko-KR")}원`;
+}
+
+function updateTuitionCalculator(memberCount) {
+  if (!selectedMemberCount || !tuitionPerPerson) return;
+
+  selectedMemberCount.textContent = `${memberCount}명`;
+  tuitionPerPerson.textContent = formatWon(monthlyTeamTuition / memberCount);
+
+  tuitionMemberButtons.forEach((button) => {
+    const isSelected = Number(button.dataset.memberCount) === memberCount;
+    button.classList.toggle("bg-starry-gold", isSelected);
+    button.classList.toggle("text-midnight-deep", isSelected);
+    button.classList.toggle("border-starry-gold", isSelected);
+    button.classList.toggle("text-black", !isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
+tuitionMemberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    updateTuitionCalculator(Number(button.dataset.memberCount));
+  });
+});
+
+updateTuitionCalculator(10);
+
+const revealTargets = Array.from(document.querySelectorAll("[data-reveal]"));
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+revealTargets.forEach((target) => {
+  const delay = target.dataset.revealDelay;
+  if (delay) target.style.setProperty("--reveal-delay", `${delay}ms`);
+});
+
+if (reduceMotion || !("IntersectionObserver" in window)) {
+  revealTargets.forEach((target) => target.classList.add("is-visible"));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: "0px 0px -12% 0px",
+    threshold: 0.12
+  });
+
+  revealTargets.forEach((target) => revealObserver.observe(target));
+}
+
+const dragScrollContainers = Array.from(document.querySelectorAll(".overflow-x-auto"));
+
+dragScrollContainers.forEach((container) => {
+  container.classList.add("drag-scroll");
+
+  let isDragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let shouldPreventClick = false;
+
+  function stopDragging(event) {
+    if (!isDragging) return;
+    isDragging = false;
+    container.classList.remove("is-dragging");
+    if (event && typeof container.releasePointerCapture === "function") {
+      try {
+        container.releasePointerCapture(event.pointerId);
+      } catch (error) {
+        // Pointer capture can already be released by the browser.
+      }
+    }
+  }
+
+  container.addEventListener("pointerdown", (event) => {
+    if (event.button !== undefined && event.button !== 0) return;
+    if (container.scrollWidth <= container.clientWidth) return;
+
+    isDragging = true;
+    startX = event.clientX;
+    startScrollLeft = container.scrollLeft;
+    shouldPreventClick = false;
+    container.classList.add("is-dragging");
+
+    if (typeof container.setPointerCapture === "function") {
+      container.setPointerCapture(event.pointerId);
+    }
+  });
+
+  container.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+
+    const deltaX = event.clientX - startX;
+    if (Math.abs(deltaX) > 4) {
+      shouldPreventClick = true;
+      if (event.cancelable) event.preventDefault();
+    }
+
+    container.scrollLeft = startScrollLeft - deltaX;
+  });
+
+  container.addEventListener("pointerup", stopDragging);
+  container.addEventListener("pointercancel", stopDragging);
+  container.addEventListener("pointerleave", (event) => {
+    if (event.pointerType === "mouse") stopDragging(event);
+  });
+
+  container.addEventListener("click", (event) => {
+    if (!shouldPreventClick) return;
+    event.preventDefault();
+    event.stopPropagation();
+    shouldPreventClick = false;
+  }, true);
+});
+
+function openCourseModal(courseKey) {
+  const course = courseCurricula[courseKey];
+  if (!course) return;
+
+  courseKicker.textContent = course.kicker;
+  courseTitle.textContent = course.title;
+  courseSummary.textContent = course.summary;
+  courseVideo.title = course.videoTitle;
+  courseVideo.src = getYouTubeEmbedSrc(course.videoId);
+  courseYoutubeLink.href = `https://www.youtube.com/watch?v=${course.videoId}`;
+  courseMeta.innerHTML = course.meta.map(([label, value]) => `
+    <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+      <div class="font-caption text-caption text-gray-500 mb-2 whitespace-nowrap">${label}</div>
+      <div class="font-headline-md text-sm md:text-base leading-snug text-black ko-keep">${value}</div>
+    </div>
+  `).join("");
+  courseRows.innerHTML = course.rows.map(([month, topic, observation, activity]) => `
+    <tr class="hover:bg-gray-50 transition-colors">
+      <td class="px-4 py-3 font-label-md text-label-md text-starry-gold whitespace-nowrap">${month}</td>
+      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${topic}</td>
+      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${observation}</td>
+      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${activity}</td>
+    </tr>
+  `).join("");
+  courseNotes.innerHTML = course.notes.map((note) => `
+    <li class="flex items-start gap-2 rounded-xl bg-gray-50 border border-gray-200 p-4 ko-keep">
+      <span class="text-starry-gold shrink-0">•</span>
+      <span class="min-w-0">${note}</span>
+    </li>
+  `).join("");
+
+  courseModal.scrollTop = 0;
+  if (coursePanel) coursePanel.scrollTop = 0;
+  courseModal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => {
+    courseModal.scrollTop = 0;
+    if (coursePanel) coursePanel.scrollTop = 0;
+  });
+  courseButtons.forEach((button) => {
+    const isActive = button.dataset.courseTrigger === courseKey;
+    button.setAttribute("aria-expanded", String(isActive));
+    button.classList.toggle("underline", isActive);
+  });
+}
+
+function closeCourseModal() {
+  courseModal.classList.add("hidden");
+  document.body.style.overflow = "";
+  courseVideo.src = "";
+  courseYoutubeLink.href = "#";
+  courseButtons.forEach((button) => {
+    button.setAttribute("aria-expanded", "false");
+    button.classList.remove("underline");
+  });
+}
+
+courseButtons.forEach((button) => {
+  button.addEventListener("click", () => openCourseModal(button.dataset.courseTrigger));
+});
+
+courseClose.addEventListener("click", closeCourseModal);
+courseBackdrop.addEventListener("click", closeCourseModal);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !courseModal.classList.contains("hidden")) {
+    closeCourseModal();
+  }
+});
+</script>
+</body></html>
+

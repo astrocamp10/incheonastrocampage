@@ -1,0 +1,91 @@
+{
+  "days": [
+    "화",
+    "수",
+    "목",
+    "금",
+    "토"
+  ],
+  "times": [
+    "7시",
+    "9시"
+  ],
+  "weeks": [
+    {
+      "label": "1주차",
+      "slots": {
+        "7시": [
+          "wait",
+          "open",
+          "wait",
+          "open",
+          "wait"
+        ],
+        "9시": [
+          "wait",
+          "open",
+          "wait",
+          "open",
+          "wait"
+        ]
+      }
+    },
+    {
+      "label": "2주차",
+      "slots": {
+        "7시": [
+          "open",
+          "wait",
+          "open",
+          "wait",
+          "open"
+        ],
+        "9시": [
+          "open",
+          "wait",
+          "wait",
+          "wait",
+          "open"
+        ]
+      }
+    },
+    {
+      "label": "3주차",
+      "slots": {
+        "7시": [
+          "open",
+          "wait",
+          "wait",
+          "wait",
+          "open"
+        ],
+        "9시": [
+          "open",
+          "wait",
+          "wait",
+          "wait",
+          "open"
+        ]
+      }
+    },
+    {
+      "label": "4주차",
+      "slots": {
+        "7시": [
+          "wait",
+          "open",
+          "wait",
+          "open",
+          "wait"
+        ],
+        "9시": [
+          "wait",
+          "wait",
+          "open",
+          "wait",
+          "wait"
+        ]
+      }
+    }
+  ]
+}

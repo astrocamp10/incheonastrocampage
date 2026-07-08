@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html class="dark" lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>관리자 페이지 - 인천어린이천문대</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "starry-gold": "#FFC300",
+          "midnight-deep": "#05070A"
+        },
+        fontFamily: {
+          "headline": ["Plus Jakarta Sans", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"],
+          "body": ["Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "sans-serif"]
+        }
+      }
+    }
+  };
+</script>
+<style>
+  body {
+    background: #f7f8fb;
+    color: #111827;
+    font-family: "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  .admin-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 16px 40px rgba(17, 24, 39, 0.08);
+    max-width: 100%;
+  }
+
+  .korean-copy {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .slot-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    border-radius: 9999px;
+    border: 1px solid #d1d5db;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.15;
+    white-space: nowrap;
+    transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+
+  .slot-toggle.is-open {
+    color: #917a00;
+    background: rgba(255, 195, 0, 0.12);
+    border-color: rgba(255, 195, 0, 0.42);
+  }
+
+  .slot-toggle.is-wait {
+    color: #6b7280;
+    background: #f3f4f6;
+  }
+
+  .status-pill {
+    border-radius: 9999px;
+    border: 1px solid;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .status-open {
+    color: #917a00;
+    background: rgba(255, 195, 0, 0.12);
+    border-color: rgba(255, 195, 0, 0.42);
+  }
+
+  .status-wait {
+    color: #6b7280;
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .status-closed {
+    color: #be123c;
+    background: #fff1f2;
+    border-color: #fecdd3;
+  }
+</style>
+</head>
+<body class="font-body antialiased">
+<header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-200">
+<div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6">
+<a class="flex min-w-0 items-center gap-2 sm:gap-3" href="curriculum.html">
+<img alt="Logo" class="h-7 w-7 shrink-0 object-contain grayscale sm:h-8 sm:w-8" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<span class="whitespace-nowrap font-headline text-base font-bold text-black sm:text-lg md:text-xl">관리자 페이지</span>
+</a>
+<a class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gray-200 px-3 py-2 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:gap-2 sm:px-4 sm:text-sm" href="curriculum.html">
+커리큘럼 보기 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+</header>
+
+<main class="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+<section id="login-panel" class="admin-card mx-auto max-w-md rounded-xl p-5 sm:p-6 md:p-8">
+<h1 class="font-headline text-[1.35rem] font-bold leading-tight text-black sm:text-2xl">관리자 로그인</h1>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">비밀번호를 입력하면 정규반 시간표와 일일체험 일정을 변경할 수 있습니다.</p>
+<form id="login-form" class="mt-6 space-y-4">
+<label class="block">
+<span class="mb-2 block text-sm font-bold text-gray-700">비밀번호</span>
+<input id="admin-password" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-base focus:border-starry-gold focus:ring-starry-gold sm:px-4" type="password" autocomplete="current-password" autofocus/>
+</label>
+<p id="login-error" class="korean-copy hidden rounded-xl bg-red-50 px-4 py-3 text-sm font-bold leading-6 text-red-600">비밀번호가 맞지 않습니다.</p>
+<button class="w-full whitespace-nowrap rounded-full bg-starry-gold px-5 py-3 text-sm font-bold text-midnight-deep hover:bg-black hover:text-white transition-colors sm:text-base" type="submit">들어가기</button>
+</form>
+</section>
+
+<section id="admin-panel" class="hidden space-y-6">
+<div class="admin-card rounded-xl p-5 sm:p-6 md:p-8">
+<div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div class="min-w-0">
+<span class="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/30 bg-starry-gold/10 px-3 py-1.5 text-xs font-bold text-starry-gold sm:px-4">
+<span class="material-symbols-outlined" style="font-size: 16px;">edit_calendar</span>
+시간표 편집
+</span>
+<h1 class="mt-4 font-headline text-2xl font-bold leading-tight text-black sm:text-3xl">상담가능 / 대기 변경</h1>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">각 칸을 누르면 상태가 바뀌고 바로 저장됩니다.</p>
+</div>
+<div class="flex w-full flex-wrap gap-2 sm:w-auto md:justify-end">
+<button id="reset-button" class="flex-1 whitespace-nowrap rounded-full border border-gray-300 px-3 py-2.5 text-xs font-bold text-gray-700 hover:border-red-300 hover:text-red-600 transition-colors sm:flex-none sm:px-5 sm:text-sm" type="button">기본값 복원</button>
+<button id="copy-button" class="flex-1 whitespace-nowrap rounded-full border border-gray-300 px-3 py-2.5 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:flex-none sm:px-5 sm:text-sm" type="button">DATA 파일 저장</button>
+</div>
+</div>
+</div>
+
+<div class="admin-card rounded-xl p-4 sm:p-5 md:p-6">
+<div class="mb-4 flex flex-wrap items-start justify-between gap-3 sm:items-center">
+<h2 class="min-w-0 font-headline text-lg font-bold leading-tight text-black sm:text-xl">수업 시간표</h2>
+<div class="flex shrink-0 flex-wrap items-center gap-2 text-xs">
+<span class="slot-toggle is-open px-2.5 sm:px-3">상담가능</span>
+<span class="slot-toggle is-wait px-2.5 sm:px-3">대기</span>
+</div>
+</div>
+<div class="overflow-x-auto pb-2">
+<div id="admin-schedule" class="min-w-[640px] space-y-3 sm:min-w-[700px]"></div>
+</div>
+<p id="save-message" class="korean-copy mt-4 hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]">저장되었습니다. 커리큘럼 페이지를 새로고침하면 반영됩니다.</p>
+</div>
+
+<div class="admin-card rounded-xl p-5 sm:p-6 md:p-8">
+<div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div class="min-w-0">
+<span class="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/30 bg-starry-gold/10 px-3 py-1.5 text-xs font-bold text-starry-gold sm:px-4">
+<span class="material-symbols-outlined" style="font-size: 16px;">calendar_month</span>
+일일체험 편집
+</span>
+<h2 class="mt-4 font-headline text-2xl font-bold leading-tight text-black sm:text-3xl">일일체험 일정 관리</h2>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">일정을 추가하면 일일체험 달력 페이지에 표시됩니다.</p>
+</div>
+<a class="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-auto sm:px-5" href="daily-experience.html" target="_blank" rel="noopener">
+달력 보기 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+</div>
+
+<div class="grid min-w-0 gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+<form id="experience-form" class="admin-card min-w-0 rounded-xl p-5 md:p-6">
+<h3 class="font-headline text-lg font-bold leading-tight text-black sm:text-xl">일정 추가</h3>
+<div class="mt-5 space-y-4">
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">날짜</span>
+<input id="experience-date" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="date" required/>
+</label>
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">시간</span>
+<input id="experience-time" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="time" value="19:00" required/>
+</label>
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">프로그램</span>
+<select id="experience-title" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base"></select>
+</label>
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">상태</span>
+<select id="experience-status" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base">
+<option value="open">접수중</option>
+<option value="wait">대기</option>
+<option value="closed">마감</option>
+</select>
+</label>
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">메모</span>
+<textarea id="experience-memo" class="korean-copy min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" rows="3" maxlength="120" placeholder="예: 20명 정원, 우천 시 안내 예정"></textarea>
+</label>
+</div>
+<button class="mt-5 w-full whitespace-nowrap rounded-full bg-starry-gold px-5 py-3 text-sm font-bold text-midnight-deep hover:bg-black hover:text-white transition-colors sm:text-base" type="submit">일정 추가</button>
+<p id="experience-save-message" class="korean-copy mt-4 hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]">저장되었습니다.</p>
+</form>
+
+<div class="admin-card min-w-0 rounded-xl p-5 md:p-6">
+<div class="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+<div class="min-w-0">
+<h3 class="font-headline text-lg font-bold leading-tight text-black sm:text-xl">등록된 일정</h3>
+<p class="korean-copy mt-1 text-sm leading-6 text-gray-600">상태 변경은 각 일정의 선택 메뉴에서 바꿀 수 있습니다.</p>
+</div>
+<button id="experience-copy-button" class="w-full whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-fit sm:px-5" type="button">일정 DATA 저장</button>
+</div>
+<div id="experience-list" class="space-y-3"></div>
+</div>
+</div>
+</section>
+</main>
+
+<script src="availability-data.js"></script>
+<script src="experience-data.js"></script>
+<script>
+const ADMIN_PASSWORD = "dlscjsastro10";
+const authKey = "incheonastroAdminAuthed";
+const loginPanel = document.getElementById("login-panel");
+const adminPanel = document.getElementById("admin-panel");
+const loginForm = document.getElementById("login-form");
+const passwordInput = document.getElementById("admin-password");
+const loginError = document.getElementById("login-error");
+const scheduleNode = document.getElementById("admin-schedule");
+const saveMessage = document.getElementById("save-message");
+const resetButton = document.getElementById("reset-button");
+const copyButton = document.getElementById("copy-button");
+const storageKey = window.INCHEON_ASTRO_AVAILABILITY_KEY;
+const dataUrl = window.INCHEON_ASTRO_AVAILABILITY_DATA_URL || "availability.data";
+const saveUrl = window.INCHEON_ASTRO_AVAILABILITY_SAVE_URL || "save-availability.php";
+const experienceForm = document.getElementById("experience-form");
+const experienceDate = document.getElementById("experience-date");
+const experienceTime = document.getElementById("experience-time");
+const experienceTitle = document.getElementById("experience-title");
+const experienceStatus = document.getElementById("experience-status");
+const experienceMemo = document.getElementById("experience-memo");
+const experienceList = document.getElementById("experience-list");
+const experienceCopyButton = document.getElementById("experience-copy-button");
+const experienceSaveMessage = document.getElementById("experience-save-message");
+const experienceStorageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
+const experienceDataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
+const experienceSaveUrl = window.INCHEON_ASTRO_EXPERIENCE_SAVE_URL || "save-experience.php";
+const experiencePrograms = window.INCHEON_ASTRO_EXPERIENCE_PROGRAMS || [];
+const experienceStatusLabels = window.INCHEON_ASTRO_EXPERIENCE_STATUS || { open: "접수중", wait: "대기", closed: "마감" };
+let schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
+let experienceSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
+
+function cloneData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function mergeSchedules(baseSchedule, overrideSchedule) {
+  if (!overrideSchedule || !Array.isArray(overrideSchedule.weeks)) return baseSchedule;
+
+  baseSchedule.weeks = baseSchedule.weeks.map((week, weekIndex) => {
+    const overrideWeek = overrideSchedule.weeks[weekIndex];
+    if (!overrideWeek || !overrideWeek.slots) return week;
+
+    const slots = {};
+    baseSchedule.times.forEach((time) => {
+      slots[time] = (week.slots[time] || []).map((defaultStatus, dayIndex) => {
+        const overrideStatus = overrideWeek.slots?.[time]?.[dayIndex];
+        return overrideStatus === "open" || overrideStatus === "wait" ? overrideStatus : defaultStatus;
+      });
+    });
+
+    return { ...week, slots };
+  });
+
+  return baseSchedule;
+}
+
+async function loadSchedule() {
+  let loadedSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
+
+  try {
+    const response = await fetch(`${dataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      loadedSchedule = mergeSchedules(loadedSchedule, await response.json());
+    }
+  } catch (error) {
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
+    loadedSchedule = mergeSchedules(loadedSchedule, saved);
+  } catch (error) {
+  }
+
+  return loadedSchedule;
+}
+
+function normalizeExperienceSchedule(data) {
+  const events = Array.isArray(data?.events) ? data.events : [];
+  return {
+    events: events
+      .filter((event) => {
+        const isKnownProgram = experiencePrograms.length === 0 || experiencePrograms.includes(event.title);
+        return event
+          && typeof event.id === "string"
+          && /^\d{4}-\d{2}-\d{2}$/.test(event.date || "")
+          && /^\d{2}:\d{2}$/.test(event.time || "")
+          && isKnownProgram
+          && Object.prototype.hasOwnProperty.call(experienceStatusLabels, event.status);
+      })
+      .map((event) => ({
+        id: event.id,
+        date: event.date,
+        time: event.time,
+        title: event.title,
+        status: event.status,
+        memo: typeof event.memo === "string" ? event.memo : ""
+      }))
+      .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`))
+  };
+}
+
+async function loadExperienceSchedule() {
+  let loadedSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
+
+  try {
+    const response = await fetch(`${experienceDataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      loadedSchedule = normalizeExperienceSchedule(await response.json());
+    }
+  } catch (error) {
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(experienceStorageKey) || "null");
+    if (saved) {
+      loadedSchedule = normalizeExperienceSchedule(saved);
+    }
+  } catch (error) {
+  }
+
+  return loadedSchedule;
+}
+
+async function saveSchedule() {
+  try {
+    const response = await fetch(saveUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: ADMIN_PASSWORD,
+        schedule
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "save failed");
+    }
+
+    localStorage.removeItem(storageKey);
+    showSaveMessage("availability.data 파일에 저장되었습니다.");
+    return;
+  } catch (error) {
+    localStorage.setItem(storageKey, JSON.stringify(schedule));
+    showSaveMessage("현재 서버에서는 자동 파일 저장이 안 됩니다. DATA 파일 저장 버튼으로 availability.data를 내려받아 교체해 주세요.");
+  }
+}
+
+async function saveExperienceSchedule() {
+  experienceSchedule = normalizeExperienceSchedule(experienceSchedule);
+
+  try {
+    const response = await fetch(experienceSaveUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: ADMIN_PASSWORD,
+        schedule: experienceSchedule
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "save failed");
+    }
+
+    localStorage.removeItem(experienceStorageKey);
+    showExperienceSaveMessage("experience.data 파일에 저장되었습니다.");
+    return;
+  } catch (error) {
+    localStorage.setItem(experienceStorageKey, JSON.stringify(experienceSchedule));
+    showExperienceSaveMessage("현재 서버에서는 자동 파일 저장이 안 됩니다. 일정 DATA 저장 버튼으로 experience.data를 내려받아 교체해 주세요.");
+  }
+}
+
+function showSaveMessage(message) {
+  saveMessage.textContent = message;
+  saveMessage.classList.remove("hidden");
+  window.clearTimeout(showSaveMessage.timer);
+  showSaveMessage.timer = window.setTimeout(() => saveMessage.classList.add("hidden"), 2200);
+}
+
+function showExperienceSaveMessage(message) {
+  experienceSaveMessage.textContent = message;
+  experienceSaveMessage.classList.remove("hidden");
+  window.clearTimeout(showExperienceSaveMessage.timer);
+  showExperienceSaveMessage.timer = window.setTimeout(() => experienceSaveMessage.classList.add("hidden"), 2600);
+}
+
+async function showAdmin() {
+  loginPanel.classList.add("hidden");
+  adminPanel.classList.remove("hidden");
+  schedule = await loadSchedule();
+  experienceSchedule = await loadExperienceSchedule();
+  renderSchedule();
+  renderExperienceList();
+}
+
+function renderSchedule() {
+  scheduleNode.innerHTML = schedule.weeks.map((week, weekIndex) => `
+    <div class="overflow-hidden rounded-xl border border-gray-200">
+      <div class="grid grid-cols-[64px_repeat(5,minmax(92px,1fr))] text-center text-xs sm:grid-cols-[72px_repeat(5,minmax(110px,1fr))] sm:text-sm">
+        <div class="whitespace-nowrap border-b border-r border-gray-200 bg-gray-50 px-2 py-3 font-bold leading-tight text-black sm:px-3">${week.label}</div>
+        ${schedule.days.map((day, index) => `
+          <div class="whitespace-nowrap border-b ${index < schedule.days.length - 1 ? "border-r" : ""} border-gray-200 bg-gray-50 px-2 py-3 font-bold leading-tight text-black sm:px-3">${day}</div>
+        `).join("")}
+        ${schedule.times.map((time, timeIndex) => `
+          <div class="whitespace-nowrap border-r ${timeIndex < schedule.times.length - 1 ? "border-b" : ""} border-gray-200 bg-gray-50 px-2 py-3 font-bold leading-tight text-black sm:px-3">${time}</div>
+          ${(week.slots[time] || []).map((status, dayIndex) => {
+            const isOpen = status === "open";
+            const isLastDay = dayIndex === schedule.days.length - 1;
+            const isLastTime = timeIndex === schedule.times.length - 1;
+            return `
+              <div class="${!isLastDay ? "border-r" : ""} ${!isLastTime ? "border-b" : ""} border-gray-100 p-1.5 sm:p-2">
+                <button class="slot-toggle ${isOpen ? "is-open" : "is-wait"} w-full px-2 text-xs leading-tight" type="button" data-week-index="${weekIndex}" data-time="${time}" data-day-index="${dayIndex}" aria-pressed="${isOpen}">
+                  ${isOpen ? "상담가능" : "대기"}
+                </button>
+              </div>
+            `;
+          }).join("")}
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function getStatusClass(status) {
+  return {
+    open: "status-open",
+    wait: "status-wait",
+    closed: "status-closed"
+  }[status] || "status-wait";
+}
+
+function renderExperienceProgramOptions() {
+  experienceTitle.innerHTML = experiencePrograms.map((program) => `
+    <option value="${escapeHTML(program)}">${escapeHTML(program)}</option>
+  `).join("");
+}
+
+function renderExperienceStatusOptions(currentStatus) {
+  return Object.entries(experienceStatusLabels).map(([value, label]) => `
+    <option value="${value}" ${value === currentStatus ? "selected" : ""}>${label}</option>
+  `).join("");
+}
+
+function renderExperienceList() {
+  if (!experienceSchedule.events.length) {
+    experienceList.innerHTML = `
+      <div class="korean-copy rounded-xl border border-dashed border-gray-200 bg-gray-50 p-4 text-sm font-bold leading-6 text-gray-500 sm:p-5">
+        등록된 일일체험 일정이 없습니다.
+      </div>
+    `;
+    return;
+  }
+
+  experienceList.innerHTML = experienceSchedule.events.map((event) => `
+    <article class="min-w-0 rounded-xl border border-gray-200 bg-gray-50 p-3.5 sm:p-4">
+      <div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="whitespace-nowrap text-sm font-bold text-gray-500">${escapeHTML(event.date)} ${escapeHTML(event.time)}</span>
+            <span class="status-pill ${getStatusClass(event.status)} px-3 py-1">${escapeHTML(experienceStatusLabels[event.status])}</span>
+          </div>
+          <h4 class="korean-copy mt-2 font-headline text-base font-bold leading-snug text-black sm:text-lg">${escapeHTML(event.title)}</h4>
+          ${event.memo ? `<p class="korean-copy mt-2 text-sm leading-6 text-gray-600">${escapeHTML(event.memo)}</p>` : ""}
+        </div>
+        <div class="flex w-full flex-wrap gap-2 sm:w-auto sm:shrink-0 md:justify-end">
+          <select class="min-w-0 flex-1 rounded-full border-gray-300 px-3 py-2 text-sm font-bold leading-5 focus:border-starry-gold focus:ring-starry-gold sm:flex-none" data-experience-status="${escapeHTML(event.id)}">
+            ${renderExperienceStatusOptions(event.status)}
+          </select>
+          <button class="shrink-0 whitespace-nowrap rounded-full border border-red-200 px-4 py-2 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors" type="button" data-delete-experience="${escapeHTML(event.id)}">삭제</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (passwordInput.value === ADMIN_PASSWORD) {
+    sessionStorage.setItem(authKey, "true");
+    loginError.classList.add("hidden");
+    showAdmin();
+    return;
+  }
+  loginError.classList.remove("hidden");
+});
+
+scheduleNode.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-week-index]");
+  if (!button) return;
+
+  const weekIndex = Number(button.dataset.weekIndex);
+  const time = button.dataset.time;
+  const dayIndex = Number(button.dataset.dayIndex);
+  const current = schedule.weeks[weekIndex].slots[time][dayIndex];
+  schedule.weeks[weekIndex].slots[time][dayIndex] = current === "open" ? "wait" : "open";
+  renderSchedule();
+  saveSchedule();
+});
+
+experienceForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const newEvent = {
+    id: `exp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    date: experienceDate.value,
+    time: experienceTime.value,
+    title: experienceTitle.value,
+    status: experienceStatus.value,
+    memo: experienceMemo.value.trim()
+  };
+
+  experienceSchedule.events.push(newEvent);
+  experienceSchedule = normalizeExperienceSchedule(experienceSchedule);
+  renderExperienceList();
+  saveExperienceSchedule();
+  experienceMemo.value = "";
+});
+
+experienceList.addEventListener("change", (event) => {
+  const select = event.target.closest("[data-experience-status]");
+  if (!select) return;
+
+  const targetEvent = experienceSchedule.events.find((item) => item.id === select.dataset.experienceStatus);
+  if (!targetEvent) return;
+
+  targetEvent.status = select.value;
+  experienceSchedule = normalizeExperienceSchedule(experienceSchedule);
+  renderExperienceList();
+  saveExperienceSchedule();
+});
+
+experienceList.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-delete-experience]");
+  if (!button) return;
+  if (!window.confirm("이 일정을 삭제할까요?")) return;
+
+  experienceSchedule.events = experienceSchedule.events.filter((item) => item.id !== button.dataset.deleteExperience);
+  renderExperienceList();
+  saveExperienceSchedule();
+});
+
+resetButton.addEventListener("click", () => {
+  schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
+  saveSchedule();
+  renderSchedule();
+});
+
+function downloadJsonData(data, fileName, callback) {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([`${json}\n`], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  callback();
+}
+
+function downloadScheduleData() {
+  downloadJsonData(schedule, "availability.data", () => {
+  showSaveMessage("availability.data 파일을 내려받았습니다.");
+  });
+}
+
+function downloadExperienceData() {
+  downloadJsonData(experienceSchedule, "experience.data", () => {
+    showExperienceSaveMessage("experience.data 파일을 내려받았습니다.");
+  });
+}
+
+copyButton.addEventListener("click", downloadScheduleData);
+experienceCopyButton.addEventListener("click", downloadExperienceData);
+
+function setDefaultExperienceDate() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  experienceDate.value = `${now.getFullYear()}-${month}-${day}`;
+}
+
+renderExperienceProgramOptions();
+setDefaultExperienceDate();
+
+if (sessionStorage.getItem(authKey) === "true") {
+  showAdmin();
+}
+</script>
+</body>
+</html>
