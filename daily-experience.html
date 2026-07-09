@@ -48,6 +48,11 @@
     background-size: 110px 110px, 150px 150px;
   }
 
+  .daily-hero-title {
+    font-size: clamp(40px, 4.4vw, 56px);
+    line-height: 1.12;
+  }
+
   .surface-card {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -292,6 +297,62 @@
   }
 
   @media (max-width: 767px) {
+    .daily-page {
+      font-size: 14px;
+    }
+
+    .daily-page header .h-20 {
+      height: 64px;
+    }
+
+    .daily-page header a {
+      font-size: 12px;
+    }
+
+    .daily-page .hero-sky > div {
+      background-color: #070a12;
+      gap: 22px;
+      padding: 38px 16px;
+    }
+
+    .daily-page .hero-sky h1 {
+      font-size: clamp(28px, 8.2vw, 38px);
+      line-height: 1.18;
+    }
+
+    .daily-page .hero-sky p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .daily-page .surface-card {
+      border-radius: 14px;
+    }
+
+    .daily-page section.mx-auto {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .daily-page .hero-sky .surface-card h2 {
+      font-size: 17px;
+      line-height: 1.28;
+    }
+
+    .daily-page main > section:not(.hero-sky) h2 {
+      font-size: 25px;
+      line-height: 1.24;
+    }
+
+    .daily-page #month-title {
+      font-size: 22px;
+    }
+
+    .daily-page .status-pill {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+
     .mobile-calendar-board {
       padding: 12px;
     }
@@ -323,9 +384,79 @@
     .event-program {
       font-size: 12px;
     }
+
+    .daily-page #selected-title,
+    .daily-page aside h3 {
+      font-size: 19px;
+      line-height: 1.28;
+    }
+
+    .daily-page #selected-events,
+    .daily-page #upcoming-events {
+      font-size: 13px;
+    }
   }
 
   @media (max-width: 430px) {
+    .daily-page {
+      font-size: 13px;
+    }
+
+    .daily-page header .h-20 {
+      height: 58px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .daily-page header img {
+      height: 28px;
+      width: 28px;
+    }
+
+    .daily-page header a:last-child {
+      gap: 4px;
+      padding: 8px 10px;
+      font-size: 11px;
+    }
+
+    .daily-page .hero-sky > div {
+      padding-top: 32px;
+      padding-bottom: 34px;
+    }
+
+    .daily-page .hero-sky h1 {
+      font-size: clamp(25px, 7.4vw, 31px);
+    }
+
+    .daily-page .hero-sky .surface-card {
+      padding: 12px;
+    }
+
+    .daily-page .hero-sky .surface-card h2 {
+      font-size: 16px;
+    }
+
+    .daily-page .hero-sky .surface-card p {
+      font-size: 12px;
+    }
+
+    .daily-page section.mx-auto {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .daily-page main > section:not(.hero-sky) h2 {
+      font-size: 23px;
+    }
+
+    .daily-page #month-title {
+      font-size: 20px;
+    }
+
+    .daily-page .surface-card {
+      padding: 14px;
+    }
+
     .mobile-calendar-board {
       margin: 0 -6px;
       padding: 10px 8px;
@@ -350,10 +481,15 @@
       padding: 3px 1px;
       font-size: 9px;
     }
+
+    .daily-page #selected-title,
+    .daily-page aside h3 {
+      font-size: 17px;
+    }
   }
 </style>
 </head>
-<body class="font-body antialiased">
+<body class="daily-page font-body antialiased">
 <header class="sticky top-0 z-30 border-b border-gray-200 bg-white/90 backdrop-blur">
 <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 md:px-6">
 <a class="flex min-w-0 items-center gap-2 sm:gap-3" href="index.html">
@@ -375,7 +511,7 @@
 <span class="material-symbols-outlined shrink-0" style="font-size: 17px;">calendar_month</span>
 일일체험 일정
 </span>
-<h1 class="mt-6 break-keep font-headline text-4xl font-extrabold leading-tight md:text-6xl">밤하늘을 만나는 날을 확인하세요</h1>
+<h1 class="daily-hero-title mt-6 break-keep font-headline font-extrabold">밤하늘을 만나는 날을 확인하세요</h1>
 <p class="mt-5 max-w-2xl text-base leading-8 text-gray-300 md:text-lg">가족과 함께하는 우주여행과 일일별자리체험 일정을 달력에서 바로 확인할 수 있습니다.</p>
 </div>
 <div class="grid content-center gap-3 text-ink" data-reveal>
