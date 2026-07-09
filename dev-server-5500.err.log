@@ -44,3 +44,17 @@
 127.0.0.1 - - [09/Jul/2026 22:20:41] "GET /curriculum.html?videoalign2=1783603241388 HTTP/1.1" 200 -
 127.0.0.1 - - [09/Jul/2026 22:20:41] "GET /course.data?v=1783603241881 HTTP/1.1" 200 -
 127.0.0.1 - - [09/Jul/2026 22:20:41] "GET /availability.data?v=1783603241881 HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:22:48] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2026 22:23:40] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2026 22:23:44] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2026 22:25:02] "GET /index.html HTTP/1.1" 304 -
+127.0.0.1 - - [09/Jul/2026 22:25:38] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:25:38] "GET /assets/images/incheon-observatory-entrance.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:25:38] "GET /assets/images/incheon-observatory-rooftop.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:25:38] "GET /assets/images/incheon-observatory-main-telescope.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:25:41] "GET /index.html?photoCheck=1783603541595 HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:26:04] "GET /assets/images/incheon-observatory-rooftop.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:36:24] "GET /index.html?localImages=1783604184445 HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:36:24] "GET /mainimg.webp HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:36:24] "GET /dayclass.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2026 22:36:24] "GET /assets/images/incheon-observatory-main-telescope.jpg HTTP/1.1" 304 -
