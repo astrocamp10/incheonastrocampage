@@ -30,9 +30,8 @@ if (!is_array($schedule) || !isset($schedule['events']) || !is_array($schedule['
 }
 
 $allowedStatuses = ['open', 'wait', 'closed'];
-$allowedPrograms = ['가족과 함께하는 우주여행', '일일별자리체험'];
 
-foreach ($schedule['events'] as $event) {
+foreach ($schedule['events'] as &$event) {
     if (!is_array($event)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Invalid event'], JSON_UNESCAPED_UNICODE);
@@ -64,11 +63,12 @@ foreach ($schedule['events'] as $event) {
         exit;
     }
 
-    if (!is_string($title) || !in_array($title, $allowedPrograms, true)) {
+    if (!is_string($title) || trim($title) === '' || strlen(trim($title)) > 180) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Invalid event title'], JSON_UNESCAPED_UNICODE);
         exit;
     }
+    $event['title'] = trim($title);
 
     if (!is_string($status) || !in_array($status, $allowedStatuses, true)) {
         http_response_code(400);
@@ -82,6 +82,7 @@ foreach ($schedule['events'] as $event) {
         exit;
     }
 }
+unset($event);
 
 usort($schedule['events'], static function (array $a, array $b): int {
     return strcmp(($a['date'] ?? '') . ($a['time'] ?? ''), ($b['date'] ?? '') . ($b['time'] ?? ''));

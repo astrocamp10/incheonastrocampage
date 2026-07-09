@@ -94,6 +94,27 @@
     background: #fff1f2;
     border-color: #fecdd3;
   }
+
+  @media (max-width: 430px) {
+    .slot-toggle {
+      min-height: 28px;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    #admin-schedule {
+      min-width: 540px;
+    }
+
+    #admin-schedule .grid {
+      grid-template-columns: 56px repeat(5, minmax(86px, 1fr));
+      font-size: 11px;
+    }
+
+    #admin-schedule .grid > div {
+      padding: 0.4rem 0.25rem;
+    }
+  }
 </style>
 </head>
 <body class="font-body antialiased">
@@ -135,7 +156,6 @@
 <p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">각 칸을 누르면 상태가 바뀌고 바로 저장됩니다.</p>
 </div>
 <div class="flex w-full flex-wrap gap-2 sm:w-auto md:justify-end">
-<button id="reset-button" class="flex-1 whitespace-nowrap rounded-full border border-gray-300 px-3 py-2.5 text-xs font-bold text-gray-700 hover:border-red-300 hover:text-red-600 transition-colors sm:flex-none sm:px-5 sm:text-sm" type="button">기본값 복원</button>
 <button id="copy-button" class="flex-1 whitespace-nowrap rounded-full border border-gray-300 px-3 py-2.5 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:flex-none sm:px-5 sm:text-sm" type="button">DATA 파일 저장</button>
 </div>
 </div>
@@ -150,10 +170,57 @@
 </div>
 </div>
 <div class="overflow-x-auto pb-2">
-<div id="admin-schedule" class="min-w-[640px] space-y-3 sm:min-w-[700px]"></div>
+<div id="admin-schedule" class="min-w-[540px] space-y-3 sm:min-w-[700px]"></div>
 </div>
 <p id="save-message" class="korean-copy mt-4 hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]">저장되었습니다. 커리큘럼 페이지를 새로고침하면 반영됩니다.</p>
 </div>
+
+<form id="course-editor-form" class="admin-card rounded-xl p-5 sm:p-6 md:p-8">
+<div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div class="min-w-0">
+<span class="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/30 bg-starry-gold/10 px-3 py-1.5 text-xs font-bold text-starry-gold sm:px-4">
+<span class="material-symbols-outlined" style="font-size: 16px;">table_edit</span>
+커리큘럼 편집
+</span>
+<h2 class="mt-4 font-headline text-2xl font-bold leading-tight text-black sm:text-3xl">정규 과정 수업료 / 표 관리</h2>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">수업료, 과정별 수업 주제와 실습 내용을 수정하고 course.data 파일에 저장합니다.</p>
+</div>
+<div class="flex w-full flex-wrap gap-2 sm:w-auto md:justify-end">
+<button id="course-copy-button" class="flex-1 whitespace-nowrap rounded-full border border-gray-300 px-3 py-2.5 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:flex-none sm:px-5 sm:text-sm" type="button">커리큘럼 DATA 저장</button>
+</div>
+</div>
+
+<div class="mt-6 grid min-w-0 gap-5 lg:grid-cols-2">
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">팀 기준 월 수업료</span>
+<input id="course-tuition-amount" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="number" min="0" step="1000" required/>
+</label>
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">교재비 안내 문구</span>
+<input id="course-material-note" class="korean-copy min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="text" maxlength="180"/>
+</label>
+</div>
+
+<div class="mt-6">
+<div id="course-tab-list" class="flex flex-wrap gap-2"></div>
+<label class="mt-4 block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">과정 설명</span>
+<textarea id="course-summary" class="korean-copy min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" rows="3" maxlength="600"></textarea>
+</label>
+<div class="mt-4 overflow-x-auto pb-2">
+<div id="course-row-editor" class="min-w-[680px] space-y-2"></div>
+</div>
+<div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+<p class="korean-copy text-sm leading-6 text-gray-600">관측 천체는 고정값으로 유지됩니다. 관리자에서는 월, 수업 주제, 실습/만들기만 수정합니다.</p>
+<button id="course-add-row-button" class="whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors" type="button">행 추가</button>
+</div>
+</div>
+
+<div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+<p id="course-save-message" class="korean-copy hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]">저장되었습니다.</p>
+<button class="whitespace-nowrap rounded-full bg-starry-gold px-5 py-3 text-sm font-bold text-midnight-deep hover:bg-black hover:text-white transition-colors sm:text-base" type="submit">커리큘럼 저장</button>
+</div>
+</form>
 
 <div class="admin-card rounded-xl p-5 sm:p-6 md:p-8">
 <div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -185,7 +252,7 @@
 </label>
 <label class="block min-w-0">
 <span class="mb-2 block text-sm font-bold text-gray-700">프로그램</span>
-<select id="experience-title" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base"></select>
+<input id="experience-title" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="text" maxlength="60" placeholder="프로그램명을 입력하세요" required/>
 </label>
 <label class="block min-w-0">
 <span class="mb-2 block text-sm font-bold text-gray-700">상태</span>
@@ -220,6 +287,7 @@
 
 <script src="availability-data.js"></script>
 <script src="experience-data.js"></script>
+<script src="course-data.js"></script>
 <script>
 const ADMIN_PASSWORD = "dlscjsastro10";
 const authKey = "incheonastroAdminAuthed";
@@ -230,7 +298,6 @@ const passwordInput = document.getElementById("admin-password");
 const loginError = document.getElementById("login-error");
 const scheduleNode = document.getElementById("admin-schedule");
 const saveMessage = document.getElementById("save-message");
-const resetButton = document.getElementById("reset-button");
 const copyButton = document.getElementById("copy-button");
 const storageKey = window.INCHEON_ASTRO_AVAILABILITY_KEY;
 const dataUrl = window.INCHEON_ASTRO_AVAILABILITY_DATA_URL || "availability.data";
@@ -247,10 +314,29 @@ const experienceSaveMessage = document.getElementById("experience-save-message")
 const experienceStorageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
 const experienceDataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
 const experienceSaveUrl = window.INCHEON_ASTRO_EXPERIENCE_SAVE_URL || "save-experience.php";
-const experiencePrograms = window.INCHEON_ASTRO_EXPERIENCE_PROGRAMS || [];
 const experienceStatusLabels = window.INCHEON_ASTRO_EXPERIENCE_STATUS || { open: "접수중", wait: "대기", closed: "마감" };
+const courseEditorForm = document.getElementById("course-editor-form");
+const courseTuitionAmount = document.getElementById("course-tuition-amount");
+const courseMaterialNote = document.getElementById("course-material-note");
+const courseTabList = document.getElementById("course-tab-list");
+const courseSummary = document.getElementById("course-summary");
+const courseRowEditor = document.getElementById("course-row-editor");
+const courseAddRowButton = document.getElementById("course-add-row-button");
+const courseCopyButton = document.getElementById("course-copy-button");
+const courseSaveMessage = document.getElementById("course-save-message");
+const courseStorageKey = window.INCHEON_ASTRO_COURSE_KEY;
+const courseDataUrl = window.INCHEON_ASTRO_COURSE_DATA_URL || "course.data";
+const courseSaveUrl = window.INCHEON_ASTRO_COURSE_SAVE_URL || "save-course.php";
+const courseLabels = {
+  starter: "첫걸음",
+  experience: "체험",
+  inquiry: "탐구",
+  theme: "테마"
+};
 let schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
 let experienceSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
+let courseSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_COURSE);
+let activeCourseKey = "starter";
 
 function cloneData(data) {
   return JSON.parse(JSON.stringify(data));
@@ -312,19 +398,20 @@ function normalizeExperienceSchedule(data) {
   return {
     events: events
       .filter((event) => {
-        const isKnownProgram = experiencePrograms.length === 0 || experiencePrograms.includes(event.title);
         return event
           && typeof event.id === "string"
           && /^\d{4}-\d{2}-\d{2}$/.test(event.date || "")
           && /^\d{2}:\d{2}$/.test(event.time || "")
-          && isKnownProgram
+          && typeof event.title === "string"
+          && event.title.trim().length > 0
+          && event.title.trim().length <= 60
           && Object.prototype.hasOwnProperty.call(experienceStatusLabels, event.status);
       })
       .map((event) => ({
         id: event.id,
         date: event.date,
         time: event.time,
-        title: event.title,
+        title: event.title.trim(),
         status: event.status,
         memo: typeof event.memo === "string" ? event.memo : ""
       }))
@@ -347,6 +434,110 @@ async function loadExperienceSchedule() {
     const saved = JSON.parse(localStorage.getItem(experienceStorageKey) || "null");
     if (saved) {
       loadedSchedule = normalizeExperienceSchedule(saved);
+    }
+  } catch (error) {
+  }
+
+  return loadedSchedule;
+}
+
+function splitCourseTargets(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean);
+  }
+  return String(value || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function formatAdminWon(value) {
+  return `${Math.round(Number(value) || 0).toLocaleString("ko-KR")}원`;
+}
+
+function getCourseFeeLabel(data) {
+  return `팀당 1회 ${formatAdminWon(data.tuition.monthlyTeamTuition)}`;
+}
+
+function syncCourseTuitionMeta(data) {
+  Object.values(data.curricula).forEach((course) => {
+    const meta = Array.isArray(course.meta) ? course.meta : [];
+    const hasFeeMeta = meta.some(([label]) => label === "교육비");
+    course.meta = meta.map(([label, value]) => label === "교육비" ? [label, getCourseFeeLabel(data)] : [label, value]);
+    if (!hasFeeMeta) {
+      course.meta.push(["교육비", getCourseFeeLabel(data)]);
+    }
+  });
+}
+
+function normalizeCourseData(data) {
+  const fallback = cloneData(window.INCHEON_ASTRO_DEFAULT_COURSE);
+  const source = data && typeof data === "object" ? data : {};
+  const normalized = cloneData(fallback);
+  const tuition = source.tuition && typeof source.tuition === "object" ? source.tuition : {};
+  const monthlyTeamTuition = Number(tuition.monthlyTeamTuition);
+
+  normalized.tuition = {
+    monthlyTeamTuition: Number.isFinite(monthlyTeamTuition) && monthlyTeamTuition >= 0 ? monthlyTeamTuition : fallback.tuition.monthlyTeamTuition,
+    paymentLabel: typeof tuition.paymentLabel === "string" ? tuition.paymentLabel.trim() : fallback.tuition.paymentLabel,
+    materialNote: typeof tuition.materialNote === "string" ? tuition.materialNote.trim() : fallback.tuition.materialNote
+  };
+
+  const targets = source.observationTargets && typeof source.observationTargets === "object" ? source.observationTargets : {};
+  normalized.observationTargets = {
+    winter: splitCourseTargets(targets.winter ?? fallback.observationTargets.winter),
+    spring: splitCourseTargets(targets.spring ?? fallback.observationTargets.spring),
+    summer: splitCourseTargets(targets.summer ?? targets.summerExperience ?? fallback.observationTargets.summer),
+    summerExperience: splitCourseTargets(targets.summer ?? targets.summerExperience ?? fallback.observationTargets.summer),
+    autumn: splitCourseTargets(targets.autumn ?? fallback.observationTargets.autumn)
+  };
+
+  Object.keys(courseLabels).forEach((key) => {
+    const fallbackCourse = fallback.curricula[key];
+    const sourceCourse = source.curricula?.[key] && typeof source.curricula[key] === "object" ? source.curricula[key] : {};
+    const rows = Array.isArray(sourceCourse.rows) ? sourceCourse.rows : fallbackCourse.rows;
+    const meta = Array.isArray(sourceCourse.meta) ? sourceCourse.meta : fallbackCourse.meta;
+    const notes = Array.isArray(sourceCourse.notes) ? sourceCourse.notes : fallbackCourse.notes;
+
+    normalized.curricula[key] = {
+      ...fallbackCourse,
+      ...sourceCourse,
+      kicker: typeof sourceCourse.kicker === "string" ? sourceCourse.kicker.trim() : fallbackCourse.kicker,
+      title: typeof sourceCourse.title === "string" ? sourceCourse.title.trim() : fallbackCourse.title,
+      summary: typeof sourceCourse.summary === "string" ? sourceCourse.summary.trim() : fallbackCourse.summary,
+      videoId: typeof sourceCourse.videoId === "string" ? sourceCourse.videoId.trim() : fallbackCourse.videoId,
+      videoTitle: typeof sourceCourse.videoTitle === "string" ? sourceCourse.videoTitle.trim() : fallbackCourse.videoTitle,
+      meta: meta
+        .filter((item) => Array.isArray(item) && item.length === 2)
+        .map(([label, value]) => [String(label).trim(), String(value).trim()])
+        .filter(([label]) => label),
+      rows: rows
+        .filter((row) => Array.isArray(row))
+        .map((row) => [0, 1, 2, 3].map((index) => String(row[index] ?? "").trim()))
+        .filter((row) => row.some(Boolean)),
+      notes: notes.map((note) => String(note).trim()).filter(Boolean)
+    };
+  });
+
+  syncCourseTuitionMeta(normalized);
+  return normalized;
+}
+
+async function loadCourseSchedule() {
+  let loadedSchedule = normalizeCourseData(window.INCHEON_ASTRO_DEFAULT_COURSE);
+
+  try {
+    const response = await fetch(`${courseDataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      loadedSchedule = normalizeCourseData(await response.json());
+    }
+  } catch (error) {
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(courseStorageKey) || "null");
+    if (saved) {
+      loadedSchedule = normalizeCourseData(saved);
     }
   } catch (error) {
   }
@@ -404,6 +595,32 @@ async function saveExperienceSchedule() {
   }
 }
 
+async function saveCourseSchedule() {
+  courseSchedule = normalizeCourseData(courseSchedule);
+
+  try {
+    const response = await fetch(courseSaveUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: ADMIN_PASSWORD,
+        schedule: courseSchedule
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "save failed");
+    }
+
+    localStorage.removeItem(courseStorageKey);
+    showCourseSaveMessage("course.data 파일에 저장되었습니다.");
+    return;
+  } catch (error) {
+    localStorage.setItem(courseStorageKey, JSON.stringify(courseSchedule));
+    showCourseSaveMessage("현재 서버에서는 자동 파일 저장이 안 됩니다. 커리큘럼 DATA 저장 버튼으로 course.data를 내려받아 교체해 주세요.");
+  }
+}
+
 function showSaveMessage(message) {
   saveMessage.textContent = message;
   saveMessage.classList.remove("hidden");
@@ -418,13 +635,22 @@ function showExperienceSaveMessage(message) {
   showExperienceSaveMessage.timer = window.setTimeout(() => experienceSaveMessage.classList.add("hidden"), 2600);
 }
 
+function showCourseSaveMessage(message) {
+  courseSaveMessage.textContent = message;
+  courseSaveMessage.classList.remove("hidden");
+  window.clearTimeout(showCourseSaveMessage.timer);
+  showCourseSaveMessage.timer = window.setTimeout(() => courseSaveMessage.classList.add("hidden"), 3000);
+}
+
 async function showAdmin() {
   loginPanel.classList.add("hidden");
   adminPanel.classList.remove("hidden");
   schedule = await loadSchedule();
   experienceSchedule = await loadExperienceSchedule();
+  courseSchedule = await loadCourseSchedule();
   renderSchedule();
   renderExperienceList();
+  renderCourseEditor();
 }
 
 function renderSchedule() {
@@ -461,12 +687,6 @@ function getStatusClass(status) {
     wait: "status-wait",
     closed: "status-closed"
   }[status] || "status-wait";
-}
-
-function renderExperienceProgramOptions() {
-  experienceTitle.innerHTML = experiencePrograms.map((program) => `
-    <option value="${escapeHTML(program)}">${escapeHTML(program)}</option>
-  `).join("");
 }
 
 function renderExperienceStatusOptions(currentStatus) {
@@ -507,6 +727,67 @@ function renderExperienceList() {
   `).join("");
 }
 
+function collectCourseEditor() {
+  const activeCourse = courseSchedule.curricula[activeCourseKey];
+  if (!activeCourse) return;
+
+  courseSchedule.tuition.monthlyTeamTuition = Number(courseTuitionAmount.value || 0);
+  courseSchedule.tuition.materialNote = courseMaterialNote.value.trim();
+  activeCourse.summary = courseSummary.value.trim();
+  activeCourse.rows = Array.from(courseRowEditor.querySelectorAll("[data-course-row]")).map((row) => {
+    return ["month", "topic", "observation", "activity"].map((cell) => {
+      const input = row.querySelector(`[data-course-cell="${cell}"]`);
+      return input ? input.value.trim() : "";
+    });
+  }).filter((row) => row.some(Boolean));
+  courseSchedule = normalizeCourseData(courseSchedule);
+}
+
+function renderCourseTabs() {
+  courseTabList.innerHTML = Object.entries(courseLabels).map(([key, label]) => {
+    const isActive = key === activeCourseKey;
+    return `
+      <button class="whitespace-nowrap rounded-full border px-4 py-2 text-sm font-bold transition-colors ${isActive ? "border-starry-gold bg-starry-gold text-midnight-deep" : "border-gray-300 text-gray-700 hover:border-starry-gold hover:text-starry-gold"}" type="button" data-course-tab="${key}">
+        ${escapeHTML(label)} 과정
+      </button>
+    `;
+  }).join("");
+}
+
+function renderCourseRowsEditor() {
+  const activeCourse = courseSchedule.curricula[activeCourseKey];
+  courseRowEditor.innerHTML = `
+    <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)_64px] gap-2 px-1 text-xs font-bold text-gray-500">
+      <div>월</div>
+      <div>수업 주제</div>
+      <div>실습 / 만들기</div>
+      <div></div>
+    </div>
+    ${activeCourse.rows.map((row, rowIndex) => `
+      <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)_64px] gap-2" data-course-row="${rowIndex}">
+        <input class="rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="month" value="${escapeHTML(row[0] || "")}" placeholder="1월"/>
+        <input class="korean-copy rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="topic" value="${escapeHTML(row[1] || "")}" placeholder="수업 주제"/>
+        <input type="hidden" data-course-cell="observation" value="${escapeHTML(row[2] || "")}"/>
+        <input class="korean-copy rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="activity" value="${escapeHTML(row[3] || "")}" placeholder="실습 / 만들기"/>
+        <button class="rounded-xl border border-red-200 px-2 py-2 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors" type="button" data-delete-course-row="${rowIndex}">삭제</button>
+      </div>
+    `).join("")}
+  `;
+}
+
+function renderCourseEditor() {
+  if (!courseSchedule.curricula[activeCourseKey]) {
+    activeCourseKey = "starter";
+  }
+  const activeCourse = courseSchedule.curricula[activeCourseKey];
+
+  courseTuitionAmount.value = String(courseSchedule.tuition.monthlyTeamTuition);
+  courseMaterialNote.value = courseSchedule.tuition.materialNote || "";
+  renderCourseTabs();
+  courseSummary.value = activeCourse.summary || "";
+  renderCourseRowsEditor();
+}
+
 loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
   if (passwordInput.value === ADMIN_PASSWORD) {
@@ -538,7 +819,7 @@ experienceForm.addEventListener("submit", (event) => {
     id: `exp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     date: experienceDate.value,
     time: experienceTime.value,
-    title: experienceTitle.value,
+    title: experienceTitle.value.trim(),
     status: experienceStatus.value,
     memo: experienceMemo.value.trim()
   };
@@ -573,10 +854,34 @@ experienceList.addEventListener("click", (event) => {
   saveExperienceSchedule();
 });
 
-resetButton.addEventListener("click", () => {
-  schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
-  saveSchedule();
-  renderSchedule();
+courseTabList.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-course-tab]");
+  if (!button) return;
+  collectCourseEditor();
+  activeCourseKey = button.dataset.courseTab;
+  renderCourseEditor();
+});
+
+courseAddRowButton.addEventListener("click", () => {
+  collectCourseEditor();
+  courseSchedule.curricula[activeCourseKey].rows.push(["", "", "-", ""]);
+  renderCourseEditor();
+});
+
+courseRowEditor.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-delete-course-row]");
+  if (!button) return;
+  collectCourseEditor();
+  const rowIndex = Number(button.dataset.deleteCourseRow);
+  courseSchedule.curricula[activeCourseKey].rows.splice(rowIndex, 1);
+  renderCourseEditor();
+});
+
+courseEditorForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  collectCourseEditor();
+  renderCourseEditor();
+  saveCourseSchedule();
 });
 
 function downloadJsonData(data, fileName, callback) {
@@ -605,8 +910,17 @@ function downloadExperienceData() {
   });
 }
 
+function downloadCourseData() {
+  collectCourseEditor();
+  courseSchedule = normalizeCourseData(courseSchedule);
+  downloadJsonData(courseSchedule, "course.data", () => {
+    showCourseSaveMessage("course.data 파일을 내려받았습니다.");
+  });
+}
+
 copyButton.addEventListener("click", downloadScheduleData);
 experienceCopyButton.addEventListener("click", downloadExperienceData);
+courseCopyButton.addEventListener("click", downloadCourseData);
 
 function setDefaultExperienceDate() {
   const now = new Date();
@@ -615,7 +929,6 @@ function setDefaultExperienceDate() {
   experienceDate.value = `${now.getFullYear()}-${month}-${day}`;
 }
 
-renderExperienceProgramOptions();
 setDefaultExperienceDate();
 
 if (sessionStorage.getItem(authKey) === "true") {

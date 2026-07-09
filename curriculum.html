@@ -238,12 +238,192 @@
             white-space: nowrap;
         }
 
+        .course-modal-table {
+            border-collapse: collapse;
+        }
+
+        .course-modal-table th,
+        .course-modal-table td {
+            border: 1px solid #d1d5db;
+        }
+
+        .course-modal-table thead th {
+            border-bottom-color: #9ca3af;
+        }
+
+        .course-modal-kicker-text {
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .course-modal-title-text {
+            font-size: 28px;
+            line-height: 1.16;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+
+        .course-meta-card {
+            display: flex;
+            min-height: 58px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .course-meta-label,
+        .course-meta-value {
+            width: auto;
+        }
+
+        .course-meta-label {
+            flex: 0 0 auto;
+        }
+
+        .course-meta-value {
+            flex: 1 1 auto;
+            text-align: right;
+        }
+
+        .course-meta-mobile-break {
+            display: none;
+        }
+
+        .course-meta-desktop-separator {
+            display: inline;
+        }
+
+        @media (min-width: 1024px) {
+            .course-modal-media-column {
+                padding-top: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            main .font-display-lg {
+                font-size: 26px !important;
+                line-height: 1.22 !important;
+            }
+
+            main .font-headline-lg {
+                font-size: 22px !important;
+                line-height: 1.25 !important;
+            }
+
+            main .font-headline-md {
+                font-size: 16px !important;
+                line-height: 1.35 !important;
+            }
+
+            main .font-body-lg {
+                font-size: 15px !important;
+                line-height: 1.55 !important;
+            }
+
+            main .font-body-md {
+                font-size: 13px !important;
+                line-height: 1.55 !important;
+            }
+
+            main .font-label-md {
+                font-size: 12px !important;
+                line-height: 1.2 !important;
+            }
+
+            main .font-caption {
+                font-size: 11px !important;
+                line-height: 1.25 !important;
+            }
+
+            main .glass-panel {
+                box-shadow: 0 10px 28px rgba(17, 24, 39, 0.07);
+            }
+
+            .course-modal-kicker-text {
+                font-size: 13px !important;
+                line-height: 1.2 !important;
+                font-weight: 800 !important;
+            }
+
+            .course-modal-title-text {
+                font-size: 24px !important;
+                line-height: 1.18 !important;
+                font-weight: 800 !important;
+            }
+
+            main .course-meta-card {
+                min-height: 78px;
+                flex-direction: column;
+                justify-content: center;
+                gap: 0;
+                padding: 0.55rem 0.4rem;
+                text-align: center;
+            }
+
+            main .course-meta-label {
+                margin-bottom: 0.25rem;
+                font-size: 10px !important;
+                line-height: 1.15 !important;
+            }
+
+            main .course-meta-value {
+                font-size: 11px !important;
+                line-height: 1.28 !important;
+                word-break: keep-all;
+                overflow-wrap: anywhere;
+                text-align: center;
+            }
+
+            .course-meta-mobile-break {
+                display: inline;
+            }
+
+            .course-meta-desktop-separator {
+                display: none;
+            }
+
+            main .tuition-result-amount {
+                display: block;
+                max-width: 100%;
+                font-size: clamp(24px, 7vw, 30px) !important;
+                line-height: 1.15 !important;
+                letter-spacing: 0;
+                font-variant-numeric: tabular-nums;
+            }
+        }
+
         @media (max-width: 430px) {
             .time-slot-badge {
-                min-width: 64px;
-                min-height: 26px;
-                padding: 0.3rem 0.5rem;
+                min-width: 54px;
+                min-height: 22px;
+                padding: 0.22rem 0.38rem;
+                font-size: 10px;
+            }
+
+            #availability-table {
+                min-width: 540px;
+            }
+
+            #availability-table .grid {
+                grid-template-columns: 56px repeat(5, minmax(86px, 1fr));
                 font-size: 11px;
+            }
+
+            #availability-table .grid > div {
+                padding: 0.45rem 0.3rem;
+            }
+
+            .course-modal-table {
+                min-width: 620px !important;
+                font-size: 12px;
+            }
+
+            .course-modal-table th,
+            .course-modal-table td {
+                padding: 0.55rem 0.65rem;
             }
         }
 
@@ -370,7 +550,7 @@
             </a>
 </div>
 </nav>
-<main class="pt-32 pb-section-gap-mobile md:pb-section-gap">
+<main class="pt-40 md:pt-44 pb-section-gap-mobile md:pb-section-gap">
 <!-- Hero Section -->
 <section class="px-gutter max-w-container-max mx-auto text-center mb-section-gap-mobile md:mb-section-gap" data-reveal="zoom">
 <h1 class="font-display-lg text-[28px] sm:text-display-lg-mobile md:text-display-lg leading-tight md:leading-[1.2] text-on-surface mb-6 max-w-3xl mx-auto ko-keep">인천어린이천문대 정규 과정 커리큘럼</h1>
@@ -378,27 +558,40 @@
 </section>
 <!-- Curriculum Features (Bento Grid) -->
 <section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="0">
-<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
-<span class="material-symbols-outlined" style="font-size: 32px;">school</span>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+<div class="glass-panel rounded-xl p-4 md:p-6 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="0">
+<div class="w-11 h-11 md:w-16 md:h-16 rounded-full bg-glass-surface flex items-center justify-center mb-3 md:mb-4 text-starry-gold">
+<span class="material-symbols-outlined text-[24px] md:text-[32px]">supervisor_account</span>
 </div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">전담 선생님</h3>
-<p class="font-body-md text-body-md text-on-surface-variant ko-keep">아이들의 성향을 파악하고 맞춤형 지도를 제공합니다.</p>
+<h3 class="font-headline-md text-base md:text-xl text-on-surface mb-1.5 md:mb-2 leading-tight ko-keep">정기적으로</h3>
+<p class="font-body-md text-xs sm:text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">1년동안 매달 2시간 담임선생님과 함께 수업</p>
 </div>
-<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="110">
-<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
-<span class="material-symbols-outlined" style="font-size: 32px;">groups</span>
+<div class="glass-panel rounded-xl p-4 md:p-6 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="110">
+<div class="w-11 h-11 md:w-16 md:h-16 rounded-full bg-glass-surface flex items-center justify-center mb-3 md:mb-4 text-starry-gold">
+<span class="material-symbols-outlined text-[24px] md:text-[32px]">auto_stories</span>
 </div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">1년 과정 팀 수업</h3>
-<p class="font-body-md text-body-md text-on-surface-variant ko-keep">친구들과 함께 협동심을 기르며 장기적인 학습을 진행합니다.</p>
+<h3 class="font-headline-md text-base md:text-xl text-on-surface mb-1.5 md:mb-2 leading-tight ko-keep">수업</h3>
+<p class="font-body-md text-xs sm:text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">스토리텔링을 통해 우주의 원리를 탐구</p>
 </div>
-<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="220">
-<div class="w-16 h-16 rounded-full bg-glass-surface flex items-center justify-center mb-4 text-starry-gold">
-<span class="material-symbols-outlined" style="font-size: 32px;">travel_explore</span>
+<div class="glass-panel rounded-xl p-4 md:p-6 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="220">
+<div class="w-11 h-11 md:w-16 md:h-16 rounded-full bg-glass-surface flex items-center justify-center mb-3 md:mb-4 text-starry-gold">
+<span class="material-symbols-outlined text-[24px] md:text-[32px]">construction</span>
 </div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2 leading-tight ko-keep">관측 중심 교육</h3>
-<p class="font-body-md text-body-md text-on-surface-variant ko-keep">이론을 넘어 실제 밤하늘을 관측하며 우주를 체험합니다.</p>
+<h3 class="font-headline-md text-base md:text-xl text-on-surface mb-1.5 md:mb-2 leading-tight ko-keep">실습</h3>
+<p class="font-body-md text-xs sm:text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">실습과 만들기를 통해 원리를 확인</p>
+</div>
+<div class="glass-panel rounded-xl p-4 md:p-6 flex flex-col items-center text-center glow-hover transition-all" data-reveal data-reveal-delay="330">
+<div class="w-11 h-11 md:w-16 md:h-16 rounded-full bg-glass-surface flex items-center justify-center mb-3 md:mb-4 text-starry-gold">
+<svg aria-hidden="true" class="h-6 w-6 md:h-9 md:w-9" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 20.5 27.5 12l3 6.2L13 26.7 10 20.5Z" stroke="currentColor" stroke-linejoin="round" stroke-width="3"/>
+<path d="M28.8 11.3 36 8l4 8.4-7.1 3.4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+<path d="M17.5 24.5 24 31" stroke="currentColor" stroke-linecap="round" stroke-width="3"/>
+<path d="M24 31v9M24 31l-8 9M24 31l8 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+<path d="M8 19.5l-2 1" stroke="currentColor" stroke-linecap="round" stroke-width="3"/>
+</svg>
+</div>
+<h3 class="font-headline-md text-base md:text-xl text-on-surface mb-1.5 md:mb-2 leading-tight ko-keep">관측</h3>
+<p class="font-body-md text-xs sm:text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">천체관측과 기록으로 탐구력 강화</p>
 </div>
 </div>
 </section>
@@ -419,16 +612,22 @@
 <div class="w-full md:w-5/12" data-reveal="right" data-reveal-delay="120">
 <div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
 <div class="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
-<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 1~2학년</span>
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/90 text-midnight-deep px-3.5 py-1.5 rounded-full font-label-md text-xs md:text-sm leading-none border border-starry-gold shadow-sm">초등 1~2학년</span>
 <h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">첫걸음 과정</h3>
 </div>
-<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">밤하늘과 친해지기</p>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">밤하늘 입문 과정</p>
 <ul class="space-y-2 mb-8">
 <li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
-<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">달의 변화와 계절 별자리</span>
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">아이 눈높이의 이야기와 만들기로 별자리, 달, 태양을 처음 만납니다.</span>
+                                </li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">생일별자리, 달의 모습, 북극성 찾기처럼 밤하늘의 기본 감각을 익힙니다.</span>
+                                </li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">계절별 대표 천체를 관측하며 하늘을 스스로 찾아보는 습관을 만듭니다.</span>
                                 </li>
 </ul>
-<button class="inline-flex items-center gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="starter" aria-controls="course-modal" aria-expanded="false">
+<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="starter" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -447,16 +646,22 @@
 <div class="w-full md:w-5/12 text-left md:text-right" data-reveal="left" data-reveal-delay="120">
 <div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
 <div class="flex flex-wrap items-center gap-2 md:justify-end md:gap-3 mb-4">
-<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 2~3학년</span>
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/90 text-midnight-deep px-3.5 py-1.5 rounded-full font-label-md text-xs md:text-sm leading-none border border-starry-gold shadow-sm">초등 2~3학년</span>
 <h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">체험 과정</h3>
 </div>
-<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">태양계의 신비</p>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">우주 체험 과정</p>
 <ul class="space-y-2 mb-8 flex flex-col md:items-end">
 <li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
-<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">행성 탐험과 망원경 기초 조작</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">별의 색과 밝기, 태양계와 우주탐사를 실습으로 연결해 핵심 개념을 익힙니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">별자리 퍼즐, 반작용 모형, 달모형 등 손으로 만드는 활동이 풍부합니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">계절별 별자리와 관측 천체를 보며 우주 개념을 실제 하늘과 연결합니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
 </li>
 </ul>
-<button class="inline-flex w-auto md:w-full items-center md:justify-end gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="experience" aria-controls="course-modal" aria-expanded="false">
+<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="experience" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -475,16 +680,22 @@
 <div class="w-full md:w-5/12" data-reveal="right" data-reveal-delay="120">
 <div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
 <div class="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
-<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 4~5학년</span>
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/90 text-midnight-deep px-3.5 py-1.5 rounded-full font-label-md text-xs md:text-sm leading-none border border-starry-gold shadow-sm">초등 4~5학년</span>
 <h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">탐구 과정</h3>
 </div>
-<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">심화 천문학</p>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">천문 탐구 과정</p>
 <ul class="space-y-2 mb-8">
 <li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
-<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">성단/성운 관측 및 우주 과학 원리</span>
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">별의 물리와 태양계 천체, 성운·성단·은하를 과학적으로 파고듭니다.</span>
+                                </li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">밝기, 거리, 색, 별의 일생을 실험과 기록으로 이해합니다.</span>
+                                </li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep">
+<span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">망원경 조작과 천체 구별 실습으로 관측 능력을 한 단계 끌어올립니다.</span>
                                 </li>
 </ul>
-<button class="inline-flex items-center gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="inquiry" aria-controls="course-modal" aria-expanded="false">
+<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="inquiry" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -503,16 +714,22 @@
 <div class="w-full md:w-5/12 text-left md:text-right" data-reveal="left" data-reveal-delay="120">
 <div class="glass-panel rounded-xl p-5 sm:p-6 md:p-8 glow-hover transition-all">
 <div class="flex flex-wrap items-center gap-2 md:justify-end md:gap-3 mb-4">
-<span class="shrink-0 whitespace-nowrap bg-starry-gold/20 text-starry-gold px-3 py-1 rounded-full font-caption text-caption border border-starry-gold/30">초등 5학년 이상</span>
+<span class="shrink-0 whitespace-nowrap bg-starry-gold/90 text-midnight-deep px-3.5 py-1.5 rounded-full font-label-md text-xs md:text-sm leading-none border border-starry-gold shadow-sm">초등 5학년 이상</span>
 <h3 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface ko-keep min-w-0">테마 과정</h3>
 </div>
-<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">전문 관측 프로젝트</p>
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant mb-6 ko-keep">현대 천문학 심화 과정</p>
 <ul class="space-y-2 mb-8 flex flex-col md:items-end">
 <li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
-<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">심화 주제 탐구 및 자유 관측</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">빛, 중력, 블랙홀과 우주론까지 현대 천문학 주제를 아이 눈높이에 맞춰 탐구합니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">스펙트럼, 변광성, 적색편이 등 어려운 개념을 실습으로 풀어냅니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
+</li>
+<li class="flex items-start gap-2 text-on-surface-variant font-body-md text-sm md:text-body-md leading-relaxed ko-keep md:justify-end">
+<span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">탐구과정 이후 아이가 스스로 질문하고 해석하는 힘을 키웁니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
 </li>
 </ul>
-<button class="inline-flex w-auto md:w-full items-center md:justify-end gap-1 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" type="button" data-course-trigger="theme" aria-controls="course-modal" aria-expanded="false">
+<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="theme" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -524,18 +741,18 @@
 <div id="course-modal" class="hidden fixed inset-0 z-[100] px-3 sm:px-4 py-5 md:py-10" role="dialog" aria-modal="true" aria-labelledby="course-modal-title">
 <div id="course-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 <div id="course-modal-panel" class="relative mx-auto max-w-5xl max-h-[90vh] overflow-y-auto glass-panel rounded-lg md:rounded-xl">
-<div class="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-gray-200 bg-white/95 px-4 py-3 md:px-8 md:py-4 backdrop-blur">
+<div class="sticky top-0 z-10 relative border-b border-gray-200 bg-white/95 px-14 py-3 md:px-16 md:py-4 backdrop-blur text-center">
 <div class="min-w-0">
-<span id="course-modal-kicker" class="block font-caption text-caption text-starry-gold whitespace-nowrap mb-1"></span>
-<h2 id="course-modal-title" class="font-headline-md text-lg sm:text-xl md:text-2xl leading-tight text-black ko-keep"></h2>
+<span id="course-modal-kicker" class="course-modal-kicker-text block text-starry-gold whitespace-nowrap mb-1.5"></span>
+<h2 id="course-modal-title" class="course-modal-title-text text-black ko-keep"></h2>
 </div>
-<button id="course-modal-close" class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full border border-gray-300 text-black hover:bg-gray-100 transition-colors flex items-center justify-center" type="button" aria-label="팝업 닫기">
+<button id="course-modal-close" class="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full border border-gray-300 text-black hover:bg-gray-100 transition-colors flex items-center justify-center" type="button" aria-label="팝업 닫기">
 <span class="material-symbols-outlined" style="font-size: 22px;">close</span>
 </button>
 </div>
 <div class="p-4 sm:p-5 md:p-8">
 <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 md:gap-8 mb-8">
-<div>
+<div class="course-modal-media-column">
 <div class="rounded-xl border border-gray-200 bg-black overflow-hidden shadow-sm">
 <div class="relative aspect-video">
 <iframe id="course-modal-video" class="absolute inset-0 w-full h-full" title="" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -546,13 +763,13 @@
 </a>
 </div>
 <div>
-<p id="course-modal-summary" class="font-body-md text-sm md:text-body-md leading-relaxed text-black mb-6 ko-keep"></p>
-<div id="course-modal-meta" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4"></div>
+<p id="course-modal-summary" class="font-body-md text-sm md:text-body-md leading-relaxed text-black mb-4 md:mb-6 ko-keep"></p>
+<div id="course-modal-meta" class="grid grid-cols-3 lg:grid-cols-1 gap-2 md:gap-3 lg:gap-4"></div>
 </div>
 </div>
-<div class="overflow-x-auto rounded-xl border border-gray-200 bg-white">
-<table class="w-full min-w-[760px] text-left">
-<thead class="bg-gray-50 border-b border-gray-200">
+<div class="overflow-x-auto rounded-xl border border-gray-300 bg-white">
+<table class="course-modal-table w-full min-w-[760px] text-left">
+<thead class="bg-gray-50 border-b border-gray-300">
 <tr>
 <th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">월</th>
 <th class="px-4 py-3 font-label-md text-label-md text-black whitespace-nowrap">주제</th>
@@ -614,7 +831,7 @@
 </div>
 </div>
 <div class="overflow-x-auto pb-2">
-<div id="availability-table" class="min-w-[660px] space-y-3">
+<div id="availability-table" class="min-w-[540px] sm:min-w-[660px] space-y-3">
 <div class="rounded-xl border border-gray-200 overflow-hidden">
 <div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
 <div class="bg-gray-50 border-r border-b border-gray-200 px-3 py-3 font-bold text-black">1주차</div>
@@ -710,6 +927,55 @@
 </div>
 </div>
 </section>
+<!-- FAQ -->
+<section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap" data-reveal>
+<div class="glass-panel rounded-xl p-5 sm:p-6 md:p-10">
+<div class="mb-8">
+<span class="inline-flex items-center gap-2 rounded-full border border-starry-gold/30 bg-starry-gold/10 px-4 py-1.5 font-caption text-caption text-starry-gold mb-4 whitespace-nowrap">
+<span class="material-symbols-outlined" style="font-size: 16px;">help</span>
+자주 묻는 질문
+</span>
+<h2 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface mb-3 ko-keep">정규반 상담 전 확인해 주세요</h2>
+<p class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed ko-keep">팀 구성, 수업료, 시작 시기처럼 상담 전에 많이 물어보는 내용을 정리했습니다.</p>
+</div>
+<div class="space-y-4">
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 정규교실은 꼭 12명이 모여야 시작할 수 있나요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 최대로 구성할 수 있는 인원이 10~12명이고 과정별로 상이합니다. 최소 인원은 정해져 있지 않기 때문에 적정 인원이 모이면 시작할 수 있습니다. 진행하면서 정원이 넘지 않게 인원을 충원하셔도 됩니다. 수업료는 인원수에 따라 1/n이 되는 구조입니다.</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 팀은 직접 구성해야 하나요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 팀은 직접 만들어 주셔야 합니다. 천문대는 학원이 아니기 때문에 구성되어 있는 반에 들어갈 수 있는 시스템이 아닙니다. 수업료도 1팀의 인원수에 따라 변동되기 때문에 직접 적정 인원을 모아주셔야 합니다. 기존반 중에는 인원 미달이어도 소수정예로 수업받길 원하는 팀도 있어 임의로 합류시킬 수 없습니다.</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업료 결제 방법은요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">최소 분기 단위, 3개월 선납입니다. 매 납부 분기 수업일의 2주 전까지 대표 어머니께서 모아서 계좌이체 해주시면 됩니다.</p>
+<p class="mt-2 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">신한은행 140-012-303300 (주)인천어린이천문대</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업료, 교재비 외에 발생하는 비용이 있나요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">없습니다. 재료비, 활동비 등 별도 비용은 발생하지 않습니다.</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 현금영수증 발행되나요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 납부하신 수업료분에 대해 개개인별로 발행해드립니다.</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업은 꼭 1월에 시작해야 하나요?</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 매월 수업 주제가 정해져 있기 때문에 수업을 시작한 해당 월의 주제로 수업이 진행됩니다. 예를 들어 4월에 등록하면 정해진 4월 수업 주제부터 시작하며, 이 반은 4월부터 내년 3월까지 12회 수업에 참여하게 됩니다.</p>
+</article>
+<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
+<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 팀을 구성하기가 어려워요.</h3>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">정규교실은 마음에 맞는 주변 친구들과 함께 재미있고 즐겁게 참여하는 수업을 지향합니다. 팀 구성이 조금 어렵지만, 모집 단계만 지나면 대한민국 어린이의 1%만 경험하는 특별한 수업을 끈끈하게 지속할 수 있습니다.</p>
+<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">정규반 팀원 충원 게시판은 진행 중인 정규반 팀에서 인원을 충원할 때 글을 올리는 곳이니 활용해 주세요.</p>
+<a class="mt-5 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep hover:bg-black hover:text-white transition-colors" href="https://cafe.naver.com/astrocamp10/116" target="_blank" rel="noopener">
+정규반 팀원 충원해요 바로가기
+<span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+</a>
+</article>
+</div>
+</div>
+</section>
 <!-- Tuition Calculator -->
 <section class="px-gutter max-w-container-max mx-auto mb-section-gap-mobile md:mb-section-gap" data-reveal="zoom">
 <div class="glass-panel rounded-xl p-5 sm:p-6 md:p-10">
@@ -721,41 +987,57 @@
 </span>
 <h2 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface mb-3 ko-keep">우리 팀 인원 수별 회비 계산기</h2>
 <p class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed ko-keep">
-정규반 수업료는 팀 단위로 책정됩니다. 팀 인원 수를 선택하면 1인당 예상 월 회비를 바로 확인할 수 있습니다.
+정규반 수업료는 팀 단위로 책정됩니다. 팀 인원 수를 선택하면 3개월 선납 기준 1인당 납부금액과 월별 금액을 바로 확인할 수 있습니다.
 </p>
-<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-<div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
+<div class="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
+<div class="rounded-xl border border-gray-200 bg-gray-50 p-3 sm:p-4">
 <p class="font-caption text-caption text-gray-500 mb-1">팀 기준 월 수업료</p>
-<p class="font-headline-md text-xl text-black">480,000원</p>
+<p id="monthly-team-tuition" class="font-headline-md text-base sm:text-xl text-black whitespace-nowrap">480,000원</p>
 </div>
-<div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
-<p class="font-caption text-caption text-gray-500 mb-1">납부 방식</p>
-<p class="font-headline-md text-xl text-black">3개월 선납</p>
+<div class="rounded-xl border border-gray-200 bg-gray-50 p-3 sm:p-4">
+<p class="font-caption text-caption text-gray-500 mb-1">기본 납부 안내</p>
+<p id="tuition-payment-label" class="font-headline-md text-base sm:text-xl text-black whitespace-nowrap">3개월 선납</p>
 </div>
 </div>
 </div>
 <div class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<p class="font-headline-md text-lg md:text-xl leading-snug text-black mb-4 ko-keep">팀 인원 선택</p>
-<div class="grid grid-cols-5 gap-1.5 sm:gap-2 mb-6" role="group" aria-label="팀 인원 수 선택">
-<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="6">6명</button>
-<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="7">7명</button>
-<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="8">8명</button>
-<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="9">9명</button>
-<button class="tuition-member-button rounded-full border border-gray-200 px-1.5 sm:px-3 py-2.5 md:py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-black hover:border-starry-gold hover:text-starry-gold transition-colors" type="button" data-member-count="10">10명</button>
+<div class="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-4 sm:p-5">
+<div class="flex items-center justify-between gap-3">
+<p class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">팀 인원 선택</p>
+<p id="selected-member-count" class="font-headline-lg text-2xl sm:text-3xl text-starry-gold whitespace-nowrap">10명</p>
+</div>
+<input id="tuition-member-count" class="mt-4 w-full accent-[#FFC300]" type="range" min="6" max="12" step="1" value="10" aria-label="팀 인원 수 선택"/>
+<div class="mt-2 flex justify-between font-caption text-caption text-gray-500">
+<span>6명</span>
+<span>12명</span>
+</div>
 </div>
 <div class="rounded-xl bg-gray-50 border border-gray-200 p-4 sm:p-5">
-<div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-<div>
-<p class="font-caption text-caption text-gray-500 mb-1">선택한 팀원 수</p>
-<p id="selected-member-count" class="font-headline-md text-xl text-black">10명</p>
+<div class="rounded-lg border border-gray-200 bg-white/80 px-3 py-2.5 sm:px-4 sm:py-3">
+<div class="grid grid-cols-2 divide-x divide-gray-200">
+<div class="min-w-0 pr-3">
+<p class="font-caption text-caption text-gray-500 mb-1 whitespace-nowrap">선택한 팀원 수</p>
+<p id="selected-member-count-summary" class="font-headline-md text-base sm:text-xl text-black whitespace-nowrap">10명</p>
 </div>
-<div class="sm:text-right">
-<p class="font-caption text-caption text-gray-500 mb-1">1인당 예상 월 회비</p>
-<p id="tuition-per-person" class="font-headline-lg text-2xl sm:text-3xl text-starry-gold whitespace-nowrap">48,000원</p>
+<div class="min-w-0 pl-3">
+<p class="font-caption text-caption text-gray-500 mb-1 whitespace-nowrap">납부 기간</p>
+<p id="selected-payment-months-summary" class="font-headline-md text-base sm:text-xl text-black whitespace-nowrap">3개월</p>
 </div>
 </div>
 </div>
-<p class="mt-4 font-body-md text-sm md:text-lg text-on-surface-variant leading-relaxed ko-keep">교재비와 기타 비용은 상담 시 별도 안내드립니다.</p>
+<div class="mt-3 grid grid-cols-1 gap-3">
+<div class="min-w-0 rounded-xl border border-starry-gold/25 bg-white px-4 py-3.5 sm:px-5 sm:py-4">
+<p class="font-caption text-caption text-gray-500 mb-1.5">1인당 납부금액</p>
+<p id="tuition-payment-total" class="tuition-result-amount font-headline-lg text-2xl sm:text-3xl text-starry-gold whitespace-nowrap">144,000원</p>
+</div>
+<div class="min-w-0 rounded-xl border border-starry-gold/25 bg-white px-4 py-3.5 sm:px-5 sm:py-4">
+<p class="font-caption text-caption text-gray-500 mb-1.5">1인당 월별 금액</p>
+<p id="tuition-per-person" class="tuition-result-amount font-headline-lg text-2xl sm:text-3xl text-starry-gold whitespace-nowrap">48,000원</p>
+</div>
+</div>
+</div>
+</div>
+<p id="tuition-material-note" class="mt-4 font-body-md text-sm md:text-lg text-on-surface-variant leading-relaxed ko-keep">교재비와 기타 비용은 상담 시 별도 안내드립니다.</p>
 </div>
 </div>
 </div>
@@ -780,12 +1062,13 @@
 </div>
 </footer>
 <script src="availability-data.js"></script>
+<script src="course-data.js"></script>
 <script>
-const courseCurricula = {
+let courseCurricula = {
   starter: {
     kicker: "1단계",
     title: "첫걸음 과정",
-    summary: "별자리와 달, 태양, 망원경을 놀이형 실습으로 처음 만나는 기초 과정입니다.",
+    summary: "밤하늘을 처음 배우는 아이들이 별자리, 달의 변화, 태양, 망원경의 기본을 이야기와 만들기로 익히는 입문 과정입니다. 생일별자리와 북극성 찾기처럼 친근한 주제에서 시작해 계절별 관측 천체를 직접 바라보며 하늘과 가까워집니다.",
     videoId: "Iez_OWB-8eA",
     videoTitle: "어린이천문대 첫걸음과정 소개",
     meta: [
@@ -796,7 +1079,7 @@ const courseCurricula = {
     rows: [
       ["1월", "오리온과 친구들", "겨울철 관측 천체", "겨울철 별자리 텀블러"],
       ["2월", "태양 뒤에 숨은 생일별자리", "-", "야광 생일별자리 열쇠고리"],
-      ["3월", "울퉁불퉁? 얼룩덜룩?", "-", "달모습 체험기"],
+      ["3월", "울퉁불퉁? 얼룩덜룩?", "-", "달모습체험기"],
       ["4월", "사자의 울음소리", "봄철 관측 천체", "별자리 무드등"],
       ["5월", "갈갈이 아저씨의 망원경", "-", "매직스코프"],
       ["6월", "북극성을 찾아라!", "-", "북극성 바람개비"],
@@ -807,12 +1090,12 @@ const courseCurricula = {
       ["11월", "플레이아데스의 비밀", "-", "만화경"],
       ["12월", "잡아라! 별똥별", "-", "유성우 칼레이도사이클"]
     ],
-    notes: ["계절별 대표 천체는 출몰 시기에 맞춰 우선 관측합니다.", "관측이 어려운 날에는 관련 실습 또는 영상 수업으로 진행합니다."]
+    notes: ["달과 행성은 출몰 시기를 고려해 우선 관측합니다.", "수업은 기상 여건과 관계없이 진행하며, 관측이 어려운 경우 해당 주제 실습 또는 영상 수업으로 대체합니다.", "관측 시 기온이 내려갈 수 있어 계절보다 조금 두꺼운 옷을 준비해 주세요.", "정규교실은 담당 선생님이 1년간 관측 목록을 관리하며, 부족한 관측은 보강이 이루어집니다."]
   },
   experience: {
     kicker: "2단계",
     title: "체험 과정",
-    summary: "별자리, 태양계, 우주탐사 주제를 관측과 만들기 활동으로 연결하는 과정입니다.",
+    summary: "별의 색·밝기·거리, 태양계, 우주탐사와 같은 핵심 주제를 실습과 관측으로 연결하는 체험 중심 과정입니다. 퍼즐, 모형, 탐사 활동을 통해 교실에서 배운 개념이 실제 밤하늘의 별자리와 천체로 이어지도록 구성했습니다.",
     videoId: "Gxa1X4TKq70",
     videoTitle: "어린이천문대 체험과정 소개",
     meta: [
@@ -824,22 +1107,22 @@ const courseCurricula = {
       ["1월", "겨울철 별자리와 별의 색깔", "겨울철 관측 천체", "겨울철 별자리 퍼즐"],
       ["2월", "우주를 향한 도전", "-", "반작용 모형"],
       ["3월", "우주인의 생활", "-", "우주정거장의 생존필수품 찾기"],
-      ["4월", "봄철 별자리와 별의 밝기", "봄철 관측 천체", "별자리스코프"],
-      ["5월", "태양", "-", "일식 체험기"],
+      ["4월", "봄철별자리와 별의 밝기", "봄철 관측 천체", "별자리스코프"],
+      ["5월", "태양", "-", "일식체험기"],
       ["6월", "태양계", "-", "태양계 주사위"],
       ["7월", "여름철 별자리와 별의 크기", "여름철 관측 천체", "광섬유 별자리 액자"],
       ["8월", "은하수", "-", "은하수 사진퍼즐"],
       ["9월", "달탐사", "-", "달모형"],
       ["10월", "가을철 별자리와 별의 거리", "가을철 관측 천체", "별의 거리 모형"],
-      ["11월", "사라진 공룡과 소행성", "-", "운석 관찰하기"],
+      ["11월", "사라진 공룡과 소행성", "-", "운석관찰하기"],
       ["12월", "우주 속의 지구", "-", "앙부일구"]
     ],
-    notes: ["만들기 활동을 통해 천문 개념을 손으로 이해하도록 구성합니다.", "관측 대상은 달과 행성의 출몰 시기에 따라 조정될 수 있습니다."]
+    notes: ["달과 행성은 출몰 시기를 고려해 우선 관측합니다.", "수업은 기상 여건과 관계없이 진행하며, 관측이 어려운 경우 해당 주제 실습 또는 영상 수업으로 대체합니다.", "관측 시 기온이 내려갈 수 있어 계절보다 조금 두꺼운 옷을 준비해 주세요.", "정규교실은 담당 선생님이 1년간 관측 목록을 관리하며, 부족한 관측은 보강이 이루어집니다."]
   },
   inquiry: {
     kicker: "3단계",
     title: "탐구 과정",
-    summary: "별의 물리, 달과 행성, 성운과 은하까지 우주 과학의 원리를 깊게 다루는 과정입니다.",
+    summary: "별의 밝기와 거리, 색, 별의 일생부터 달·행성·소행성, 성운·성단·은하까지 천문학의 원리를 더 깊게 탐구하는 과정입니다. 망원경 조작과 천체 구별 실습이 포함되어 관측을 단순한 체험에서 기록과 해석으로 확장합니다.",
     videoId: "98FwVjWm2GU",
     videoTitle: "어린이천문대의 탐구과정에서는 무슨 과정일까?",
     meta: [
@@ -848,7 +1131,7 @@ const courseCurricula = {
       ["교육비", "팀당 1회 480,000원"]
     ],
     rows: [
-      ["기초1", "별과 별자리", "해당 계절 대상 관측", "야광 생일별자리 열쇠고리"],
+      ["기초1", "별과 별자리", "해당 계절 대상관측", "야광 생일별자리 열쇠고리"],
       ["기초2", "태양계 가족", "-", "태양계 주사위"],
       ["기초3", "우주 속의 지구", "-", "앙부일구"],
       ["1월", "별의 밝기와 거리", "겨울철 관측 천체", "썬스코프"],
@@ -860,16 +1143,16 @@ const courseCurricula = {
       ["7월", "지구의 운동과 별자리", "여름철 관측 천체", "야광회전 별자리판"],
       ["8월", "혜성, 유성", "-", "혜성 매직블럭"],
       ["9월", "소행성과 왜행성", "-", "소행성 간이투영기"],
-      ["10월", "망원경", "가을철 관측 천체", "망원경 조작실습 1"],
-      ["11월", "성운 / 성단 / 은하", "-", "천체 구별하기 / 망원경 조작실습 2"],
+      ["10월", "망원경", "가을철 관측 천체", "망원경 조작실습1"],
+      ["11월", "성운 / 성단 / 은하", "-", "천체 구별하기/망원경 조작실습2"],
       ["12월", "외부은하", "-", "홀로그램 투영기"]
     ],
-    notes: ["체험과정을 수료한 대원은 기초3 과정을 생략할 수 있습니다.", "심화 관측과 망원경 조작 실습 비중이 높아집니다."]
+    notes: ["기초 1, 2, 3은 체험반을 수료하지 않은 어린이를 위한 과정입니다.", "달과 행성은 출몰 시기를 고려해 우선 관측합니다.", "수업은 기상 여건과 관계없이 진행하며, 관측이 어려운 경우 해당 주제 실습 또는 영상 수업으로 대체합니다.", "관측 시 기온이 내려갈 수 있어 계절보다 조금 두꺼운 옷을 준비해 주세요.", "정규교실은 담당 선생님이 1년간 관측 목록을 관리하며, 부족한 관측은 보강이 이루어집니다."]
   },
   theme: {
     kicker: "4단계",
     title: "테마 과정",
-    summary: "빛, 중력, 블랙홀, 상대성이론 등 현대 천문학 주제를 프로젝트형으로 탐구하는 심화 과정입니다.",
+    summary: "탐구과정을 수료한 아이들이 빛, 중력, 인공위성, 블랙홀, 상대성이론, 퀘이사와 빅뱅까지 현대 천문학 주제를 다루는 심화 과정입니다. 어려운 개념을 실험과 토론, 프로젝트형 활동으로 풀어내며 스스로 질문하고 설명하는 힘을 키웁니다.",
     videoId: "yJR56GsXn8M",
     videoTitle: "어린이천문대 테마과정에선 무엇을 하나요? - 1",
     meta: [
@@ -878,7 +1161,7 @@ const courseCurricula = {
       ["교육비", "팀당 1회 480,000원"]
     ],
     rows: [
-      ["기초1", "망원경 사용법", "해당 계절 대상 관측", "망원경 기초 실습"],
+      ["기초1", "망원경 사용법", "해당 계절 대상관측", ""],
       ["1월", "외계생명체를 찾아서", "겨울철 관측 천체", "응답하라 외계생명 실습지"],
       ["2월", "천문학의 열쇠 '빛'", "-", "스펙트로 스코프"],
       ["3월", "인공위성", "-", "인공위성 모형"],
@@ -892,8 +1175,15 @@ const courseCurricula = {
       ["11월", "전파천문학과 퀘이사", "-", "퀘이사 적색편이 실습지"],
       ["12월", "빅뱅과 우주의 성장", "-", "우주팽창의 비밀 실습지"]
     ],
-    notes: ["테마과정은 탐구과정을 수료한 학생을 대상으로 진행합니다.", "주제별 토론과 프로젝트형 실습이 함께 진행됩니다."]
+    notes: ["테마과정은 탐구과정을 수료한 학생을 대상으로 진행합니다.", "달과 행성은 출몰 시기를 고려해 우선 관측합니다.", "수업은 기상 여건과 관계없이 진행하며, 관측이 어려운 경우 해당 주제 실습 또는 영상 수업으로 대체합니다.", "관측 시 기온이 내려갈 수 있어 계절보다 조금 두꺼운 옷을 준비해 주세요.", "정규교실은 담당 선생님이 1년간 관측 목록을 관리하며, 부족한 관측은 보강이 이루어집니다."]
   }
+};
+
+let seasonalObservationTargets = {
+  winter: ["시리우스", "카펠라", "리겔", "베텔게우스", "M45", "M42"],
+  spring: ["아크투루스", "스피카", "레굴루스", "미자르 & 알코르", "M3", "M44"],
+  summer: ["베가(직녀성)", "알타이르(견우성)", "안타레스", "알비레오", "더블더블", "M13", "M57", "옷걸이성군"],
+  autumn: ["포말하우트", "알페라츠", "알마크", "M15", "M31", "NGC457", "NGC869 & 884"]
 };
 
 const courseModal = document.getElementById("course-modal");
@@ -910,17 +1200,107 @@ const courseClose = document.getElementById("course-modal-close");
 const coursePanel = document.getElementById("course-modal-panel");
 const courseButtons = document.querySelectorAll("[data-course-trigger]");
 const coursePreviewVideos = document.querySelectorAll("[data-preview-video-id]");
+let courseModalHistoryActive = false;
 const availabilityTable = document.getElementById("availability-table");
-const tuitionMemberButtons = document.querySelectorAll("[data-member-count]");
+const tuitionMemberCountInput = document.getElementById("tuition-member-count");
 const selectedMemberCount = document.getElementById("selected-member-count");
+const selectedMemberCountSummary = document.getElementById("selected-member-count-summary");
+const selectedPaymentMonthsSummary = document.getElementById("selected-payment-months-summary");
 const tuitionPerPerson = document.getElementById("tuition-per-person");
-const monthlyTeamTuition = 480000;
+const tuitionPaymentTotal = document.getElementById("tuition-payment-total");
+const monthlyTeamTuitionLabel = document.getElementById("monthly-team-tuition");
+const tuitionPaymentLabel = document.getElementById("tuition-payment-label");
+const tuitionMaterialNote = document.getElementById("tuition-material-note");
+let monthlyTeamTuition = 480000;
+let tuitionPaymentText = "3개월 선납";
+let tuitionMaterialText = "교재비와 기타 비용은 상담 시 별도 안내드립니다.";
+let selectedTuitionMemberCount = 10;
+const tuitionPaymentMonths = 3;
 
 function getYouTubeEmbedSrc(videoId) {
   const videoOrigin = window.location.origin && window.location.origin !== "null"
     ? `&origin=${encodeURIComponent(window.location.origin)}`
     : "";
   return `https://www.youtube.com/embed/${videoId}?rel=0&playsinline=1${videoOrigin}`;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function formatCourseMetaValue(label, value) {
+  let text = escapeHTML(value);
+  if (label === "수업시간") {
+    const parts = text.split(/\s*\/\s*/).map((part) => part.trim()).filter(Boolean);
+    if (parts.length > 1) {
+      return parts.map((part, index) => index === 0
+        ? part
+        : `<span class="course-meta-mobile-break"><br></span><span class="course-meta-desktop-separator"> / </span>${part}`
+      ).join("");
+    }
+    return text;
+  }
+  if (label === "교육비") {
+    return text.replace(/^(팀당\s*1회)\s*/, '$1<span class="course-meta-mobile-break"><br></span><span class="course-meta-desktop-separator"> </span>');
+  }
+  if (label === "권장대상") {
+    return text.replace(/\s+(초등학교)/, '<span class="course-meta-mobile-break"><br></span><span class="course-meta-desktop-separator"> </span>$1');
+  }
+  return text;
+}
+
+function getSeasonObservation(courseKey, observation) {
+  if (!observation || observation === "-") return null;
+
+  if (observation.includes("겨울철")) {
+    return { label: "겨울철 관측 천체", rowSpan: 3, targets: seasonalObservationTargets.winter };
+  }
+  if (observation.includes("봄철")) {
+    return { label: "봄철 관측 천체", rowSpan: 3, targets: seasonalObservationTargets.spring };
+  }
+  if (observation.includes("여름철")) {
+    return {
+      label: "여름철 관측 천체",
+      rowSpan: 3,
+      targets: seasonalObservationTargets.summer
+    };
+  }
+  if (observation.includes("가을철")) {
+    return { label: "가을철 관측 천체", rowSpan: 3, targets: seasonalObservationTargets.autumn };
+  }
+  if (observation.includes("해당 계절")) {
+    return {
+      label: "해당 계절 대상관측",
+      rowSpan: courseKey === "inquiry" ? 3 : 1,
+      targets: courseKey === "inquiry"
+        ? ["기초 1, 2, 3은 체험반을 수료하지 않은 어린이를 위한 과정입니다."]
+        : ["계절별 대표 천체를 대상으로 관측합니다."]
+    };
+  }
+
+  return { label: observation, rowSpan: 1, targets: [] };
+}
+
+function renderObservationCell(courseKey, observation) {
+  const seasonObservation = getSeasonObservation(courseKey, observation);
+  if (!seasonObservation) return "";
+
+  const targetMarkup = seasonObservation.targets.length
+    ? `<p class="mt-1 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep text-center">${seasonObservation.targets.map(escapeHTML).join(", ")}</p>`
+    : "";
+
+  return `
+    <td rowspan="${seasonObservation.rowSpan}" class="px-4 py-3 align-middle text-center font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep bg-white">
+      <div class="font-headline-md text-base md:text-lg font-bold leading-snug text-black ko-keep text-center">${escapeHTML(seasonObservation.label)}</div>
+      ${targetMarkup}
+    </td>
+  `;
 }
 
 coursePreviewVideos.forEach((video) => {
@@ -1010,29 +1390,126 @@ function formatWon(value) {
   return `${Math.round(value).toLocaleString("ko-KR")}원`;
 }
 
-function updateTuitionCalculator(memberCount) {
-  if (!selectedMemberCount || !tuitionPerPerson) return;
+function cloneCoursePageData(data) {
+  return JSON.parse(JSON.stringify(data));
+}
 
-  selectedMemberCount.textContent = `${memberCount}명`;
-  tuitionPerPerson.textContent = formatWon(monthlyTeamTuition / memberCount);
+function splitTargetText(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean);
+  }
+  return String(value || "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
-  tuitionMemberButtons.forEach((button) => {
-    const isSelected = Number(button.dataset.memberCount) === memberCount;
-    button.classList.toggle("bg-starry-gold", isSelected);
-    button.classList.toggle("text-midnight-deep", isSelected);
-    button.classList.toggle("border-starry-gold", isSelected);
-    button.classList.toggle("text-black", !isSelected);
-    button.setAttribute("aria-pressed", String(isSelected));
+function getCourseFeeLabel() {
+  return `팀당 1회 ${formatWon(monthlyTeamTuition)}`;
+}
+
+function syncCourseFeeMeta() {
+  Object.values(courseCurricula).forEach((course) => {
+    if (!Array.isArray(course.meta)) return;
+    const hasFeeMeta = course.meta.some(([label]) => label === "교육비");
+    course.meta = course.meta.map(([label, value]) => label === "교육비" ? [label, getCourseFeeLabel()] : [label, value]);
+    if (!hasFeeMeta) {
+      course.meta.push(["교육비", getCourseFeeLabel()]);
+    }
   });
 }
 
-tuitionMemberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    updateTuitionCalculator(Number(button.dataset.memberCount));
-  });
-});
+function applyCoursePageData(data) {
+  if (!data || typeof data !== "object") return;
 
+  const tuition = data.tuition || {};
+  const nextTuition = Number(tuition.monthlyTeamTuition);
+  if (Number.isFinite(nextTuition) && nextTuition >= 0) {
+    monthlyTeamTuition = nextTuition;
+  }
+  if (typeof tuition.paymentLabel === "string" && tuition.paymentLabel.trim()) {
+    tuitionPaymentText = tuition.paymentLabel.trim();
+  }
+  if (typeof tuition.materialNote === "string" && tuition.materialNote.trim()) {
+    tuitionMaterialText = tuition.materialNote.trim();
+  }
+
+  if (data.observationTargets && typeof data.observationTargets === "object") {
+    seasonalObservationTargets = {
+      ...seasonalObservationTargets,
+      winter: splitTargetText(data.observationTargets.winter ?? seasonalObservationTargets.winter),
+      spring: splitTargetText(data.observationTargets.spring ?? seasonalObservationTargets.spring),
+      summer: splitTargetText(data.observationTargets.summer ?? data.observationTargets.summerExperience ?? seasonalObservationTargets.summer),
+      autumn: splitTargetText(data.observationTargets.autumn ?? seasonalObservationTargets.autumn)
+    };
+  }
+
+  if (data.curricula && typeof data.curricula === "object") {
+    Object.keys(courseCurricula).forEach((key) => {
+      const nextCourse = data.curricula[key];
+      if (!nextCourse || typeof nextCourse !== "object") return;
+      courseCurricula[key] = {
+        ...courseCurricula[key],
+        ...nextCourse,
+        meta: Array.isArray(nextCourse.meta) ? nextCourse.meta : courseCurricula[key].meta,
+        rows: Array.isArray(nextCourse.rows) ? nextCourse.rows : courseCurricula[key].rows,
+        notes: Array.isArray(nextCourse.notes) ? nextCourse.notes : courseCurricula[key].notes
+      };
+    });
+  }
+
+  syncCourseFeeMeta();
+  if (monthlyTeamTuitionLabel) monthlyTeamTuitionLabel.textContent = formatWon(monthlyTeamTuition);
+  if (tuitionPaymentLabel) tuitionPaymentLabel.textContent = tuitionPaymentText;
+  if (tuitionMaterialNote) tuitionMaterialNote.textContent = tuitionMaterialText;
+  updateTuitionCalculator(selectedTuitionMemberCount);
+}
+
+async function loadCoursePageData() {
+  const dataUrl = window.INCHEON_ASTRO_COURSE_DATA_URL || "course.data";
+  const storageKey = window.INCHEON_ASTRO_COURSE_KEY;
+
+  try {
+    const response = await fetch(`${dataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      applyCoursePageData(await response.json());
+    }
+  } catch (error) {
+  }
+
+  try {
+    const localCourseData = JSON.parse(localStorage.getItem(storageKey) || "null");
+    if (localCourseData) {
+      applyCoursePageData(localCourseData);
+    }
+  } catch (error) {
+  }
+}
+
+function updateTuitionCalculator(memberCount) {
+  if (!selectedMemberCount || !tuitionPerPerson) return;
+
+  selectedTuitionMemberCount = memberCount;
+  if (tuitionMemberCountInput) tuitionMemberCountInput.value = String(memberCount);
+  const monthlyPerPerson = monthlyTeamTuition / memberCount;
+  const paymentTotal = monthlyPerPerson * tuitionPaymentMonths;
+
+  selectedMemberCount.textContent = `${memberCount}명`;
+  if (selectedMemberCountSummary) selectedMemberCountSummary.textContent = `${memberCount}명`;
+  if (selectedPaymentMonthsSummary) selectedPaymentMonthsSummary.textContent = `${tuitionPaymentMonths}개월`;
+  if (tuitionPaymentTotal) tuitionPaymentTotal.textContent = formatWon(paymentTotal);
+  tuitionPerPerson.textContent = formatWon(monthlyPerPerson);
+}
+
+if (tuitionMemberCountInput) {
+  tuitionMemberCountInput.addEventListener("input", () => {
+    updateTuitionCalculator(Number(tuitionMemberCountInput.value));
+  });
+}
+
+syncCourseFeeMeta();
 updateTuitionCalculator(10);
+loadCoursePageData();
 
 const revealTargets = Array.from(document.querySelectorAll("[data-reveal]"));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1134,23 +1611,23 @@ function openCourseModal(courseKey) {
   courseVideo.src = getYouTubeEmbedSrc(course.videoId);
   courseYoutubeLink.href = `https://www.youtube.com/watch?v=${course.videoId}`;
   courseMeta.innerHTML = course.meta.map(([label, value]) => `
-    <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
-      <div class="font-caption text-caption text-gray-500 mb-2 whitespace-nowrap">${label}</div>
-      <div class="font-headline-md text-sm md:text-base leading-snug text-black ko-keep">${value}</div>
+    <div class="course-meta-card rounded-lg md:rounded-xl border border-gray-200 bg-gray-50 px-2 py-2 md:p-4">
+      <div class="course-meta-label font-caption text-caption text-gray-500 mb-1 md:mb-2 whitespace-nowrap">${escapeHTML(label)}</div>
+      <div class="course-meta-value font-headline-md text-[11px] sm:text-sm md:text-base leading-snug text-black ko-keep">${formatCourseMetaValue(label, value)}</div>
     </div>
   `).join("");
   courseRows.innerHTML = course.rows.map(([month, topic, observation, activity]) => `
     <tr class="hover:bg-gray-50 transition-colors">
-      <td class="px-4 py-3 font-label-md text-label-md text-starry-gold whitespace-nowrap">${month}</td>
-      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${topic}</td>
-      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${observation}</td>
-      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${activity}</td>
+      <td class="px-4 py-3 font-label-md text-label-md text-starry-gold whitespace-nowrap">${escapeHTML(month)}</td>
+      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${escapeHTML(topic)}</td>
+      ${renderObservationCell(courseKey, observation)}
+      <td class="px-4 py-3 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">${escapeHTML(activity || "")}</td>
     </tr>
   `).join("");
   courseNotes.innerHTML = course.notes.map((note) => `
     <li class="flex items-start gap-2 rounded-xl bg-gray-50 border border-gray-200 p-4 ko-keep">
       <span class="text-starry-gold shrink-0">•</span>
-      <span class="min-w-0">${note}</span>
+      <span class="min-w-0">${escapeHTML(note)}</span>
     </li>
   `).join("");
 
@@ -1158,6 +1635,12 @@ function openCourseModal(courseKey) {
   if (coursePanel) coursePanel.scrollTop = 0;
   courseModal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
+  if (!courseModalHistoryActive) {
+    window.history.pushState({ courseModal: courseKey }, "", window.location.href);
+    courseModalHistoryActive = true;
+  } else {
+    window.history.replaceState({ courseModal: courseKey }, "", window.location.href);
+  }
   requestAnimationFrame(() => {
     courseModal.scrollTop = 0;
     if (coursePanel) coursePanel.scrollTop = 0;
@@ -1165,19 +1648,27 @@ function openCourseModal(courseKey) {
   courseButtons.forEach((button) => {
     const isActive = button.dataset.courseTrigger === courseKey;
     button.setAttribute("aria-expanded", String(isActive));
-    button.classList.toggle("underline", isActive);
   });
 }
 
-function closeCourseModal() {
+function closeCourseModal(options = {}) {
+  const skipHistory = options.skipHistory === true;
+  const wasOpen = !courseModal.classList.contains("hidden");
+
   courseModal.classList.add("hidden");
   document.body.style.overflow = "";
   courseVideo.src = "";
   courseYoutubeLink.href = "#";
   courseButtons.forEach((button) => {
     button.setAttribute("aria-expanded", "false");
-    button.classList.remove("underline");
   });
+
+  if (wasOpen && courseModalHistoryActive && !skipHistory) {
+    courseModalHistoryActive = false;
+    window.history.back();
+  } else if (skipHistory) {
+    courseModalHistoryActive = false;
+  }
 }
 
 courseButtons.forEach((button) => {
@@ -1189,6 +1680,12 @@ courseBackdrop.addEventListener("click", closeCourseModal);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !courseModal.classList.contains("hidden")) {
     closeCourseModal();
+  }
+});
+
+window.addEventListener("popstate", () => {
+  if (!courseModal.classList.contains("hidden")) {
+    closeCourseModal({ skipHistory: true });
   }
 });
 </script>

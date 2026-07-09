@@ -485,7 +485,6 @@
 const storageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
 const dataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
 const statusLabels = window.INCHEON_ASTRO_EXPERIENCE_STATUS || { open: "접수중", wait: "대기", closed: "마감" };
-const programNames = window.INCHEON_ASTRO_EXPERIENCE_PROGRAMS || [];
 const programShortLabels = {
   "가족과 함께하는 우주여행": "가족 우주여행",
   "일일별자리체험": "별자리체험"
@@ -518,19 +517,20 @@ function normalizeSchedule(data) {
   return {
     events: events
       .filter((event) => {
-        const isKnownProgram = programNames.length === 0 || programNames.includes(event.title);
         return event
           && typeof event.id === "string"
           && /^\d{4}-\d{2}-\d{2}$/.test(event.date || "")
           && /^\d{2}:\d{2}$/.test(event.time || "")
-          && isKnownProgram
+          && typeof event.title === "string"
+          && event.title.trim().length > 0
+          && event.title.trim().length <= 60
           && Object.prototype.hasOwnProperty.call(statusLabels, event.status);
       })
       .map((event) => ({
         id: event.id,
         date: event.date,
         time: event.time,
-        title: event.title,
+        title: event.title.trim(),
         status: event.status,
         memo: typeof event.memo === "string" ? event.memo : ""
       }))

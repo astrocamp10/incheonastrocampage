@@ -10,8 +10,10 @@ ROOT = Path(__file__).resolve().parent
 PASSWORD = "dlscjsastro10"
 AVAILABILITY_FILE = ROOT / "availability.data"
 EXPERIENCE_FILE = ROOT / "experience.data"
-EXPERIENCE_PROGRAMS = {"가족과 함께하는 우주여행", "일일별자리체험"}
+COURSE_FILE = ROOT / "course.data"
 EXPERIENCE_STATUSES = {"open", "wait", "closed"}
+COURSE_KEYS = {"starter", "experience", "inquiry", "theme"}
+OBSERVATION_KEYS = {"winter", "spring", "summer", "autumn"}
 
 
 class AstroHandler(SimpleHTTPRequestHandler):
@@ -27,6 +29,7 @@ class AstroHandler(SimpleHTTPRequestHandler):
         route = {
             "/save-availability.php": (AVAILABILITY_FILE, validate_schedule),
             "/save-experience.php": (EXPERIENCE_FILE, validate_experience),
+            "/save-course.php": (COURSE_FILE, validate_course),
         }.get(path)
 
         if route is None:
@@ -113,14 +116,112 @@ def validate_experience(schedule):
             return "Invalid event date"
         if not isinstance(time, str) or not re.match(r"^\d{2}:\d{2}$", time):
             return "Invalid event time"
-        if title not in EXPERIENCE_PROGRAMS:
+        if not isinstance(title, str) or not title.strip() or len(title.strip()) > 60:
             return "Invalid event title"
+        event["title"] = title.strip()
         if status not in EXPERIENCE_STATUSES:
             return "Invalid event status"
         if not isinstance(memo, str) or len(memo) > 300:
             return "Invalid event memo"
 
     events.sort(key=lambda item: f"{item.get('date', '')}{item.get('time', '')}")
+    return None
+
+
+def validate_course(schedule):
+    if not isinstance(schedule, dict):
+        return "Invalid course data"
+
+    tuition = schedule.get("tuition")
+    if not isinstance(tuition, dict):
+        return "Invalid tuition"
+
+    monthly_tuition = tuition.get("monthlyTeamTuition")
+    if not isinstance(monthly_tuition, (int, float)) or monthly_tuition < 0 or monthly_tuition > 10000000:
+        return "Invalid tuition amount"
+
+    for field in ("paymentLabel", "materialNote"):
+        value = tuition.get(field, "")
+        if not isinstance(value, str) or len(value.strip()) > 300:
+            return f"Invalid {field}"
+        tuition[field] = value.strip()
+
+    observation_targets = schedule.get("observationTargets")
+    if not isinstance(observation_targets, dict):
+        return "Invalid observation targets"
+
+    for key in OBSERVATION_KEYS:
+        targets = observation_targets.get(key)
+        if not isinstance(targets, list) or len(targets) > 30:
+            return "Invalid observation target list"
+        cleaned = []
+        for target in targets:
+            if not isinstance(target, str):
+                return "Invalid observation target"
+            target = target.strip()
+            if target and len(target) <= 80:
+                cleaned.append(target)
+        observation_targets[key] = cleaned
+
+    observation_targets["summerExperience"] = list(observation_targets["summer"])
+
+    curricula = schedule.get("curricula")
+    if not isinstance(curricula, dict):
+        return "Invalid curricula"
+
+    for key in COURSE_KEYS:
+        course = curricula.get(key)
+        if not isinstance(course, dict):
+            return "Invalid course"
+
+        for field in ("kicker", "title", "summary", "videoId", "videoTitle"):
+            value = course.get(field, "")
+            if not isinstance(value, str) or len(value.strip()) > 600:
+                return f"Invalid course {field}"
+            course[field] = value.strip()
+
+        meta = course.get("meta", [])
+        if not isinstance(meta, list) or len(meta) > 8:
+            return "Invalid course meta"
+        cleaned_meta = []
+        for item in meta:
+            if not isinstance(item, list) or len(item) != 2:
+                return "Invalid course meta item"
+            label, value = item
+            if not isinstance(label, str) or not isinstance(value, str):
+                return "Invalid course meta text"
+            if len(label.strip()) > 40 or len(value.strip()) > 120:
+                return "Invalid course meta length"
+            cleaned_meta.append([label.strip(), value.strip()])
+        course["meta"] = cleaned_meta
+
+        rows = course.get("rows")
+        if not isinstance(rows, list) or len(rows) > 40:
+            return "Invalid course rows"
+        cleaned_rows = []
+        for row in rows:
+            if not isinstance(row, list) or len(row) != 4:
+                return "Invalid course row"
+            cleaned_row = []
+            for cell in row:
+                if not isinstance(cell, str) or len(cell.strip()) > 160:
+                    return "Invalid course row cell"
+                cleaned_row.append(cell.strip())
+            if any(cleaned_row):
+                cleaned_rows.append(cleaned_row)
+        course["rows"] = cleaned_rows
+
+        notes = course.get("notes", [])
+        if not isinstance(notes, list) or len(notes) > 12:
+            return "Invalid course notes"
+        cleaned_notes = []
+        for note in notes:
+            if not isinstance(note, str) or len(note.strip()) > 300:
+                return "Invalid course note"
+            if note.strip():
+                cleaned_notes.append(note.strip())
+        course["notes"] = cleaned_notes
+
     return None
 
 
