@@ -3,7 +3,8 @@
 <html class="dark" lang="ko"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Incheon Children's Observatory</title>
+<title>인천어린이천문대 | 어린이를 위한 천문 교육</title>
+<meta name="theme-color" content="#121212"/>
 <script>document.documentElement.classList.add("motion-ready");</script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -107,11 +108,22 @@
             }
         }
     </script>
-<style>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
         body {
             background-color: #121212;
             color: #e1e3e4;
             font-family: "Manrope", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        }
+        :where(a, button, input, select, textarea):focus-visible {
+            outline: 3px solid #D4AF37;
+            outline-offset: 3px;
+        }
+        .brand-name-short {
+            display: none;
         }
         .glass-panel {
             background: #151717;
@@ -142,10 +154,18 @@
         .mobile-footer-link .material-symbols-outlined {
             flex-shrink: 0;
         }
+        .mobile-action {
+            min-height: 44px;
+        }
         .mobile-footer-link > span:not(.material-symbols-outlined) {
             min-width: 0;
             word-break: keep-all;
             overflow-wrap: break-word;
+        }
+        .footer-quick-link {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
         }
         .motion-ready [data-reveal] {
             opacity: 0;
@@ -182,6 +202,53 @@
                 transform: none;
                 filter: none;
                 transition: none;
+            }
+        }
+        @media (max-width: 767px) {
+            .site-header-inner {
+                min-height: 64px;
+                padding-left: 14px !important;
+                padding-right: 14px !important;
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+            }
+            .site-brand-logo {
+                height: 28px !important;
+            }
+            .brand-name-full {
+                display: none;
+            }
+            .brand-name-short {
+                display: inline;
+            }
+            .mobile-nav-panel {
+                border-top: 1px solid #2a2d2d;
+                background: rgba(18, 18, 18, 0.98);
+                padding: 10px 14px 14px;
+            }
+            .mobile-nav-panel .nav-link {
+                display: flex;
+                min-height: 44px;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom-width: 0;
+                border-radius: 8px;
+                padding: 0 12px;
+            }
+            .mobile-nav-panel .nav-link.is-active {
+                background: rgba(212, 175, 55, 0.12);
+            }
+            .motion-ready [data-reveal] {
+                transition-duration: 460ms;
+            }
+            .motion-ready [data-reveal="zoom"] {
+                filter: none;
+            }
+            #osm-map .leaflet-control-zoom a {
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+                font-size: 20px;
             }
         }
         @media (max-width: 480px) {
@@ -230,16 +297,27 @@
 </head>
 <body class="antialiased font-body-md text-body-md selection:bg-starry-gold selection:text-midnight-deep bg-background">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-surface-variant">
-<div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
-<div class="flex items-center space-x-3">
-<img alt="Logo" class="w-8 h-8 object-contain grayscale" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
-<span class="font-headline-md text-lg md:text-xl font-bold text-on-surface tracking-wide whitespace-nowrap min-w-0">인천어린이천문대</span>
-</div>
+<nav class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-surface-variant" aria-label="주요 메뉴">
+<div class="site-header-inner flex justify-between items-center gap-3 px-gutter py-4 max-w-container-max mx-auto">
+<a class="flex min-w-0 items-center gap-2 md:gap-3" href="index.html" aria-label="인천어린이천문대 메인으로 이동">
+<img alt="어린이천문대 공식 로고" class="site-brand-logo h-8 w-auto shrink-0 object-contain md:h-10" src="assets/images/astrocamp-logo-color.png"/>
+<span class="brand-name-full font-headline-md text-xl font-bold text-on-surface tracking-wide whitespace-nowrap">인천어린이천문대</span>
+<span class="brand-name-short font-headline-md text-base font-bold text-on-surface whitespace-nowrap">인천</span>
+</a>
 <div class="hidden md:flex space-x-8">
 <a class="nav-link is-active font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#regular-course" data-nav-link>정규과정</a>
 <a class="nav-link font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#daily-experience" data-nav-link>일일체험</a>
 <a class="nav-link font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#observatory-info" data-nav-link>천문대 정보</a>
+</div>
+<button id="mobile-nav-toggle" class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-surface-variant text-on-surface md:hidden" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="메뉴 열기">
+<span class="material-symbols-outlined" aria-hidden="true">menu</span>
+</button>
+</div>
+<div id="mobile-nav" class="mobile-nav-panel hidden md:hidden">
+<div class="mx-auto grid max-w-container-max gap-1">
+<a class="nav-link is-active font-label-md text-label-md" href="#regular-course" data-nav-link>정규과정 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
+<a class="nav-link font-label-md text-label-md" href="#daily-experience" data-nav-link>일일체험 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
+<a class="nav-link font-label-md text-label-md" href="#observatory-info" data-nav-link>천문대 정보 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
 </nav>
@@ -252,7 +330,6 @@
 <p class="ko-copy mobile-body-copy font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl">프리미엄 우주 교육의 시작, 인천어린이천문대에서 우리 아이의 상상력을 키워주세요. 문제집 속 우주가 아니라, 아이가 직접 만나는 우주를 경험합니다.</p>
 </div>
 <div class="flex-1 w-full relative" data-reveal="right" data-reveal-delay="120">
-<div class="absolute -inset-4 bg-gradient-to-r from-starry-gold/20 to-surface-tint/20 blur-3xl opacity-30 rounded-full"></div>
 <img alt="인천어린이천문대 야간 관측소" class="relative rounded-[2rem] w-full object-cover shadow-2xl border border-surface-variant aspect-[4/3]" src="mainimg.webp"/>
 </div>
 </div>
@@ -392,7 +469,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
 <div class="lg:col-span-5 space-y-6" data-reveal="left">
 <div class="flex items-center space-x-3 mb-6">
-<img alt="Logo" class="w-10 h-10 object-contain grayscale opacity-80" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<img alt="어린이천문대 공식 로고" class="h-10 w-auto shrink-0 object-contain opacity-90" src="assets/images/astrocamp-logo-light.png"/>
 <span class="font-headline-md text-xl font-bold text-white tracking-wide whitespace-nowrap min-w-0">인천어린이천문대</span>
 </div>
 <p class="ko-copy text-on-surface-variant leading-relaxed text-sm">
@@ -444,9 +521,9 @@
 <div class="border-t border-surface-variant pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-on-surface-variant" data-reveal>
 <p>© 2024 Incheon Children's Observatory. All rights reserved.</p>
 <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-4 md:mt-0">
-<a class="ko-copy hover:text-starry-gold transition-colors" href="#">이용약관</a>
-<a class="ko-copy hover:text-starry-gold transition-colors" href="#">개인정보처리방침</a>
-<a class="ko-copy hover:text-starry-gold transition-colors" href="#">오시는 길</a>
+<a class="footer-quick-link ko-copy hover:text-starry-gold transition-colors" href="tel:0325673245">전화 문의</a>
+<a class="footer-quick-link ko-copy hover:text-starry-gold transition-colors" href="https://cafe.naver.com/astrocamp10" target="_blank" rel="noopener noreferrer">네이버 카페</a>
+<a class="footer-quick-link ko-copy hover:text-starry-gold transition-colors" href="https://naver.me/FvEIT76V" target="_blank" rel="noopener noreferrer">오시는 길</a>
 </div>
 </div>
 </div>
@@ -524,6 +601,8 @@ document.querySelectorAll("[data-naver-map-link]").forEach((link) => {
 });
 
 const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+const mobileNavToggle = document.getElementById("mobile-nav-toggle");
+const mobileNav = document.getElementById("mobile-nav");
 const navSections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -531,6 +610,21 @@ const navSections = navLinks
 function setActiveNav(sectionId) {
   navLinks.forEach((link) => {
     link.classList.toggle("is-active", link.getAttribute("href") === `#${sectionId}`);
+  });
+}
+
+function setMobileNavOpen(isOpen) {
+  if (!mobileNavToggle || !mobileNav) return;
+  mobileNav.classList.toggle("hidden", !isOpen);
+  mobileNavToggle.setAttribute("aria-expanded", String(isOpen));
+  mobileNavToggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+  const icon = mobileNavToggle.querySelector(".material-symbols-outlined");
+  if (icon) icon.textContent = isOpen ? "close" : "menu";
+}
+
+if (mobileNavToggle) {
+  mobileNavToggle.addEventListener("click", () => {
+    setMobileNavOpen(mobileNavToggle.getAttribute("aria-expanded") !== "true");
   });
 }
 
@@ -558,7 +652,12 @@ navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     const sectionId = link.getAttribute("href").slice(1);
     setActiveNav(sectionId);
+    setMobileNavOpen(false);
   });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setMobileNavOpen(false);
 });
 
 let navUpdateQueued = false;
@@ -570,7 +669,10 @@ window.addEventListener("scroll", () => {
     navUpdateQueued = false;
   });
 });
-window.addEventListener("resize", updateActiveNav);
+window.addEventListener("resize", () => {
+  updateActiveNav();
+  if (window.innerWidth >= 768) setMobileNavOpen(false);
+});
 window.addEventListener("hashchange", updateActiveNav);
 updateActiveNav();
 

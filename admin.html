@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>관리자 페이지 - 인천어린이천문대</title>
+<meta name="theme-color" content="#ffffff"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -25,10 +26,28 @@
   };
 </script>
 <style>
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     background: #f7f8fb;
     color: #111827;
+    overflow-x: hidden;
     font-family: "Hanken Grotesk", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  }
+
+  :where(a, button, input, select, textarea):focus-visible {
+    outline: 3px solid #ffc300;
+    outline-offset: 3px;
+  }
+
+  .brand-name-short {
+    display: none;
+  }
+
+  .touch-target {
+    min-height: 44px;
   }
 
   .admin-card {
@@ -96,10 +115,27 @@
   }
 
   @media (max-width: 430px) {
+    .admin-header-inner {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+    }
+
+    .admin-brand-logo {
+      height: 27px !important;
+    }
+
+    .admin-brand-name-full {
+      display: none;
+    }
+
+    .brand-name-short {
+      display: inline;
+    }
+
     .slot-toggle {
-      min-height: 28px;
-      font-size: 10px;
-      line-height: 1;
+      min-height: 40px;
+      font-size: 11px;
+      line-height: 1.1;
     }
 
     #admin-schedule {
@@ -119,12 +155,13 @@
 </head>
 <body class="font-body antialiased">
 <header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-gray-200">
-<div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6">
+<div class="admin-header-inner mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:h-20 sm:gap-3 sm:px-6">
 <a class="flex min-w-0 items-center gap-2 sm:gap-3" href="curriculum.html">
-<img alt="Logo" class="h-7 w-7 shrink-0 object-contain grayscale sm:h-8 sm:w-8" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
-<span class="whitespace-nowrap font-headline text-base font-bold text-black sm:text-lg md:text-xl">관리자 페이지</span>
+<img alt="어린이천문대 공식 로고" class="admin-brand-logo h-7 w-auto shrink-0 object-contain sm:h-8" src="assets/images/astrocamp-logo-color.png"/>
+<span class="admin-brand-name-full whitespace-nowrap font-headline text-base font-bold text-black sm:text-lg md:text-xl">관리자 페이지</span>
+<span class="brand-name-short whitespace-nowrap font-headline text-sm font-bold text-black">관리자</span>
 </a>
-<a class="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gray-200 px-3 py-2 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:gap-2 sm:px-4 sm:text-sm" href="curriculum.html">
+<a class="touch-target inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-gray-200 px-3 py-2 text-xs font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:gap-2 sm:px-4 sm:text-sm" href="curriculum.html">
 커리큘럼 보기 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
 </a>
 </div>
@@ -169,7 +206,7 @@
 <span class="slot-toggle is-wait px-2.5 sm:px-3">대기</span>
 </div>
 </div>
-<div class="overflow-x-auto pb-2">
+<div class="overflow-x-auto pb-2" tabindex="0" aria-label="상담 가능 시간표 편집">
 <div id="admin-schedule" class="min-w-[540px] space-y-3 sm:min-w-[700px]"></div>
 </div>
 <p id="save-message" class="korean-copy mt-4 hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]">저장되었습니다. 커리큘럼 페이지를 새로고침하면 반영됩니다.</p>
@@ -207,7 +244,7 @@
 <span class="mb-2 block text-sm font-bold text-gray-700">과정 설명</span>
 <textarea id="course-summary" class="korean-copy min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm leading-6 focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" rows="3" maxlength="600"></textarea>
 </label>
-<div class="mt-4 overflow-x-auto pb-2">
+<div class="mt-4 overflow-x-auto pb-2" tabindex="0" aria-label="과정별 수업 주제 편집 표">
 <div id="course-row-editor" class="min-w-[680px] space-y-2"></div>
 </div>
 <div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

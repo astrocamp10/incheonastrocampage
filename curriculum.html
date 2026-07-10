@@ -5,9 +5,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="referrer" content="strict-origin-when-cross-origin"/>
 <title>정규 과정 커리큘럼 - 인천어린이천문대</title>
+<meta name="theme-color" content="#ffffff"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script>document.documentElement.classList.add("motion-ready");</script>
 <script id="tailwind-config">
@@ -173,6 +173,10 @@
   }
 </script>
 <style>
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
         body {
             background-color: #f7f8fb;
             color: #111827;
@@ -183,6 +187,19 @@
         .ko-keep {
             word-break: keep-all;
             overflow-wrap: break-word;
+        }
+
+        :where(a, button, input, select, textarea, summary):focus-visible {
+            outline: 3px solid #d4af37;
+            outline-offset: 3px;
+        }
+
+        .brand-name-short {
+            display: none;
+        }
+
+        .touch-target {
+            min-height: 44px;
         }
         
         .star-field {
@@ -296,6 +313,40 @@
             display: inline;
         }
 
+        #tuition-member-count {
+            min-height: 48px;
+            cursor: pointer;
+        }
+
+        .faq-item > summary {
+            display: flex;
+            min-height: 60px;
+            cursor: pointer;
+            list-style: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .faq-item > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-toggle-icon {
+            flex: none;
+            transition: transform 180ms ease;
+        }
+
+        .faq-item[open] .faq-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem 1.25rem 1.25rem;
+        }
+
         @media (min-width: 1024px) {
             .course-modal-media-column {
                 padding-top: 2rem;
@@ -303,6 +354,24 @@
         }
 
         @media (max-width: 640px) {
+            .subpage-header-inner {
+                height: 64px !important;
+                padding-left: 12px !important;
+                padding-right: 12px !important;
+            }
+
+            .subpage-brand-logo {
+                height: 28px !important;
+            }
+
+            .brand-name-full {
+                display: none;
+            }
+
+            .brand-name-short {
+                display: inline;
+            }
+
             main .font-display-lg {
                 font-size: 26px !important;
                 line-height: 1.22 !important;
@@ -355,7 +424,7 @@
             }
 
             main .course-meta-card {
-                min-height: 78px;
+                min-height: 82px;
                 flex-direction: column;
                 justify-content: center;
                 gap: 0;
@@ -365,13 +434,13 @@
 
             main .course-meta-label {
                 margin-bottom: 0.25rem;
-                font-size: 10px !important;
+                font-size: 11px !important;
                 line-height: 1.15 !important;
             }
 
             main .course-meta-value {
-                font-size: 11px !important;
-                line-height: 1.28 !important;
+                font-size: 12px !important;
+                line-height: 1.3 !important;
                 word-break: keep-all;
                 overflow-wrap: anywhere;
                 text-align: center;
@@ -393,14 +462,35 @@
                 letter-spacing: 0;
                 font-variant-numeric: tabular-nums;
             }
+
+            .faq-item > summary {
+                min-height: 56px;
+                padding: 0.9rem 1rem;
+            }
+
+            .faq-answer {
+                padding: 0.9rem 1rem 1rem;
+            }
+
+            .motion-ready [data-reveal] {
+                transition-duration: 460ms;
+            }
+
+            .motion-ready [data-reveal="zoom"] {
+                filter: none;
+            }
         }
 
         @media (max-width: 430px) {
             .time-slot-badge {
                 min-width: 54px;
-                min-height: 22px;
-                padding: 0.22rem 0.38rem;
-                font-size: 10px;
+                min-height: 32px;
+                padding: 0.3rem 0.42rem;
+                font-size: 11px;
+            }
+
+            .touch-target.time-slot-badge {
+                min-height: 44px;
             }
 
             #availability-table {
@@ -540,17 +630,18 @@
 <div class="star-field"></div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
-<div class="flex justify-between items-center gap-3 h-20 px-gutter max-w-container-max mx-auto">
+<div class="subpage-header-inner flex justify-between items-center gap-3 h-20 px-gutter max-w-container-max mx-auto">
 <a class="flex min-w-0 items-center space-x-2 sm:space-x-3" href="index.html">
-<img alt="Logo" class="w-8 h-8 object-contain grayscale" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
-<span class="font-headline-md text-base md:text-xl font-bold text-black tracking-normal leading-tight ko-keep min-w-0">인천어린이천문대</span>
+<img alt="어린이천문대 공식 로고" class="subpage-brand-logo h-8 w-auto shrink-0 object-contain md:h-10" src="assets/images/astrocamp-logo-color.png"/>
+<span class="brand-name-full font-headline-md text-base md:text-xl font-bold text-black tracking-normal leading-tight ko-keep whitespace-nowrap">인천어린이천문대</span>
+<span class="brand-name-short font-headline-md text-sm font-bold text-black whitespace-nowrap">인천</span>
 </a>
-<a class="inline-flex shrink-0 items-center justify-center whitespace-nowrap bg-starry-gold text-midnight-deep px-3 sm:px-4 md:px-6 py-2 rounded-full font-label-md text-xs md:text-label-md leading-none hover:opacity-90 active:scale-95 duration-200" href="index.html">
+<a class="touch-target inline-flex shrink-0 items-center justify-center whitespace-nowrap bg-starry-gold text-midnight-deep px-3 sm:px-4 md:px-6 py-2 rounded-full font-label-md text-xs md:text-label-md leading-none hover:opacity-90 active:scale-95 duration-200" href="index.html">
                 메인 페이지로
             </a>
 </div>
 </nav>
-<main class="pt-40 md:pt-44 pb-section-gap-mobile md:pb-section-gap">
+<main class="pt-32 md:pt-44 pb-section-gap-mobile md:pb-section-gap">
 <!-- Hero Section -->
 <section class="px-gutter max-w-container-max mx-auto text-center mb-section-gap-mobile md:mb-section-gap" data-reveal="zoom">
 <h1 class="font-display-lg text-[28px] sm:text-display-lg-mobile md:text-display-lg leading-tight md:leading-[1.2] text-on-surface mb-6 max-w-3xl mx-auto ko-keep">인천어린이천문대 정규 과정 커리큘럼</h1>
@@ -598,7 +689,7 @@
 <!-- Timeline & Course Cards -->
 <section class="px-gutter max-w-container-max mx-auto relative pb-section-gap-mobile md:pb-section-gap">
 <div class="timeline-line hidden md:block" data-reveal="line"></div>
-<div class="space-y-24 relative z-10">
+<div class="space-y-14 md:space-y-24 relative z-10">
 <!-- Stage 1 -->
 <div class="flex flex-col md:flex-row items-center justify-between gap-8">
 <div class="w-full md:w-5/12 text-right" data-reveal="left">
@@ -627,7 +718,7 @@
 <span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">계절별 대표 천체를 관측하며 하늘을 스스로 찾아보는 습관을 만듭니다.</span>
                                 </li>
 </ul>
-<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="starter" aria-controls="course-modal" aria-expanded="false">
+<button class="touch-target mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="starter" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -661,7 +752,7 @@
 <span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">계절별 별자리와 관측 천체를 보며 우주 개념을 실제 하늘과 연결합니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
 </li>
 </ul>
-<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="experience" aria-controls="course-modal" aria-expanded="false">
+<button class="touch-target mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="experience" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -695,7 +786,7 @@
 <span class="text-nebular-violet shrink-0">✦</span><span class="min-w-0">망원경 조작과 천체 구별 실습으로 관측 능력을 한 단계 끌어올립니다.</span>
                                 </li>
 </ul>
-<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="inquiry" aria-controls="course-modal" aria-expanded="false">
+<button class="touch-target mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="inquiry" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -729,7 +820,7 @@
 <span class="text-nebular-violet md:hidden shrink-0">✦</span><span class="min-w-0">탐구과정 이후 아이가 스스로 질문하고 해석하는 힘을 키웁니다.</span> <span class="text-nebular-violet hidden md:inline shrink-0">✦</span>
 </li>
 </ul>
-<button class="mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="theme" aria-controls="course-modal" aria-expanded="false">
+<button class="touch-target mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep shadow-sm hover:bg-black hover:text-white transition-colors" type="button" data-course-trigger="theme" aria-controls="course-modal" aria-expanded="false">
                                 자세히 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">arrow_forward</span>
 </button>
 </div>
@@ -738,15 +829,15 @@
 </div>
 </section>
 <!-- Course Detail Modal -->
-<div id="course-modal" class="hidden fixed inset-0 z-[100] px-3 sm:px-4 py-5 md:py-10" role="dialog" aria-modal="true" aria-labelledby="course-modal-title">
+<div id="course-modal" class="hidden fixed inset-0 z-[100] px-2 py-3 sm:px-4 sm:py-5 md:py-10" role="dialog" aria-modal="true" aria-labelledby="course-modal-title">
 <div id="course-modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-<div id="course-modal-panel" class="relative mx-auto max-w-5xl max-h-[90vh] overflow-y-auto glass-panel rounded-lg md:rounded-xl">
+<div id="course-modal-panel" class="relative mx-auto max-w-5xl max-h-[calc(100dvh-1.5rem)] md:max-h-[90vh] overflow-y-auto glass-panel rounded-lg md:rounded-xl">
 <div class="sticky top-0 z-10 relative border-b border-gray-200 bg-white/95 px-14 py-3 md:px-16 md:py-4 backdrop-blur text-center">
 <div class="min-w-0">
 <span id="course-modal-kicker" class="course-modal-kicker-text block text-starry-gold whitespace-nowrap mb-1.5"></span>
 <h2 id="course-modal-title" class="course-modal-title-text text-black ko-keep"></h2>
 </div>
-<button id="course-modal-close" class="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full border border-gray-300 text-black hover:bg-gray-100 transition-colors flex items-center justify-center" type="button" aria-label="팝업 닫기">
+<button id="course-modal-close" class="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 w-11 h-11 shrink-0 rounded-full border border-gray-300 text-black hover:bg-gray-100 transition-colors flex items-center justify-center" type="button" aria-label="팝업 닫기">
 <span class="material-symbols-outlined" style="font-size: 22px;">close</span>
 </button>
 </div>
@@ -758,7 +849,7 @@
 <iframe id="course-modal-video" class="absolute inset-0 w-full h-full" title="" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 </div>
-<a id="course-modal-youtube-link" class="mt-3 inline-flex items-center gap-2 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" href="#" target="_blank" rel="noopener noreferrer">
+<a id="course-modal-youtube-link" class="touch-target mt-2 inline-flex items-center gap-2 text-starry-gold font-label-md text-sm md:text-label-md leading-none whitespace-nowrap hover:text-black transition-colors" href="#" target="_blank" rel="noopener noreferrer">
 유튜브에서 보기 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">open_in_new</span>
 </a>
 </div>
@@ -767,7 +858,7 @@
 <div id="course-modal-meta" class="grid grid-cols-3 lg:grid-cols-1 gap-2 md:gap-3 lg:gap-4"></div>
 </div>
 </div>
-<div class="overflow-x-auto rounded-xl border border-gray-300 bg-white">
+<div class="overflow-x-auto rounded-xl border border-gray-300 bg-white" tabindex="0" aria-label="과정별 월간 커리큘럼 표">
 <table class="course-modal-table w-full min-w-[760px] text-left">
 <thead class="bg-gray-50 border-b border-gray-300">
 <tr>
@@ -815,7 +906,7 @@
 </ul>
 <div class="mt-6 rounded-xl bg-white border border-gray-200 p-4">
 <p class="font-headline-md text-lg leading-snug text-black mb-2 ko-keep">상담 및 접수</p>
-<a class="font-headline-md text-xl text-starry-gold hover:text-black transition-colors whitespace-nowrap" href="tel:0325673245">032-567-3245</a>
+<a class="touch-target inline-flex items-center font-headline-md text-xl text-starry-gold hover:text-black transition-colors whitespace-nowrap" href="tel:0325673245">032-567-3245</a>
 <p class="font-body-md text-sm md:text-lg text-on-surface-variant mt-3 leading-relaxed ko-keep">아래 시간표를 기준으로 희망 타임을 상담해 주세요. 실제 개설 가능 여부는 상담 시 최종 안내드립니다.</p>
 <a class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-starry-gold px-4 md:px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep hover:bg-black hover:text-white transition-colors" href="tel:0325673245">
 전화 상담 연결 <span class="material-symbols-outlined shrink-0" style="font-size: 16px;">call</span>
@@ -826,11 +917,11 @@
 <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
 <h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep min-w-0">수업 시간표</h3>
 <div class="flex shrink-0 items-center gap-2 text-xs">
-<span class="time-slot-badge time-slot-open">상담가능</span>
-<a class="time-slot-badge time-slot-wait cursor-pointer hover:border-starry-gold hover:text-starry-gold transition-colors" href="admin.html" aria-label="정규반 대기 관리 페이지로 이동">대기</a>
+<span class="touch-target time-slot-badge time-slot-open">상담가능</span>
+<a class="touch-target time-slot-badge time-slot-wait cursor-pointer hover:border-starry-gold hover:text-starry-gold transition-colors" href="admin.html" aria-label="정규반 대기 관리 페이지로 이동">대기</a>
 </div>
 </div>
-<div class="overflow-x-auto pb-2">
+<div class="overflow-x-auto pb-2" tabindex="0" aria-label="정규반 수업 시간표">
 <div id="availability-table" class="min-w-[540px] sm:min-w-[660px] space-y-3">
 <div class="rounded-xl border border-gray-200 overflow-hidden">
 <div class="grid grid-cols-[72px_repeat(5,1fr)] text-center text-sm">
@@ -938,41 +1029,66 @@
 <h2 class="font-headline-lg text-[26px] sm:text-headline-lg-mobile md:text-headline-lg leading-tight text-on-surface mb-3 ko-keep">정규반 상담 전 확인해 주세요</h2>
 <p class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed ko-keep">팀 구성, 수업료, 시작 시기처럼 상담 전에 많이 물어보는 내용을 정리했습니다.</p>
 </div>
-<div class="space-y-4">
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 정규교실은 꼭 12명이 모여야 시작할 수 있나요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 최대로 구성할 수 있는 인원이 10~12명이고 과정별로 상이합니다. 최소 인원은 정해져 있지 않기 때문에 적정 인원이 모이면 시작할 수 있습니다. 진행하면서 정원이 넘지 않게 인원을 충원하셔도 됩니다. 수업료는 인원수에 따라 1/n이 되는 구조입니다.</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 팀은 직접 구성해야 하나요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 팀은 직접 만들어 주셔야 합니다. 천문대는 학원이 아니기 때문에 구성되어 있는 반에 들어갈 수 있는 시스템이 아닙니다. 수업료도 1팀의 인원수에 따라 변동되기 때문에 직접 적정 인원을 모아주셔야 합니다. 기존반 중에는 인원 미달이어도 소수정예로 수업받길 원하는 팀도 있어 임의로 합류시킬 수 없습니다.</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업료 결제 방법은요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">최소 분기 단위, 3개월 선납입니다. 매 납부 분기 수업일의 2주 전까지 대표 어머니께서 모아서 계좌이체 해주시면 됩니다.</p>
+<div class="space-y-3">
+<details class="faq-item rounded-xl border border-gray-200 bg-white" open>
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 정규교실은 꼭 12명이 모여야 시작할 수 있나요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer"><p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 최대로 구성할 수 있는 인원이 10~12명이고 과정별로 상이합니다. 최소 인원은 정해져 있지 않기 때문에 적정 인원이 모이면 시작할 수 있습니다. 진행하면서 정원이 넘지 않게 인원을 충원하셔도 됩니다. 수업료는 인원수에 따라 1/n이 되는 구조입니다.</p></div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 팀은 직접 구성해야 하나요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer"><p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 팀은 직접 만들어 주셔야 합니다. 천문대는 학원이 아니기 때문에 구성되어 있는 반에 들어갈 수 있는 시스템이 아닙니다. 수업료도 1팀의 인원수에 따라 변동되기 때문에 직접 적정 인원을 모아주셔야 합니다. 기존반 중에는 인원 미달이어도 소수정예로 수업받길 원하는 팀도 있어 임의로 합류시킬 수 없습니다.</p></div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 수업료 결제 방법은요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer">
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">최소 분기 단위, 3개월 선납입니다. 매 납부 분기 수업일의 2주 전까지 대표 어머니께서 모아서 계좌이체 해주시면 됩니다.</p>
 <p class="mt-2 font-body-md text-sm md:text-body-md leading-relaxed text-black ko-keep">신한은행 140-012-303300 (주)인천어린이천문대</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업료, 교재비 외에 발생하는 비용이 있나요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">없습니다. 재료비, 활동비 등 별도 비용은 발생하지 않습니다.</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 현금영수증 발행되나요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 납부하신 수업료분에 대해 개개인별로 발행해드립니다.</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 수업은 꼭 1월에 시작해야 하나요?</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 매월 수업 주제가 정해져 있기 때문에 수업을 시작한 해당 월의 주제로 수업이 진행됩니다. 예를 들어 4월에 등록하면 정해진 4월 수업 주제부터 시작하며, 이 반은 4월부터 내년 3월까지 12회 수업에 참여하게 됩니다.</p>
-</article>
-<article class="rounded-xl border border-gray-200 bg-white p-4 sm:p-5 md:p-6">
-<h3 class="font-headline-md text-lg md:text-xl leading-snug text-black ko-keep">Q. 팀을 구성하기가 어려워요.</h3>
-<p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">정규교실은 마음에 맞는 주변 친구들과 함께 재미있고 즐겁게 참여하는 수업을 지향합니다. 팀 구성이 조금 어렵지만, 모집 단계만 지나면 대한민국 어린이의 1%만 경험하는 특별한 수업을 끈끈하게 지속할 수 있습니다.</p>
+</div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 수업료, 교재비 외에 발생하는 비용이 있나요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer"><p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">없습니다. 재료비, 활동비 등 별도 비용은 발생하지 않습니다.</p></div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 현금영수증 발행되나요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer"><p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">네, 납부하신 수업료분에 대해 개개인별로 발행해드립니다.</p></div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 수업은 꼭 1월에 시작해야 하나요?</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer"><p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">아닙니다. 매월 수업 주제가 정해져 있기 때문에 수업을 시작한 해당 월의 주제로 수업이 진행됩니다. 예를 들어 4월에 등록하면 정해진 4월 수업 주제부터 시작하며, 이 반은 4월부터 내년 3월까지 12회 수업에 참여하게 됩니다.</p></div>
+</details>
+<details class="faq-item rounded-xl border border-gray-200 bg-white">
+<summary>
+<span class="font-headline-md text-base md:text-xl leading-snug text-black ko-keep">Q. 팀을 구성하기가 어려워요.</span>
+<span class="faq-toggle-icon material-symbols-outlined text-starry-gold" aria-hidden="true">expand_more</span>
+</summary>
+<div class="faq-answer">
+<p class="font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">정규교실은 마음에 맞는 주변 친구들과 함께 재미있고 즐겁게 참여하는 수업을 지향합니다. 팀 구성이 조금 어렵지만, 모집 단계만 지나면 대한민국 어린이의 1%만 경험하는 특별한 수업을 끈끈하게 지속할 수 있습니다.</p>
 <p class="mt-3 font-body-md text-sm md:text-body-md leading-relaxed text-on-surface-variant ko-keep">정규반 팀원 충원 게시판은 진행 중인 정규반 팀에서 인원을 충원할 때 글을 올리는 곳이니 활용해 주세요.</p>
-<a class="mt-5 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep hover:bg-black hover:text-white transition-colors" href="https://cafe.naver.com/astrocamp10/116" target="_blank" rel="noopener">
+<a class="touch-target mt-5 inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-starry-gold px-5 py-3 font-label-md text-sm md:text-label-md leading-none whitespace-nowrap text-midnight-deep hover:bg-black hover:text-white transition-colors" href="https://cafe.naver.com/astrocamp10/116" target="_blank" rel="noopener noreferrer">
 정규반 팀원 충원해요 바로가기
 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
 </a>
-</article>
+</div>
+</details>
 </div>
 </div>
 </section>
@@ -1048,16 +1164,16 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter max-w-container-max mx-auto">
 <div>
 <a class="flex items-center space-x-3 mb-4" href="index.html">
-<img alt="Logo" class="w-10 h-10 object-contain grayscale opacity-80" src="https://lh3.googleusercontent.com/aida/AP1WRLsILd0ib3fdRsyqpp38B-nGqKJg9tCjNlYnUly1fs-iB5HhDEsdLFYHd1kpAxZQhp2_sFu0sUi28XEUjruj1UKUrVry8AYJdAeEuQJsFtXJUM8KoKEkJ3JXRxcOy_oH2o-p9BIsXRFwl0URG8NSAXo39eIruuyuPaYkRhImcF0ItXDBAVB4hMIFauMzW4KDhrhdpNiudNU_FSDYHeCIH486xPg6oHHPUjlKWjAbTyow24VFZQ2zywRQIg"/>
+<img alt="어린이천문대 공식 로고" class="h-10 w-auto shrink-0 object-contain" src="assets/images/astrocamp-logo-color.png"/>
 <span class="font-headline-md text-xl font-bold text-black tracking-wide">인천어린이천문대</span>
 </a>
 <p class="font-caption text-caption text-on-surface-variant mb-4">© 2024 Incheon Children's Observatory. All rights reserved.</p>
 </div>
 <div class="flex flex-wrap gap-6 md:justify-end">
-<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">032-567-3245</a>
-<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">인천 서구 원당대로 454-14</a>
-<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">Naver Cafe</a>
-<a class="font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="#">Instagram</a>
+<a class="touch-target inline-flex items-center font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="tel:0325673245">032-567-3245</a>
+<a class="touch-target inline-flex items-center font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="https://naver.me/FvEIT76V" target="_blank" rel="noopener noreferrer">인천 서구 원당대로 454-14</a>
+<a class="touch-target inline-flex items-center font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="https://cafe.naver.com/astrocamp10" target="_blank" rel="noopener noreferrer">Naver Cafe</a>
+<a class="touch-target inline-flex items-center font-caption text-caption text-on-surface-variant hover:text-starry-gold transition-colors opacity-80 hover:opacity-100" href="https://www.instagram.com/astrocamp_incheon/" target="_blank" rel="noopener noreferrer">Instagram</a>
 </div>
 </div>
 </footer>
