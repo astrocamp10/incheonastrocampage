@@ -29,6 +29,14 @@ if (!is_array($schedule) || !isset($schedule['events']) || !is_array($schedule['
     exit;
 }
 
+if (!array_key_exists('mainNoticeEnabled', $schedule)) {
+    $schedule['mainNoticeEnabled'] = true;
+} elseif (!is_bool($schedule['mainNoticeEnabled'])) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Invalid main notice setting'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 $allowedStatuses = ['open', 'wait', 'closed'];
 
 foreach ($schedule['events'] as &$event) {

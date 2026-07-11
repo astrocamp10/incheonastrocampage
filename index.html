@@ -454,6 +454,12 @@
 </div>
 </div>
 </div>
+<div id="daily-experience-notice" class="hidden mt-8 rounded-2xl border border-starry-gold/30 bg-starry-gold/10 px-5 py-4 text-center" role="status" aria-live="polite" data-reveal>
+<p class="ko-copy flex items-center justify-center gap-2 text-sm font-bold leading-6 text-starry-gold sm:text-base">
+<span class="material-symbols-outlined shrink-0" aria-hidden="true">info</span>
+<span>현재 신청 가능한 일일체험이 없습니다.</span>
+</p>
+</div>
 <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4" data-reveal data-reveal-delay="160">
 <a class="mobile-action w-full sm:w-auto bg-surface-container-high border border-surface-variant text-starry-gold px-8 py-3 rounded-full font-bold font-label-md text-label-md hover:bg-starry-gold hover:text-midnight-deep transition-colors flex items-center justify-center gap-1.5 group/btn shadow-sm uppercase tracking-widest" href="daily-experience.html">
                         일일체험 일정 확인 <span class="material-symbols-outlined ml-1.5 text-sm group-hover/btn:translate-x-1 transition-transform">calendar_month</span>
@@ -528,8 +534,36 @@
 </div>
 </div>
 </footer>
+<script src="experience-data.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+const experienceStorageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
+const experienceDataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
+const dailyExperienceNotice = document.getElementById("daily-experience-notice");
+
+async function updateDailyExperienceNotice() {
+  if (!dailyExperienceNotice) return;
+
+  let enabled = window.INCHEON_ASTRO_DEFAULT_EXPERIENCE?.mainNoticeEnabled === true;
+
+  try {
+    const response = await fetch(`${experienceDataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      const data = await response.json();
+      if (typeof data?.mainNoticeEnabled === "boolean") enabled = data.mainNoticeEnabled;
+    }
+  } catch (error) {
+  }
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(experienceStorageKey) || "null");
+    if (typeof saved?.mainNoticeEnabled === "boolean") enabled = saved.mainNoticeEnabled;
+  } catch (error) {
+  }
+
+  dailyExperienceNotice.classList.toggle("hidden", !enabled);
+}
+
 const observatoryPlace = {
   name: "인천어린이천문대",
   address: "인천광역시 서구 원당대로 454-14",
@@ -675,6 +709,7 @@ window.addEventListener("resize", () => {
 });
 window.addEventListener("hashchange", updateActiveNav);
 updateActiveNav();
+updateDailyExperienceNotice();
 
 const revealTargets = Array.from(document.querySelectorAll("[data-reveal]"));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -95,6 +95,12 @@ def validate_experience(schedule):
     if not isinstance(schedule, dict):
         return "Invalid schedule"
 
+    notice_enabled = schedule.get("mainNoticeEnabled")
+    if notice_enabled is None:
+        schedule["mainNoticeEnabled"] = True
+    elif not isinstance(notice_enabled, bool):
+        return "Invalid main notice setting"
+
     events = schedule.get("events")
     if not isinstance(events, list):
         return "Invalid events"

@@ -247,10 +247,6 @@
 <div class="mt-4 overflow-x-auto pb-2" tabindex="0" aria-label="과정별 수업 주제 편집 표">
 <div id="course-row-editor" class="min-w-[680px] space-y-2"></div>
 </div>
-<div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-<p class="korean-copy text-sm leading-6 text-gray-600">관측 천체는 고정값으로 유지됩니다. 관리자에서는 월, 수업 주제, 실습/만들기만 수정합니다.</p>
-<button id="course-add-row-button" class="whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors" type="button">행 추가</button>
-</div>
 </div>
 
 <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
@@ -272,6 +268,21 @@
 <a class="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-auto sm:px-5" href="daily-experience.html" target="_blank" rel="noopener">
 달력 보기 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
 </a>
+</div>
+</div>
+
+<div class="admin-card rounded-xl p-5 sm:p-6">
+<div class="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+<div class="min-w-0">
+<h3 class="font-headline text-lg font-bold leading-tight text-black sm:text-xl">메인페이지 모집 안내</h3>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600">안내를 켜도 일일체험 달력과 등록된 일정은 그대로 유지됩니다.</p>
+<p id="experience-notice-state" class="korean-copy mt-2 text-sm font-bold leading-6 text-[#917a00]" aria-live="polite"></p>
+</div>
+<label class="inline-flex min-h-11 shrink-0 cursor-pointer items-center justify-between gap-3 rounded-full border border-gray-200 bg-gray-50 px-4 py-2.5 sm:justify-start">
+<span class="whitespace-nowrap text-sm font-bold text-gray-700">안내 표시</span>
+<input id="experience-notice-toggle" class="peer sr-only" type="checkbox" role="switch"/>
+<span class="relative h-7 w-12 shrink-0 rounded-full bg-gray-300 transition-colors after:absolute after:left-1 after:top-1 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow-sm after:transition-transform peer-checked:bg-starry-gold peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-starry-gold peer-focus-visible:ring-offset-2" aria-hidden="true"></span>
+</label>
 </div>
 </div>
 
@@ -312,7 +323,6 @@
 <div class="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
 <div class="min-w-0">
 <h3 class="font-headline text-lg font-bold leading-tight text-black sm:text-xl">등록된 일정</h3>
-<p class="korean-copy mt-1 text-sm leading-6 text-gray-600">상태 변경은 각 일정의 선택 메뉴에서 바꿀 수 있습니다.</p>
 </div>
 <button id="experience-copy-button" class="w-full whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-fit sm:px-5" type="button">일정 DATA 저장</button>
 </div>
@@ -348,6 +358,8 @@ const experienceMemo = document.getElementById("experience-memo");
 const experienceList = document.getElementById("experience-list");
 const experienceCopyButton = document.getElementById("experience-copy-button");
 const experienceSaveMessage = document.getElementById("experience-save-message");
+const experienceNoticeToggle = document.getElementById("experience-notice-toggle");
+const experienceNoticeState = document.getElementById("experience-notice-state");
 const experienceStorageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
 const experienceDataUrl = window.INCHEON_ASTRO_EXPERIENCE_DATA_URL || "experience.data";
 const experienceSaveUrl = window.INCHEON_ASTRO_EXPERIENCE_SAVE_URL || "save-experience.php";
@@ -358,7 +370,6 @@ const courseMaterialNote = document.getElementById("course-material-note");
 const courseTabList = document.getElementById("course-tab-list");
 const courseSummary = document.getElementById("course-summary");
 const courseRowEditor = document.getElementById("course-row-editor");
-const courseAddRowButton = document.getElementById("course-add-row-button");
 const courseCopyButton = document.getElementById("course-copy-button");
 const courseSaveMessage = document.getElementById("course-save-message");
 const courseStorageKey = window.INCHEON_ASTRO_COURSE_KEY;
@@ -432,7 +443,11 @@ async function loadSchedule() {
 
 function normalizeExperienceSchedule(data) {
   const events = Array.isArray(data?.events) ? data.events : [];
+  const defaultNoticeEnabled = window.INCHEON_ASTRO_DEFAULT_EXPERIENCE?.mainNoticeEnabled === true;
   return {
+    mainNoticeEnabled: typeof data?.mainNoticeEnabled === "boolean"
+      ? data.mainNoticeEnabled
+      : defaultNoticeEnabled,
     events: events
       .filter((event) => {
         return event
@@ -686,8 +701,17 @@ async function showAdmin() {
   experienceSchedule = await loadExperienceSchedule();
   courseSchedule = await loadCourseSchedule();
   renderSchedule();
+  renderExperienceNoticeControl();
   renderExperienceList();
   renderCourseEditor();
+}
+
+function renderExperienceNoticeControl() {
+  const enabled = experienceSchedule.mainNoticeEnabled === true;
+  experienceNoticeToggle.checked = enabled;
+  experienceNoticeState.textContent = enabled
+    ? "현재 메인페이지에 '현재 신청 가능한 일일체험이 없습니다.' 안내가 표시됩니다."
+    : "현재 메인페이지에서 모집 안내를 숨기고 있습니다.";
 }
 
 function renderSchedule() {
@@ -794,19 +818,17 @@ function renderCourseTabs() {
 function renderCourseRowsEditor() {
   const activeCourse = courseSchedule.curricula[activeCourseKey];
   courseRowEditor.innerHTML = `
-    <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)_64px] gap-2 px-1 text-xs font-bold text-gray-500">
+    <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)] gap-2 px-1 text-xs font-bold text-gray-500">
       <div>월</div>
       <div>수업 주제</div>
       <div>실습 / 만들기</div>
-      <div></div>
     </div>
     ${activeCourse.rows.map((row, rowIndex) => `
-      <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)_64px] gap-2" data-course-row="${rowIndex}">
+      <div class="grid grid-cols-[86px_minmax(230px,1fr)_minmax(230px,1fr)] gap-2" data-course-row="${rowIndex}">
         <input class="rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="month" value="${escapeHTML(row[0] || "")}" placeholder="1월"/>
         <input class="korean-copy rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="topic" value="${escapeHTML(row[1] || "")}" placeholder="수업 주제"/>
         <input type="hidden" data-course-cell="observation" value="${escapeHTML(row[2] || "")}"/>
         <input class="korean-copy rounded-xl border-gray-300 px-3 py-2 text-sm focus:border-starry-gold focus:ring-starry-gold" data-course-cell="activity" value="${escapeHTML(row[3] || "")}" placeholder="실습 / 만들기"/>
-        <button class="rounded-xl border border-red-200 px-2 py-2 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors" type="button" data-delete-course-row="${rowIndex}">삭제</button>
       </div>
     `).join("")}
   `;
@@ -847,6 +869,13 @@ scheduleNode.addEventListener("click", (event) => {
   schedule.weeks[weekIndex].slots[time][dayIndex] = current === "open" ? "wait" : "open";
   renderSchedule();
   saveSchedule();
+});
+
+experienceNoticeToggle.addEventListener("change", () => {
+  experienceSchedule.mainNoticeEnabled = experienceNoticeToggle.checked;
+  experienceSchedule = normalizeExperienceSchedule(experienceSchedule);
+  renderExperienceNoticeControl();
+  saveExperienceSchedule();
 });
 
 experienceForm.addEventListener("submit", (event) => {
@@ -896,21 +925,6 @@ courseTabList.addEventListener("click", (event) => {
   if (!button) return;
   collectCourseEditor();
   activeCourseKey = button.dataset.courseTab;
-  renderCourseEditor();
-});
-
-courseAddRowButton.addEventListener("click", () => {
-  collectCourseEditor();
-  courseSchedule.curricula[activeCourseKey].rows.push(["", "", "-", ""]);
-  renderCourseEditor();
-});
-
-courseRowEditor.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-delete-course-row]");
-  if (!button) return;
-  collectCourseEditor();
-  const rowIndex = Number(button.dataset.deleteCourseRow);
-  courseSchedule.curricula[activeCourseKey].rows.splice(rowIndex, 1);
   renderCourseEditor();
 });
 

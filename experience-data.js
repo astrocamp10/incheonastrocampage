@@ -3,6 +3,7 @@ window.INCHEON_ASTRO_EXPERIENCE_DATA_URL = "experience.data";
 window.INCHEON_ASTRO_EXPERIENCE_SAVE_URL = "save-experience.php";
 
 window.INCHEON_ASTRO_DEFAULT_EXPERIENCE = {
+  mainNoticeEnabled: true,
   events: []
 };
 
