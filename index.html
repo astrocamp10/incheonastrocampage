@@ -307,7 +307,7 @@
 <div class="hidden md:flex space-x-8">
 <a class="nav-link is-active font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#regular-course" data-nav-link>정규과정</a>
 <a class="nav-link font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#daily-experience" data-nav-link>일일체험</a>
-<a class="nav-link font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#observatory-info" data-nav-link>천문대 정보</a>
+<a class="nav-link font-label-md text-label-md transition-all duration-300 uppercase tracking-widest" href="#instagram-feed" data-nav-link>천문대 정보</a>
 </div>
 <button id="mobile-nav-toggle" class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-surface-variant text-on-surface md:hidden" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="메뉴 열기">
 <span class="material-symbols-outlined" aria-hidden="true">menu</span>
@@ -317,7 +317,7 @@
 <div class="mx-auto grid max-w-container-max gap-1">
 <a class="nav-link is-active font-label-md text-label-md" href="#regular-course" data-nav-link>정규과정 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
 <a class="nav-link font-label-md text-label-md" href="#daily-experience" data-nav-link>일일체험 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
-<a class="nav-link font-label-md text-label-md" href="#observatory-info" data-nav-link>천문대 정보 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
+<a class="nav-link font-label-md text-label-md" href="#instagram-feed" data-nav-link>천문대 정보 <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
 </div>
 </div>
 </nav>
@@ -469,6 +469,39 @@
 </a>
 </div>
 </section>
+<!-- Instagram Feed -->
+<section id="instagram-feed" class="relative overflow-hidden border-t border-surface-variant bg-surface-container-lowest py-section-gap scroll-mt-24">
+<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+<div class="absolute -left-32 top-1/3 h-72 w-72 rounded-full bg-starry-gold/5 blur-3xl"></div>
+<div class="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-primary/5 blur-3xl"></div>
+</div>
+<div class="relative mx-auto max-w-container-max px-gutter">
+<div class="mb-10 flex flex-col items-center gap-6 text-center md:mb-12" data-reveal>
+<div>
+<a class="mobile-chip mb-6 inline-flex items-center gap-2 rounded-full border border-starry-gold/30 bg-starry-gold/10 px-4 py-1.5 font-label-md text-label-md font-bold tracking-wider text-starry-gold whitespace-nowrap transition-colors hover:border-starry-gold/60 hover:bg-starry-gold hover:text-midnight-deep" href="https://www.instagram.com/astrocamp_incheon/" target="_blank" rel="noopener noreferrer" aria-label="인천어린이천문대 인스타그램 새 창에서 보기">
+<span class="material-symbols-outlined text-base" aria-hidden="true">photo_camera</span>
+@astrocamp_incheon
+<span class="material-symbols-outlined text-sm" aria-hidden="true">open_in_new</span>
+</a>
+<h2 class="ko-copy mobile-section-title mb-4 font-headline-lg text-headline-lg text-white">천문대 소식 더보기</h2>
+<p class="ko-copy mobile-body-copy mx-auto max-w-2xl font-body-lg text-body-lg text-on-surface-variant">천문대의 여러 이벤트 및 카드뉴스를 확인하세요!</p>
+</div>
+</div>
+<div id="instagram-posts" class="rounded-[2rem] border border-dashed border-starry-gold/30 bg-surface-container/70 p-6 shadow-md backdrop-blur-sm sm:p-10" aria-live="polite" data-reveal data-reveal-delay="100">
+<div class="grid min-h-72 place-items-center rounded-[1.5rem] border border-surface-variant bg-surface-container-high/50 px-6 py-12 text-center">
+<div class="max-w-md">
+<span class="material-symbols-outlined mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-3xl text-starry-gold" aria-hidden="true">add_a_photo</span>
+<h3 class="ko-copy mobile-card-title mb-3 font-headline-md text-2xl text-white">최신 게시물이 이곳에 표시됩니다</h3>
+<p class="ko-copy text-sm leading-relaxed text-on-surface-variant sm:text-base">인스타그램 게시물 연동을 준비하고 있어요. 지금은 공식 인스타그램에서 최신 소식을 확인해 주세요.</p>
+<a class="mt-6 inline-flex items-center gap-1.5 font-label-md text-sm font-bold text-starry-gold transition-colors hover:text-white" href="https://www.instagram.com/astrocamp_incheon/" target="_blank" rel="noopener noreferrer">
+인스타그램 바로가기
+<span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Footer -->
 <footer id="observatory-info" class="w-full pt-20 pb-12 bg-surface-container-lowest border-t border-surface-variant scroll-mt-24">
 <div class="px-gutter max-w-container-max mx-auto">
@@ -495,15 +528,13 @@
 <span class="material-symbols-outlined mr-3 text-starry-gold">schedule</span>
 <span class="ko-copy">화~토 14:00 - 23:00 (일, 월요일 휴무)</span>
 </p>
-<a class="mobile-footer-link flex items-center text-on-surface-variant text-sm bg-surface-container p-4 rounded-2xl border border-surface-variant hover:text-white hover:border-starry-gold/40 transition-colors" href="https://cafe.naver.com/astrocamp10" target="_blank" rel="noopener noreferrer">
-<span class="material-symbols-outlined mr-3 text-starry-gold">forum</span>
-<span class="font-bold">네이버 카페</span>
-<span class="material-symbols-outlined ml-auto pl-3 text-starry-gold text-sm">open_in_new</span>
-</a>
-<a class="mobile-footer-link flex items-center text-on-surface-variant text-sm bg-surface-container p-4 rounded-2xl border border-surface-variant hover:text-white hover:border-starry-gold/40 transition-colors" href="https://www.instagram.com/astrocamp_incheon/" target="_blank" rel="noopener noreferrer">
-<span class="material-symbols-outlined mr-3 text-starry-gold">photo_camera</span>
-<span class="font-bold">인스타그램</span>
-<span class="material-symbols-outlined ml-auto pl-3 text-starry-gold text-sm">open_in_new</span>
+<a class="mobile-footer-link group flex min-h-32 items-center text-on-surface-variant bg-surface-container p-6 rounded-2xl border border-surface-variant hover:text-white hover:border-starry-gold/40 transition-all duration-300" href="https://cafe.naver.com/astrocamp10" target="_blank" rel="noopener noreferrer">
+<span class="material-symbols-outlined mr-4 inline-flex h-12 w-12 items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-2xl text-starry-gold">forum</span>
+<span class="flex flex-col gap-1">
+<span class="font-bold text-base text-white">네이버 카페</span>
+<span class="ko-copy text-sm leading-relaxed">공지사항과 다양한 천문대 소식을 확인하세요.</span>
+</span>
+<span class="material-symbols-outlined ml-auto pl-3 text-starry-gold transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
 </a>
 </div>
 </div>
