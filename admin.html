@@ -170,7 +170,7 @@
 <main class="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
 <section id="login-panel" class="admin-card mx-auto max-w-md rounded-xl p-5 sm:p-6 md:p-8">
 <h1 class="font-headline text-[1.35rem] font-bold leading-tight text-black sm:text-2xl">관리자 로그인</h1>
-<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">비밀번호를 입력하면 정규반 시간표와 일일체험 일정을 변경할 수 있습니다.</p>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">비밀번호를 입력하면 시간표, 커리큘럼, 일일체험 일정과 Instagram 게시물을 변경할 수 있습니다.</p>
 <form id="login-form" class="mt-6 space-y-4">
 <label class="block">
 <span class="mb-2 block text-sm font-bold text-gray-700">비밀번호</span>
@@ -329,12 +329,50 @@
 <div id="experience-list" class="space-y-3"></div>
 </div>
 </div>
+
+<form id="instagram-form" class="admin-card rounded-xl p-5 sm:p-6 md:p-8">
+<div class="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div class="min-w-0">
+<span class="inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-starry-gold/30 bg-starry-gold/10 px-3 py-1.5 text-xs font-bold text-starry-gold sm:px-4">
+<span class="material-symbols-outlined" style="font-size: 16px;">photo_camera</span>
+Instagram 편집
+</span>
+<h2 class="mt-4 font-headline text-2xl font-bold leading-tight text-black sm:text-3xl">Instagram 게시물 관리</h2>
+<p class="korean-copy mt-2 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">게시물 또는 릴스 주소를 붙여 넣으면 최신순으로 최대 6개가 메인페이지에 표시됩니다.</p>
+</div>
+<a class="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-auto sm:px-5" href="index.html#instagram-feed" target="_blank" rel="noopener">
+메인에서 보기 <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+</a>
+</div>
+
+<div class="mt-6 grid min-w-0 gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+<label class="block min-w-0">
+<span class="mb-2 block text-sm font-bold text-gray-700">게시물 URL</span>
+<input id="instagram-url" class="min-w-0 w-full rounded-xl border-gray-300 px-3.5 py-3 text-sm focus:border-starry-gold focus:ring-starry-gold sm:px-4 sm:text-base" type="url" inputmode="url" autocomplete="off" maxlength="500" placeholder="https://www.instagram.com/p/.../ 또는 /reel/.../" aria-describedby="instagram-url-help" required/>
+</label>
+<button class="min-h-11 w-full whitespace-nowrap rounded-full bg-starry-gold px-6 py-3 text-sm font-bold text-midnight-deep hover:bg-black hover:text-white transition-colors md:w-auto sm:text-base" type="submit">URL 추가</button>
+</div>
+<p id="instagram-url-help" class="korean-copy mt-2 text-xs leading-5 text-gray-500 sm:text-sm">프로필·스토리 주소가 아닌 개별 게시물의 링크 복사 주소를 입력하세요. 공유용 ?igsh= 문자는 자동으로 정리됩니다.</p>
+<p id="instagram-save-message" class="korean-copy mt-4 hidden rounded-xl bg-starry-gold/10 px-4 py-3 text-sm font-bold leading-6 text-[#917a00]" role="status" aria-live="polite">저장되었습니다.</p>
+
+<div class="mt-6 border-t border-gray-200 pt-6">
+<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+<div class="min-w-0">
+<h3 class="font-headline text-lg font-bold leading-tight text-black sm:text-xl">표시할 게시물 <span id="instagram-count" class="text-starry-gold">0/6</span></h3>
+<p class="korean-copy mt-1 text-sm leading-6 text-gray-500">1번부터 최신순으로 홈페이지에 표시됩니다.</p>
+</div>
+<button id="instagram-copy-button" class="w-full whitespace-nowrap rounded-full border border-gray-300 px-4 py-2.5 text-sm font-bold text-gray-700 hover:border-starry-gold hover:text-starry-gold transition-colors sm:w-fit sm:px-5" type="button">Instagram DATA 저장</button>
+</div>
+<div id="instagram-list" class="space-y-3"></div>
+</div>
+</form>
 </section>
 </main>
 
 <script src="availability-data.js"></script>
 <script src="experience-data.js"></script>
 <script src="course-data.js"></script>
+<script src="instagram-data.js"></script>
 <script>
 const ADMIN_PASSWORD = "dlscjsastro10";
 const authKey = "incheonastroAdminAuthed";
@@ -375,6 +413,15 @@ const courseSaveMessage = document.getElementById("course-save-message");
 const courseStorageKey = window.INCHEON_ASTRO_COURSE_KEY;
 const courseDataUrl = window.INCHEON_ASTRO_COURSE_DATA_URL || "course.data";
 const courseSaveUrl = window.INCHEON_ASTRO_COURSE_SAVE_URL || "save-course.php";
+const instagramForm = document.getElementById("instagram-form");
+const instagramUrlInput = document.getElementById("instagram-url");
+const instagramList = document.getElementById("instagram-list");
+const instagramCount = document.getElementById("instagram-count");
+const instagramCopyButton = document.getElementById("instagram-copy-button");
+const instagramSaveMessage = document.getElementById("instagram-save-message");
+const instagramStorageKey = window.INCHEON_ASTRO_INSTAGRAM_KEY || "incheonastroInstagramPosts";
+const instagramDataUrl = window.INCHEON_ASTRO_INSTAGRAM_DATA_URL || "instagram.data";
+const instagramSaveUrl = window.INCHEON_ASTRO_INSTAGRAM_SAVE_URL || "save-instagram.php";
 const courseLabels = {
   starter: "첫걸음",
   experience: "체험",
@@ -384,6 +431,7 @@ const courseLabels = {
 let schedule = cloneData(window.INCHEON_ASTRO_DEFAULT_AVAILABILITY);
 let experienceSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_EXPERIENCE || { events: [] });
 let courseSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_COURSE);
+let instagramSchedule = cloneData(window.INCHEON_ASTRO_DEFAULT_INSTAGRAM || { posts: [] });
 let activeCourseKey = "starter";
 
 function cloneData(data) {
@@ -597,6 +645,63 @@ async function loadCourseSchedule() {
   return loadedSchedule;
 }
 
+function normalizeInstagramUrl(value) {
+  try {
+    const url = new URL(String(value || "").trim());
+    const hostname = url.hostname.toLowerCase();
+    if (url.protocol !== "https:" || (hostname !== "instagram.com" && hostname !== "www.instagram.com")) {
+      return null;
+    }
+
+    const match = url.pathname.match(/^\/(p|reel|tv)\/([A-Za-z0-9_-]{3,100})\/?$/);
+    if (!match) return null;
+    return `https://www.instagram.com/${match[1]}/${match[2]}/`;
+  } catch (error) {
+    return null;
+  }
+}
+
+function normalizeInstagramData(data) {
+  const posts = Array.isArray(data?.posts) ? data.posts : [];
+  const normalizedPosts = [];
+
+  posts.forEach((value) => {
+    const url = normalizeInstagramUrl(value);
+    if (url && !normalizedPosts.includes(url) && normalizedPosts.length < 6) {
+      normalizedPosts.push(url);
+    }
+  });
+
+  return { posts: normalizedPosts };
+}
+
+async function loadInstagramSchedule() {
+  let loadedSchedule = normalizeInstagramData(window.INCHEON_ASTRO_DEFAULT_INSTAGRAM || { posts: [] });
+  let loadedFromServer = false;
+
+  try {
+    const response = await fetch(`${instagramDataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (response.ok) {
+      loadedSchedule = normalizeInstagramData(await response.json());
+      loadedFromServer = true;
+      localStorage.removeItem(instagramStorageKey);
+    }
+  } catch (error) {
+  }
+
+  if (!loadedFromServer) {
+    try {
+      const saved = JSON.parse(localStorage.getItem(instagramStorageKey) || "null");
+      if (saved) {
+        loadedSchedule = normalizeInstagramData(saved);
+      }
+    } catch (error) {
+    }
+  }
+
+  return loadedSchedule;
+}
+
 async function saveSchedule() {
   try {
     const response = await fetch(saveUrl, {
@@ -673,6 +778,33 @@ async function saveCourseSchedule() {
   }
 }
 
+async function saveInstagramSchedule() {
+  instagramSchedule = normalizeInstagramData(instagramSchedule);
+
+  try {
+    const response = await fetch(instagramSaveUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        password: ADMIN_PASSWORD,
+        schedule: instagramSchedule
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "save failed");
+    }
+
+    localStorage.removeItem(instagramStorageKey);
+    showInstagramSaveMessage("instagram.data 파일에 저장되었습니다.");
+    return true;
+  } catch (error) {
+    localStorage.setItem(instagramStorageKey, JSON.stringify(instagramSchedule));
+    showInstagramSaveMessage("현재 서버에서는 자동 저장이 안 됩니다. Instagram DATA 저장 버튼으로 파일을 내려받아 교체해 주세요.", true);
+    return false;
+  }
+}
+
 function showSaveMessage(message) {
   saveMessage.textContent = message;
   saveMessage.classList.remove("hidden");
@@ -694,16 +826,29 @@ function showCourseSaveMessage(message) {
   showCourseSaveMessage.timer = window.setTimeout(() => courseSaveMessage.classList.add("hidden"), 3000);
 }
 
+function showInstagramSaveMessage(message, isError = false) {
+  instagramSaveMessage.textContent = message;
+  instagramSaveMessage.classList.toggle("bg-red-50", isError);
+  instagramSaveMessage.classList.toggle("text-red-600", isError);
+  instagramSaveMessage.classList.toggle("bg-starry-gold/10", !isError);
+  instagramSaveMessage.classList.toggle("text-[#917a00]", !isError);
+  instagramSaveMessage.classList.remove("hidden");
+  window.clearTimeout(showInstagramSaveMessage.timer);
+  showInstagramSaveMessage.timer = window.setTimeout(() => instagramSaveMessage.classList.add("hidden"), 3600);
+}
+
 async function showAdmin() {
   loginPanel.classList.add("hidden");
   adminPanel.classList.remove("hidden");
   schedule = await loadSchedule();
   experienceSchedule = await loadExperienceSchedule();
   courseSchedule = await loadCourseSchedule();
+  instagramSchedule = await loadInstagramSchedule();
   renderSchedule();
   renderExperienceNoticeControl();
   renderExperienceList();
   renderCourseEditor();
+  renderInstagramList();
 }
 
 function renderExperienceNoticeControl() {
@@ -782,6 +927,47 @@ function renderExperienceList() {
             ${renderExperienceStatusOptions(event.status)}
           </select>
           <button class="shrink-0 whitespace-nowrap rounded-full border border-red-200 px-4 py-2 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors" type="button" data-delete-experience="${escapeHTML(event.id)}">삭제</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function getInstagramPostType(url) {
+  if (url.includes("/reel/") || url.includes("/tv/")) return "릴스";
+  return "게시물";
+}
+
+function renderInstagramList() {
+  instagramSchedule = normalizeInstagramData(instagramSchedule);
+  instagramCount.textContent = `${instagramSchedule.posts.length}/6`;
+
+  if (!instagramSchedule.posts.length) {
+    instagramList.innerHTML = `
+      <div class="korean-copy rounded-xl border border-dashed border-gray-200 bg-gray-50 p-4 text-sm font-bold leading-6 text-gray-500 sm:p-5">
+        등록된 Instagram 게시물이 없습니다. 위 입력칸에 게시물 URL을 붙여 넣어 주세요.
+      </div>
+    `;
+    return;
+  }
+
+  instagramList.innerHTML = instagramSchedule.posts.map((url, index) => `
+    <article class="min-w-0 rounded-xl border border-gray-200 bg-gray-50 p-3.5 sm:p-4">
+      <div class="flex min-w-0 flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div class="flex min-w-0 items-start gap-3">
+          <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-starry-gold text-sm font-black text-midnight-deep">${index + 1}</span>
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="rounded-full border border-starry-gold/30 bg-starry-gold/10 px-2.5 py-1 text-xs font-bold text-[#917a00]">${getInstagramPostType(url)}</span>
+              ${index === 0 ? '<span class="rounded-full bg-black px-2.5 py-1 text-xs font-bold text-white">최신</span>' : ""}
+            </div>
+            <a class="mt-2 block break-all text-sm font-bold leading-6 text-gray-700 hover:text-starry-gold" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>
+          </div>
+        </div>
+        <div class="flex w-full flex-wrap gap-2 md:w-auto md:shrink-0 md:justify-end">
+          <button class="min-h-10 flex-1 rounded-full border border-gray-300 px-3 py-2 text-sm font-bold text-gray-600 hover:border-starry-gold hover:text-starry-gold disabled:cursor-not-allowed disabled:opacity-35 md:flex-none" type="button" data-instagram-move="up" data-instagram-index="${index}" ${index === 0 ? "disabled" : ""} aria-label="${index + 1}번 게시물을 위로 이동">위로</button>
+          <button class="min-h-10 flex-1 rounded-full border border-gray-300 px-3 py-2 text-sm font-bold text-gray-600 hover:border-starry-gold hover:text-starry-gold disabled:cursor-not-allowed disabled:opacity-35 md:flex-none" type="button" data-instagram-move="down" data-instagram-index="${index}" ${index === instagramSchedule.posts.length - 1 ? "disabled" : ""} aria-label="${index + 1}번 게시물을 아래로 이동">아래로</button>
+          <button class="min-h-10 flex-1 rounded-full border border-red-200 px-4 py-2 text-sm font-bold text-red-600 hover:bg-red-50 md:flex-none" type="button" data-delete-instagram="${index}">삭제</button>
         </div>
       </div>
     </article>
@@ -920,6 +1106,55 @@ experienceList.addEventListener("click", (event) => {
   saveExperienceSchedule();
 });
 
+instagramForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const url = normalizeInstagramUrl(instagramUrlInput.value);
+  if (!url) {
+    showInstagramSaveMessage("Instagram의 개별 게시물 또는 릴스 URL을 입력해 주세요.", true);
+    instagramUrlInput.focus();
+    return;
+  }
+
+  if (instagramSchedule.posts.includes(url)) {
+    showInstagramSaveMessage("이미 등록된 게시물입니다.", true);
+    instagramUrlInput.focus();
+    return;
+  }
+
+  instagramSchedule.posts.unshift(url);
+  instagramSchedule.posts = instagramSchedule.posts.slice(0, 6);
+  renderInstagramList();
+  saveInstagramSchedule();
+  instagramForm.reset();
+});
+
+instagramList.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest("[data-delete-instagram]");
+  if (deleteButton) {
+    const index = Number(deleteButton.dataset.deleteInstagram);
+    if (!Number.isInteger(index) || !instagramSchedule.posts[index]) return;
+    if (!window.confirm(`${index + 1}번 Instagram 게시물을 삭제할까요?`)) return;
+    instagramSchedule.posts.splice(index, 1);
+    renderInstagramList();
+    saveInstagramSchedule();
+    return;
+  }
+
+  const moveButton = event.target.closest("[data-instagram-move]");
+  if (!moveButton) return;
+  const index = Number(moveButton.dataset.instagramIndex);
+  const targetIndex = moveButton.dataset.instagramMove === "up" ? index - 1 : index + 1;
+  if (!Number.isInteger(index) || targetIndex < 0 || targetIndex >= instagramSchedule.posts.length) return;
+
+  [instagramSchedule.posts[index], instagramSchedule.posts[targetIndex]] = [
+    instagramSchedule.posts[targetIndex],
+    instagramSchedule.posts[index]
+  ];
+  renderInstagramList();
+  saveInstagramSchedule();
+});
+
 courseTabList.addEventListener("click", (event) => {
   const button = event.target.closest("[data-course-tab]");
   if (!button) return;
@@ -969,9 +1204,17 @@ function downloadCourseData() {
   });
 }
 
+function downloadInstagramData() {
+  instagramSchedule = normalizeInstagramData(instagramSchedule);
+  downloadJsonData(instagramSchedule, "instagram.data", () => {
+    showInstagramSaveMessage("instagram.data 파일을 내려받았습니다.");
+  });
+}
+
 copyButton.addEventListener("click", downloadScheduleData);
 experienceCopyButton.addEventListener("click", downloadExperienceData);
 courseCopyButton.addEventListener("click", downloadCourseData);
+instagramCopyButton.addEventListener("click", downloadInstagramData);
 
 function setDefaultExperienceDate() {
   const now = new Date();

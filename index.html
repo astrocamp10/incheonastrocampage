@@ -293,6 +293,62 @@
                 transform: translate3d(0, 24px, 0);
             }
         }
+        .instagram-carousel {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            overflow-x: auto;
+            overscroll-behavior-inline: contain;
+            padding: 0.25rem 0.25rem 1rem;
+            scroll-behavior: smooth;
+            scroll-padding-inline: 0.25rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-color: rgba(251, 209, 0, 0.6) rgba(255, 255, 255, 0.08);
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+        .instagram-carousel::-webkit-scrollbar {
+            height: 8px;
+        }
+        .instagram-carousel::-webkit-scrollbar-track {
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .instagram-carousel::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            background: rgba(251, 209, 0, 0.6);
+        }
+        .instagram-embed-shell {
+            flex: 0 0 100%;
+            max-width: 390px;
+            min-width: 0;
+            overflow: hidden;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        .instagram-embed-shell .instagram-media,
+        .instagram-embed-shell iframe {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 540px !important;
+            margin: 0 auto !important;
+        }
+        @media (min-width: 640px) {
+            .instagram-carousel .instagram-embed-shell {
+                flex-basis: 390px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .instagram-carousel .instagram-embed-shell {
+                flex-basis: calc((100% - 3rem) / 3);
+                max-width: none;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .instagram-carousel {
+                scroll-behavior: auto;
+            }
+        }
     </style>
 </head>
 <body class="antialiased font-body-md text-body-md selection:bg-starry-gold selection:text-midnight-deep bg-background">
@@ -487,16 +543,12 @@
 <p class="ko-copy mobile-body-copy mx-auto max-w-2xl font-body-lg text-body-lg text-on-surface-variant">천문대의 여러 이벤트 및 카드뉴스를 확인하세요!</p>
 </div>
 </div>
-<div id="instagram-posts" class="rounded-[2rem] border border-dashed border-starry-gold/30 bg-surface-container/70 p-6 shadow-md backdrop-blur-sm sm:p-10" aria-live="polite" data-reveal data-reveal-delay="100">
-<div class="grid min-h-72 place-items-center rounded-[1.5rem] border border-surface-variant bg-surface-container-high/50 px-6 py-12 text-center">
+<div id="instagram-posts" class="overflow-hidden rounded-[2rem] border border-dashed border-starry-gold/30 bg-surface-container/70 p-0 shadow-md backdrop-blur-sm sm:p-6" aria-live="polite" data-reveal data-reveal-delay="100">
+<div class="m-3 grid min-h-72 place-items-center rounded-[1.5rem] border border-surface-variant bg-surface-container-high/50 px-6 py-12 text-center sm:m-0">
 <div class="max-w-md">
-<span class="material-symbols-outlined mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-3xl text-starry-gold" aria-hidden="true">add_a_photo</span>
-<h3 class="ko-copy mobile-card-title mb-3 font-headline-md text-2xl text-white">최신 게시물이 이곳에 표시됩니다</h3>
-<p class="ko-copy text-sm leading-relaxed text-on-surface-variant sm:text-base">인스타그램 게시물 연동을 준비하고 있어요. 지금은 공식 인스타그램에서 최신 소식을 확인해 주세요.</p>
-<a class="mt-6 inline-flex items-center gap-1.5 font-label-md text-sm font-bold text-starry-gold transition-colors hover:text-white" href="https://www.instagram.com/astrocamp_incheon/" target="_blank" rel="noopener noreferrer">
-인스타그램 바로가기
-<span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
-</a>
+<span class="material-symbols-outlined mb-5 inline-flex h-16 w-16 animate-pulse items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-3xl text-starry-gold" aria-hidden="true">photo_library</span>
+<h3 class="ko-copy mobile-card-title mb-3 font-headline-md text-2xl text-white">게시물을 불러오는 중입니다</h3>
+<p class="ko-copy text-sm leading-relaxed text-on-surface-variant sm:text-base">잠시만 기다려 주세요.</p>
 </div>
 </div>
 </div>
@@ -566,6 +618,7 @@
 </div>
 </footer>
 <script src="experience-data.js"></script>
+<script src="instagram-data.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const experienceStorageKey = window.INCHEON_ASTRO_EXPERIENCE_KEY;
@@ -593,6 +646,206 @@ async function updateDailyExperienceNotice() {
   }
 
   dailyExperienceNotice.classList.toggle("hidden", !enabled);
+}
+
+const instagramPostsNode = document.getElementById("instagram-posts");
+const instagramDataUrl = window.INCHEON_ASTRO_INSTAGRAM_DATA_URL || "instagram.data";
+const instagramProfileUrl = "https://www.instagram.com/astrocamp_incheon/";
+
+function normalizeInstagramUrl(value) {
+  try {
+    const url = new URL(String(value || "").trim());
+    const hostname = url.hostname.toLowerCase();
+    if (url.protocol !== "https:" || (hostname !== "instagram.com" && hostname !== "www.instagram.com")) {
+      return null;
+    }
+
+    const match = url.pathname.match(/^\/(p|reel|tv)\/([A-Za-z0-9_-]{3,100})\/?$/);
+    if (!match) return null;
+    return `https://www.instagram.com/${match[1]}/${match[2]}/`;
+  } catch (error) {
+    return null;
+  }
+}
+
+function normalizeInstagramData(data) {
+  const normalizedPosts = [];
+  const posts = Array.isArray(data?.posts) ? data.posts : [];
+  posts.forEach((value) => {
+    const url = normalizeInstagramUrl(value);
+    if (url && !normalizedPosts.includes(url) && normalizedPosts.length < 6) {
+      normalizedPosts.push(url);
+    }
+  });
+  return normalizedPosts;
+}
+
+function renderInstagramState(title, description, icon = "add_a_photo") {
+  if (!instagramPostsNode) return;
+  instagramPostsNode.setAttribute("aria-live", "polite");
+  instagramPostsNode.classList.add("border-dashed");
+  instagramPostsNode.classList.remove("border-solid");
+  instagramPostsNode.innerHTML = `
+    <div class="m-3 grid min-h-72 place-items-center rounded-[1.5rem] border border-surface-variant bg-surface-container-high/50 px-6 py-12 text-center sm:m-0">
+      <div class="max-w-md">
+        <span class="material-symbols-outlined mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-3xl text-starry-gold" aria-hidden="true">${icon}</span>
+        <h3 class="ko-copy mobile-card-title mb-3 font-headline-md text-2xl text-white">${title}</h3>
+        <p class="ko-copy text-sm leading-relaxed text-on-surface-variant sm:text-base">${description}</p>
+        <a class="mt-6 inline-flex items-center gap-1.5 font-label-md text-sm font-bold text-starry-gold transition-colors hover:text-white" href="${instagramProfileUrl}" target="_blank" rel="noopener noreferrer">
+          인스타그램 바로가기
+          <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  `;
+}
+
+function processInstagramEmbeds() {
+  if (window.instgrm?.Embeds?.process) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+
+  let script = document.querySelector("script[data-instagram-embed-script]");
+  if (!script) {
+    script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.instagram.com/embed.js";
+    script.dataset.instagramEmbedScript = "true";
+    document.body.appendChild(script);
+  }
+
+  script.addEventListener("load", () => window.instgrm?.Embeds?.process(), { once: true });
+}
+
+function renderInstagramPosts(posts) {
+  if (!instagramPostsNode) return;
+  if (!posts.length) {
+    renderInstagramState("등록된 게시물이 없습니다", "관리자 페이지에서 Instagram 게시물 URL을 등록해 주세요.");
+    return;
+  }
+
+  instagramPostsNode.classList.remove("border-dashed");
+  instagramPostsNode.classList.add("border-solid");
+  instagramPostsNode.removeAttribute("aria-live");
+  instagramPostsNode.replaceChildren();
+
+  const carouselShell = document.createElement("div");
+  carouselShell.className = "p-3 sm:p-0";
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "mb-3 flex items-center justify-between gap-3 px-1 sm:mb-4";
+
+  const hint = document.createElement("p");
+  hint.className = "ko-copy flex min-w-0 items-center gap-2 text-sm font-bold text-on-surface-variant";
+  hint.innerHTML = `<span class="material-symbols-outlined shrink-0 text-lg text-starry-gold" aria-hidden="true">swipe</span><span>게시물 ${posts.length}개 · 좌우로 넘겨보세요</span>`;
+
+  const controls = document.createElement("div");
+  controls.className = "flex shrink-0 items-center gap-2";
+
+  const previousButton = document.createElement("button");
+  previousButton.type = "button";
+  previousButton.className = "inline-flex h-11 w-11 items-center justify-center rounded-full border border-starry-gold/30 bg-starry-gold/10 text-starry-gold transition-colors hover:bg-starry-gold hover:text-midnight-deep disabled:cursor-not-allowed disabled:opacity-30";
+  previousButton.setAttribute("aria-label", "이전 Instagram 게시물 보기");
+  previousButton.setAttribute("aria-controls", "instagram-carousel-track");
+  previousButton.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>';
+
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.className = previousButton.className;
+  nextButton.setAttribute("aria-label", "다음 Instagram 게시물 보기");
+  nextButton.setAttribute("aria-controls", "instagram-carousel-track");
+  nextButton.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>';
+
+  controls.append(previousButton, nextButton);
+  toolbar.append(hint, controls);
+
+  const carousel = document.createElement("div");
+  carousel.id = "instagram-carousel-track";
+  carousel.className = "instagram-carousel";
+  carousel.tabIndex = 0;
+  carousel.setAttribute("role", "region");
+  carousel.setAttribute("aria-roledescription", "carousel");
+  carousel.setAttribute("aria-label", "Instagram 최신 게시물");
+
+  posts.forEach((url, index) => {
+    const article = document.createElement("article");
+    article.className = "instagram-embed-shell min-w-0 rounded-[1.5rem] bg-white";
+    article.setAttribute("role", "group");
+    article.setAttribute("aria-roledescription", "slide");
+    article.setAttribute("aria-label", `${index + 1} / ${posts.length} Instagram 게시물`);
+
+    const blockquote = document.createElement("blockquote");
+    blockquote.className = "instagram-media";
+    blockquote.dataset.instgrmPermalink = url;
+    blockquote.dataset.instgrmVersion = "14";
+    blockquote.style.cssText = "background:#fff;border:0;border-radius:1.5rem;box-shadow:none;margin:0 auto;max-width:540px;min-width:0;padding:24px;width:100%;";
+
+    const fallbackLink = document.createElement("a");
+    fallbackLink.href = url;
+    fallbackLink.target = "_blank";
+    fallbackLink.rel = "noopener noreferrer";
+    fallbackLink.className = "flex min-h-40 items-center justify-center px-5 text-center text-sm font-bold text-gray-700";
+    fallbackLink.textContent = "Instagram에서 게시물 보기";
+
+    blockquote.appendChild(fallbackLink);
+    article.appendChild(blockquote);
+    carousel.appendChild(article);
+  });
+
+  const updateCarouselControls = () => {
+    const hasOverflow = carousel.scrollWidth > carousel.clientWidth + 2;
+    controls.classList.toggle("hidden", !hasOverflow);
+    previousButton.disabled = !hasOverflow || carousel.scrollLeft <= 2;
+    nextButton.disabled = !hasOverflow || carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 2;
+  };
+
+  const scrollCarousel = (direction) => {
+    const firstCard = carousel.firstElementChild;
+    if (!firstCard) return;
+    const gap = Number.parseFloat(window.getComputedStyle(carousel).columnGap) || 0;
+    const distance = firstCard.getBoundingClientRect().width + gap;
+    carousel.scrollBy({
+      left: distance * direction,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    });
+  };
+
+  previousButton.addEventListener("click", () => scrollCarousel(-1));
+  nextButton.addEventListener("click", () => scrollCarousel(1));
+
+  let scrollFrame = null;
+  carousel.addEventListener("scroll", () => {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(() => {
+      scrollFrame = null;
+      updateCarouselControls();
+    });
+  }, { passive: true });
+
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(updateCarouselControls);
+    resizeObserver.observe(carousel);
+  } else {
+    window.addEventListener("resize", updateCarouselControls, { passive: true });
+  }
+
+  carouselShell.append(toolbar, carousel);
+  instagramPostsNode.appendChild(carouselShell);
+  window.requestAnimationFrame(updateCarouselControls);
+  processInstagramEmbeds();
+}
+
+async function loadInstagramPosts() {
+  if (!instagramPostsNode) return;
+
+  try {
+    const response = await fetch(`${instagramDataUrl}?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error("Instagram data unavailable");
+    renderInstagramPosts(normalizeInstagramData(await response.json()));
+  } catch (error) {
+    renderInstagramState("게시물을 불러오지 못했습니다", "잠시 후 다시 시도하거나 공식 인스타그램에서 소식을 확인해 주세요.", "error");
+  }
 }
 
 const observatoryPlace = {
@@ -741,6 +994,7 @@ window.addEventListener("resize", () => {
 window.addEventListener("hashchange", updateActiveNav);
 updateActiveNav();
 updateDailyExperienceNotice();
+loadInstagramPosts();
 
 const revealTargets = Array.from(document.querySelectorAll("[data-reveal]"));
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

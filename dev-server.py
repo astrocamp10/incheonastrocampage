@@ -11,6 +11,7 @@ PASSWORD = "dlscjsastro10"
 AVAILABILITY_FILE = ROOT / "availability.data"
 EXPERIENCE_FILE = ROOT / "experience.data"
 COURSE_FILE = ROOT / "course.data"
+INSTAGRAM_FILE = ROOT / "instagram.data"
 EXPERIENCE_STATUSES = {"open", "wait", "closed"}
 COURSE_KEYS = {"starter", "experience", "inquiry", "theme"}
 OBSERVATION_KEYS = {"winter", "spring", "summer", "autumn"}
@@ -30,6 +31,7 @@ class AstroHandler(SimpleHTTPRequestHandler):
             "/save-availability.php": (AVAILABILITY_FILE, validate_schedule),
             "/save-experience.php": (EXPERIENCE_FILE, validate_experience),
             "/save-course.php": (COURSE_FILE, validate_course),
+            "/save-instagram.php": (INSTAGRAM_FILE, validate_instagram),
         }.get(path)
 
         if route is None:
@@ -228,6 +230,33 @@ def validate_course(schedule):
                 cleaned_notes.append(note.strip())
         course["notes"] = cleaned_notes
 
+    return None
+
+
+def validate_instagram(schedule):
+    if not isinstance(schedule, dict):
+        return "Invalid Instagram data"
+
+    posts = schedule.get("posts")
+    if not isinstance(posts, list) or len(posts) > 6:
+        return "Instagram posts must contain at most 6 URLs"
+
+    pattern = re.compile(
+        r"^https://www\.instagram\.com/(p|reel|tv)/([A-Za-z0-9_-]{3,100})/$"
+    )
+    cleaned_posts = []
+    for url in posts:
+        if not isinstance(url, str) or len(url) > 220:
+            return "Invalid Instagram URL"
+        match = pattern.fullmatch(url.strip())
+        if not match:
+            return "Only Instagram post or reel URLs are allowed"
+        canonical_url = f"https://www.instagram.com/{match.group(1)}/{match.group(2)}/"
+        if canonical_url not in cleaned_posts:
+            cleaned_posts.append(canonical_url)
+
+    schedule.clear()
+    schedule["posts"] = cleaned_posts
     return None
 
 
